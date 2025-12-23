@@ -1,0 +1,17 @@
+{
+  "name": "vinycherry",
+  "version": "0.1.0",
+  "author": "Tony Dugué",
+  "description": "Application de type mediathèque pour les supports musicaux et plus particulièrement les vinyles",
+  "homepage": "https://github.com/tony-dugue/vinycherry",
+  "private": true,
+  "license": "MIT",
+  "keywords": [],
+  "workspaces": [
+    "apps/*",
+    "libs/*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
