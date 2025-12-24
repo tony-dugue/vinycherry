@@ -1,0 +1,13 @@
+{
+  "name": "@vinycherry/sample-lib",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/index.js",
+  "packageManager": "yarn@4.12.0",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "build": "tsc"
+  }
+}
