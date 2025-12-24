@@ -8,6 +8,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "tsc": "tsc --noEmit"
   }
 }
