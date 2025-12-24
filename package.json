@@ -11,10 +11,15 @@
     "apps/*",
     "libs/*"
   ],
+  "packageManager": "yarn@4.12.0",
+  "engines": {
+    "node": ">=24.0.0 <25",
+    "yarn": ">=4.12.0",
+    "npm": "please-use-yarn"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "packageManager": "yarn@4.12.0",
   "devDependencies": {
     "typescript": "^5.9.3"
   }
