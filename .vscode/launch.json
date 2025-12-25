@@ -1,0 +1,73 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    // =========================
+    // 🟢 API NestJS (3000)
+    // =========================
+    {
+      "name": "API NestJS (debug)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "yarn nx serve api"
+    },
+
+    // =========================
+    // 🟦 client (3001)
+    // =========================
+    {
+      "name": "client – server",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "yarn nx dev client"
+    },
+    {
+      "name": "client – client",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3001"
+    },
+    {
+      "name": "client – full stack",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "yarn nx dev client",
+      "serverReadyAction": {
+        "pattern": "started server.*(http://localhost:3001)",
+        "uriFormat": "%s",
+        "action": "debugWithChrome"
+      }
+    },
+
+    // =========================
+    // 🟦 client-admin (3002)
+    // =========================
+    {
+      "name": "client-admin – server",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "yarn nx dev client-admin"
+    },
+    {
+      "name": "client-admin – client",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3002"
+    },
+
+    // =========================
+    // 🟦 client-user (3003)
+    // =========================
+    {
+      "name": "client-user – server",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "yarn nx dev client-user"
+    },
+    {
+      "name": "client-user – client",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3003"
+    }
+  ]
+}
