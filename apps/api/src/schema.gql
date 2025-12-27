@@ -3,10 +3,11 @@
 # ------------------------------------------------------
 
 type User {
+  name: String
   uid: String!
+  image: String
   createdAt: DateTime!
   updatedAt: DateTime!
-  name: String
 }
 
 """
@@ -15,15 +16,7 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Query {
-  users(
-    omit: [String!]
-    distinct: [UserScalarFieldEnum!]
-    where: UserWhereInput
-    orderBy: [UserOrderByWithRelationInput!]
-    cursor: UserWhereUniqueInput
-    take: Int
-    skip: Int
-  ): [User!]!
+  users(omit: [String!], distinct: [UserScalarFieldEnum!], where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int): [User!]!
   user(where: UserWhereUniqueInput!): User!
 }
 
@@ -91,17 +84,18 @@ input UserWhereUniqueInput {
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
+  registerWithCredentials(registerWithCredentialsInput: RegisterWithCredentialsInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(where: UserWhereUniqueInput!): User!
 }
 
-input CreateUserInput {
-  uid: String!
-  name: String
+input RegisterWithCredentialsInput {
+  name: String!
+  email: String!
+  password: String!
+  image: String
 }
 
 input UpdateUserInput {
   uid: String!
-  name: String
 }

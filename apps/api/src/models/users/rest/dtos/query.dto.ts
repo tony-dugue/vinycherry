@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client'
+import { Prisma } from '../../../../../prisma/generated/prisma/client'
 import { IsIn, IsOptional } from 'class-validator'
 import { BaseQueryDto } from '../../../../common/dtos/common.dto'
 

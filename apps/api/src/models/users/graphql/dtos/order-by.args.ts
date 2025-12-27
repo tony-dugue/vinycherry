@@ -1,5 +1,5 @@
 import { Field, InputType, PartialType } from '@nestjs/graphql'
-import { Prisma } from '@prisma/client'
+import { Prisma } from '../../../../../prisma/generated/prisma/client'
 import { RestrictProperties } from '../../../../common/dtos/common.input'
 
 @InputType()
@@ -7,7 +7,7 @@ export class UserOrderByWithRelationInputStrict implements RestrictProperties<
   UserOrderByWithRelationInputStrict,
   Omit<
     Prisma.UserOrderByWithRelationInput,
-    'Credentials' | 'AuthProvider' | 'Admin'
+    'Credentials' | 'AuthProvider' | 'Admin' | 'image'
   >
 > {
   @Field(() => Prisma.SortOrder)

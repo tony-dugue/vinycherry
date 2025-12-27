@@ -1,15 +1,54 @@
-import { Injectable } from '@nestjs/common'
-import { FindManyUserArgs, FindUniqueUserArgs } from './dtos/find.args'
+import { BadRequestException, Injectable } from '@nestjs/common'
+import * as bcrypt from 'bcryptjs'
+import { v4 as uuid } from 'uuid'
 import { PrismaService } from '../../../common/prisma/prisma.service'
-import { CreateUserInput } from './dtos/create-user.input'
+import { RegisterWithCredentialsInput } from './dtos/create-user.input'
+import { FindManyUserArgs, FindUniqueUserArgs } from './dtos/find.args'
 import { UpdateUserInput } from './dtos/update-user.input'
 
 @Injectable()
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
-  create(createUserInput: CreateUserInput) {
+
+  async registerWithCredentials({
+    email,
+    name,
+    password,
+    image,
+  }: RegisterWithCredentialsInput) {
+    const existingUser = await this.prisma.credentials.findUnique({
+      where: { email },
+    })
+
+    if (existingUser) {
+      throw new BadRequestException('User already exists with this email.')
+    }
+
+    // Hash the password
+    const salt = bcrypt.genSaltSync()
+    const passwordHash = bcrypt.hashSync(password, salt)
+
+    const uid = uuid()
     return this.prisma.user.create({
-      data: createUserInput,
+      data: {
+        uid,
+        name,
+        image,
+        Credentials: {
+          create: {
+            email,
+            passwordHash,
+          },
+        },
+        AuthProvider: {
+          create: {
+            type: 'CREDENTIALS',
+          },
+        },
+      },
+      include: {
+        Credentials: true,
+      },
     })
   }
 

@@ -7,7 +7,7 @@ import {
 import { checkRowLevelPermission } from '../../../common/auth/util'
 import { PrismaService } from '../../../common/prisma/prisma.service'
 import { GetUserType } from '../../../common/types'
-import { CreateUserInput } from './dtos/create-user.input'
+import { RegisterWithCredentialsInput } from './dtos/create-user.input'
 import { FindManyUserArgs, FindUniqueUserArgs } from './dtos/find.args'
 import { UpdateUserInput } from './dtos/update-user.input'
 import { User } from './entity/user.entity'
@@ -20,14 +20,12 @@ export class UsersResolver {
     private readonly prisma: PrismaService,
   ) {}
 
-  @AllowAuthenticated()
   @Mutation(() => User)
-  createUser(
-    @Args('createUserInput') args: CreateUserInput,
-    @GetUser() user: GetUserType,
+  registerWithCredentials(
+    @Args('registerWithCredentialsInput')
+    args: RegisterWithCredentialsInput,
   ) {
-    checkRowLevelPermission(user, args.uid)
-    return this.usersService.create(args)
+    return this.usersService.registerWithCredentials(args)
   }
 
   @AllowAuthenticated()

@@ -1,5 +1,5 @@
 import { InputType, PartialType } from '@nestjs/graphql'
-import { Prisma } from '@prisma/client'
+import { Prisma } from '../../../../../prisma/generated/prisma/client'
 import {
   DateTimeFilter,
   RestrictProperties,
@@ -14,7 +14,10 @@ export class UserWhereUniqueInput {
 @InputType()
 export class UserWhereInputStrict implements RestrictProperties<
   UserWhereInputStrict,
-  Omit<Prisma.UserWhereInput, 'Credentials' | 'AuthProvider' | 'Admin'>
+  Omit<
+    Prisma.UserWhereInput,
+    'Credentials' | 'AuthProvider' | 'Admin' | 'image'
+  >
 > {
   // Todo: Add the below field decorator only to the $Enums types.
   // @Field(() => $Enums.x)

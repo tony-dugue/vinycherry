@@ -29,6 +29,7 @@ export type UserMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   name: string | null
+  image: string | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -36,6 +37,7 @@ export type UserMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   name: string | null
+  image: string | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -43,6 +45,7 @@ export type UserCountAggregateOutputType = {
   createdAt: number
   updatedAt: number
   name: number
+  image: number
   _all: number
 }
 
@@ -51,6 +54,7 @@ export type UserMinAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   name?: true
+  image?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -58,6 +62,7 @@ export type UserMaxAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   name?: true
+  image?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -65,6 +70,7 @@ export type UserCountAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   name?: true
+  image?: true
   _all?: true
 }
 
@@ -152,6 +158,7 @@ export type UserGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   name: string | null
+  image: string | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -177,6 +184,7 @@ export type UserWhereInput = {
   createdAt?: Prisma.DateTimeFilter<'User'> | Date | string
   updatedAt?: Prisma.DateTimeFilter<'User'> | Date | string
   name?: Prisma.StringNullableFilter<'User'> | string | null
+  image?: Prisma.StringNullableFilter<'User'> | string | null
   Credentials?: Prisma.XOR<
     Prisma.CredentialsNullableScalarRelationFilter,
     Prisma.CredentialsWhereInput
@@ -196,6 +204,7 @@ export type UserOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
+  image?: Prisma.SortOrderInput | Prisma.SortOrder
   Credentials?: Prisma.CredentialsOrderByWithRelationInput
   AuthProvider?: Prisma.AuthProviderOrderByWithRelationInput
   Admin?: Prisma.AdminOrderByWithRelationInput
@@ -210,6 +219,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<
     createdAt?: Prisma.DateTimeFilter<'User'> | Date | string
     updatedAt?: Prisma.DateTimeFilter<'User'> | Date | string
     name?: Prisma.StringNullableFilter<'User'> | string | null
+    image?: Prisma.StringNullableFilter<'User'> | string | null
     Credentials?: Prisma.XOR<
       Prisma.CredentialsNullableScalarRelationFilter,
       Prisma.CredentialsWhereInput
@@ -231,6 +241,7 @@ export type UserOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
+  image?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -248,6 +259,7 @@ export type UserScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<'User'> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<'User'> | Date | string
   name?: Prisma.StringNullableWithAggregatesFilter<'User'> | string | null
+  image?: Prisma.StringNullableWithAggregatesFilter<'User'> | string | null
 }
 
 export type UserCreateInput = {
@@ -255,6 +267,7 @@ export type UserCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   name?: string | null
+  image?: string | null
   Credentials?: Prisma.CredentialsCreateNestedOneWithoutUserInput
   AuthProvider?: Prisma.AuthProviderCreateNestedOneWithoutUserInput
   Admin?: Prisma.AdminCreateNestedOneWithoutUserInput
@@ -265,6 +278,7 @@ export type UserUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   name?: string | null
+  image?: string | null
   Credentials?: Prisma.CredentialsUncheckedCreateNestedOneWithoutUserInput
   AuthProvider?: Prisma.AuthProviderUncheckedCreateNestedOneWithoutUserInput
   Admin?: Prisma.AdminUncheckedCreateNestedOneWithoutUserInput
@@ -275,6 +289,7 @@ export type UserUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Credentials?: Prisma.CredentialsUpdateOneWithoutUserNestedInput
   AuthProvider?: Prisma.AuthProviderUpdateOneWithoutUserNestedInput
   Admin?: Prisma.AdminUpdateOneWithoutUserNestedInput
@@ -285,6 +300,7 @@ export type UserUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Credentials?: Prisma.CredentialsUncheckedUpdateOneWithoutUserNestedInput
   AuthProvider?: Prisma.AuthProviderUncheckedUpdateOneWithoutUserNestedInput
   Admin?: Prisma.AdminUncheckedUpdateOneWithoutUserNestedInput
@@ -295,6 +311,7 @@ export type UserCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   name?: string | null
+  image?: string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -302,6 +319,7 @@ export type UserUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -309,6 +327,7 @@ export type UserUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -316,6 +335,7 @@ export type UserCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  image?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -323,6 +343,7 @@ export type UserMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  image?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -330,6 +351,7 @@ export type UserMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  image?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -432,6 +454,7 @@ export type UserCreateWithoutAdminInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   name?: string | null
+  image?: string | null
   Credentials?: Prisma.CredentialsCreateNestedOneWithoutUserInput
   AuthProvider?: Prisma.AuthProviderCreateNestedOneWithoutUserInput
 }
@@ -441,6 +464,7 @@ export type UserUncheckedCreateWithoutAdminInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   name?: string | null
+  image?: string | null
   Credentials?: Prisma.CredentialsUncheckedCreateNestedOneWithoutUserInput
   AuthProvider?: Prisma.AuthProviderUncheckedCreateNestedOneWithoutUserInput
 }
@@ -478,6 +502,7 @@ export type UserUpdateWithoutAdminInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Credentials?: Prisma.CredentialsUpdateOneWithoutUserNestedInput
   AuthProvider?: Prisma.AuthProviderUpdateOneWithoutUserNestedInput
 }
@@ -487,6 +512,7 @@ export type UserUncheckedUpdateWithoutAdminInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Credentials?: Prisma.CredentialsUncheckedUpdateOneWithoutUserNestedInput
   AuthProvider?: Prisma.AuthProviderUncheckedUpdateOneWithoutUserNestedInput
 }
@@ -496,6 +522,7 @@ export type UserCreateWithoutCredentialsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   name?: string | null
+  image?: string | null
   AuthProvider?: Prisma.AuthProviderCreateNestedOneWithoutUserInput
   Admin?: Prisma.AdminCreateNestedOneWithoutUserInput
 }
@@ -505,6 +532,7 @@ export type UserUncheckedCreateWithoutCredentialsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   name?: string | null
+  image?: string | null
   AuthProvider?: Prisma.AuthProviderUncheckedCreateNestedOneWithoutUserInput
   Admin?: Prisma.AdminUncheckedCreateNestedOneWithoutUserInput
 }
@@ -542,6 +570,7 @@ export type UserUpdateWithoutCredentialsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   AuthProvider?: Prisma.AuthProviderUpdateOneWithoutUserNestedInput
   Admin?: Prisma.AdminUpdateOneWithoutUserNestedInput
 }
@@ -551,6 +580,7 @@ export type UserUncheckedUpdateWithoutCredentialsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   AuthProvider?: Prisma.AuthProviderUncheckedUpdateOneWithoutUserNestedInput
   Admin?: Prisma.AdminUncheckedUpdateOneWithoutUserNestedInput
 }
@@ -560,6 +590,7 @@ export type UserCreateWithoutAuthProviderInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   name?: string | null
+  image?: string | null
   Credentials?: Prisma.CredentialsCreateNestedOneWithoutUserInput
   Admin?: Prisma.AdminCreateNestedOneWithoutUserInput
 }
@@ -569,6 +600,7 @@ export type UserUncheckedCreateWithoutAuthProviderInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   name?: string | null
+  image?: string | null
   Credentials?: Prisma.CredentialsUncheckedCreateNestedOneWithoutUserInput
   Admin?: Prisma.AdminUncheckedCreateNestedOneWithoutUserInput
 }
@@ -606,6 +638,7 @@ export type UserUpdateWithoutAuthProviderInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Credentials?: Prisma.CredentialsUpdateOneWithoutUserNestedInput
   Admin?: Prisma.AdminUpdateOneWithoutUserNestedInput
 }
@@ -615,6 +648,7 @@ export type UserUncheckedUpdateWithoutAuthProviderInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Credentials?: Prisma.CredentialsUncheckedUpdateOneWithoutUserNestedInput
   Admin?: Prisma.AdminUncheckedUpdateOneWithoutUserNestedInput
 }
@@ -628,6 +662,7 @@ export type UserSelect<
     createdAt?: boolean
     updatedAt?: boolean
     name?: boolean
+    image?: boolean
     Credentials?: boolean | Prisma.User$CredentialsArgs<ExtArgs>
     AuthProvider?: boolean | Prisma.User$AuthProviderArgs<ExtArgs>
     Admin?: boolean | Prisma.User$AdminArgs<ExtArgs>
@@ -644,6 +679,7 @@ export type UserSelectCreateManyAndReturn<
     createdAt?: boolean
     updatedAt?: boolean
     name?: boolean
+    image?: boolean
   },
   ExtArgs['result']['user']
 >
@@ -657,6 +693,7 @@ export type UserSelectUpdateManyAndReturn<
     createdAt?: boolean
     updatedAt?: boolean
     name?: boolean
+    image?: boolean
   },
   ExtArgs['result']['user']
 >
@@ -666,13 +703,14 @@ export type UserSelectScalar = {
   createdAt?: boolean
   updatedAt?: boolean
   name?: boolean
+  image?: boolean
 }
 
 export type UserOmit<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetOmit<
-  'uid' | 'createdAt' | 'updatedAt' | 'name',
+  'uid' | 'createdAt' | 'updatedAt' | 'name' | 'image',
   ExtArgs['result']['user']
 >
 export type UserInclude<
@@ -708,6 +746,7 @@ export type $UserPayload<
       createdAt: Date
       updatedAt: Date
       name: string | null
+      image: string | null
     },
     ExtArgs['result']['user']
   >
@@ -1343,6 +1382,7 @@ export interface UserFieldRefs {
   readonly createdAt: Prisma.FieldRef<'User', 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<'User', 'DateTime'>
   readonly name: Prisma.FieldRef<'User', 'String'>
+  readonly image: Prisma.FieldRef<'User', 'String'>
 }
 
 // Custom InputTypes

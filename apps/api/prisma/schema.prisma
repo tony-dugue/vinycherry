@@ -19,10 +19,11 @@ model User {
   updatedAt DateTime @updatedAt
 
   name  String?
+  image String?
 
-Credentials  Credentials?  @relation
-AuthProvider AuthProvider? @relation
-Admin        Admin?        @relation
+  Credentials  Credentials?  @relation
+  AuthProvider AuthProvider? @relation
+  Admin        Admin?        @relation
 }
 
 model Admin {
