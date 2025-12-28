@@ -7,7 +7,11 @@ import {
 import { checkRowLevelPermission } from '../../../common/auth/util'
 import { PrismaService } from '../../../common/prisma/prisma.service'
 import { GetUserType } from '../../../common/types'
-import { RegisterWithCredentialsInput } from './dtos/create-user.input'
+import {
+  LoginInput,
+  LoginOutput,
+  RegisterWithCredentialsInput,
+} from './dtos/create-user.input'
 import { FindManyUserArgs, FindUniqueUserArgs } from './dtos/find.args'
 import { UpdateUserInput } from './dtos/update-user.input'
 import { User } from './entity/user.entity'
@@ -26,6 +30,17 @@ export class UsersResolver {
     args: RegisterWithCredentialsInput,
   ) {
     return this.usersService.registerWithCredentials(args)
+  }
+
+  @Mutation(() => LoginOutput)
+  login(@Args('loginInput') args: LoginInput) {
+    return this.usersService.login(args)
+  }
+
+  @AllowAuthenticated()
+  @Query(() => User)
+  whoami(@GetUser() user: GetUserType) {
+    return this.usersService.findOne({ where: { uid: user.uid } })
   }
 
   @AllowAuthenticated()
