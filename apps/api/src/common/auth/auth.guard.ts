@@ -114,7 +114,7 @@ export class AuthGuard implements CanActivate {
    * Récupération des rôles utilisateur
    */
   private async getUserRoles(uid: string): Promise<Role[]> {
-    const roles: Role[] = ['user'] // rôle par défaut
+    const roles: Role[] = []
 
     const admin = await this.prisma.admin.findUnique({
       where: { uid },
