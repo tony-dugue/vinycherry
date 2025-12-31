@@ -844,9 +844,9 @@ enum GroupMusicianScalarFieldEnum {
   role
   startYear
   endYear
+  groupId
   createdAt
   updatedAt
-  groupId
 }
 
 input GroupMusicianOrderByWithRelationInput {
@@ -916,9 +916,9 @@ enum AlbumScalarFieldEnum {
   releaseDate
   studio
   coverUrl
+  groupId
   createdAt
   updatedAt
-  groupId
 }
 
 input AlbumOrderByWithRelationInput {
@@ -957,9 +957,9 @@ enum TrackScalarFieldEnum {
   title
   position
   duration
+  albumId
   createdAt
   updatedAt
-  albumId
 }
 
 input TrackOrderByWithRelationInput {
@@ -982,9 +982,9 @@ enum AlbumVersionScalarFieldEnum {
   name
   format
   year
+  albumId
   createdAt
   updatedAt
-  albumId
 }
 
 input AlbumVersionOrderByWithRelationInput {
@@ -1046,9 +1046,9 @@ enum PurchaseInfoScalarFieldEnum {
   price
   place
   date
+  collectionItemId
   createdAt
   updatedAt
-  collectionItemId
 }
 
 input PurchaseInfoWhereUniqueInput {
@@ -1059,9 +1059,9 @@ enum ExternalSourceScalarFieldEnum {
   id
   source
   externalId
+  albumId
   createdAt
   updatedAt
-  albumId
 }
 
 input ExternalSourceOrderByWithRelationInput {

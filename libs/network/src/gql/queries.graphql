@@ -1,0 +1,35 @@
+mutation RegisterWithCredentials(
+  $registerWithCredentialsInput: RegisterWithCredentialsInput!
+) {
+  registerWithCredentials(
+    registerWithCredentialsInput: $registerWithCredentialsInput
+  ) {
+    updatedAt
+    uid
+    name
+    image
+    createdAt
+  }
+}
+
+query Users($orderBy: [UserOrderByWithRelationInput!]) {
+  users(orderBy: $orderBy) {
+    name
+    image
+    uid
+    createdAt
+    updatedAt
+    admin {
+      uid
+      createdAt
+      updatedAt
+      user {
+        name
+        image
+        uid
+        createdAt
+        updatedAt
+      }
+    }
+  }
+}
