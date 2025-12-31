@@ -186,7 +186,7 @@ export type CredentialsWhereInput = {
   passwordHash?: Prisma.StringFilter<'Credentials'> | string
   createdAt?: Prisma.DateTimeFilter<'Credentials'> | Date | string
   updatedAt?: Prisma.DateTimeFilter<'Credentials'> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type CredentialsOrderByWithRelationInput = {
@@ -195,7 +195,7 @@ export type CredentialsOrderByWithRelationInput = {
   passwordHash?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
+  User?: Prisma.UserOrderByWithRelationInput
 }
 
 export type CredentialsWhereUniqueInput = Prisma.AtLeast<
@@ -208,7 +208,7 @@ export type CredentialsWhereUniqueInput = Prisma.AtLeast<
     passwordHash?: Prisma.StringFilter<'Credentials'> | string
     createdAt?: Prisma.DateTimeFilter<'Credentials'> | Date | string
     updatedAt?: Prisma.DateTimeFilter<'Credentials'> | Date | string
-    user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+    User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   },
   'uid' | 'email'
 >
@@ -244,7 +244,7 @@ export type CredentialsCreateInput = {
   passwordHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutCredentialsInput
+  User: Prisma.UserCreateNestedOneWithoutCredentialsInput
 }
 
 export type CredentialsUncheckedCreateInput = {
@@ -260,7 +260,7 @@ export type CredentialsUpdateInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutCredentialsNestedInput
+  User?: Prisma.UserUpdateOneRequiredWithoutCredentialsNestedInput
 }
 
 export type CredentialsUncheckedUpdateInput = {
@@ -445,7 +445,7 @@ export type CredentialsSelect<
     passwordHash?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+    User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['credentials']
 >
@@ -460,7 +460,7 @@ export type CredentialsSelectCreateManyAndReturn<
     passwordHash?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+    User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['credentials']
 >
@@ -475,7 +475,7 @@ export type CredentialsSelectUpdateManyAndReturn<
     passwordHash?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+    User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['credentials']
 >
@@ -499,19 +499,19 @@ export type CredentialsInclude<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type CredentialsIncludeCreateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type CredentialsIncludeUpdateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $CredentialsPayload<
@@ -520,7 +520,7 @@ export type $CredentialsPayload<
 > = {
   name: 'Credentials'
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
+    User: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
@@ -1082,7 +1082,7 @@ export interface Prisma__CredentialsClient<
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise'
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(
+  User<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>,
   ): Prisma.Prisma__UserClient<
     | runtime.Types.Result.GetResult<

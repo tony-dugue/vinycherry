@@ -5,8 +5,8 @@ import {
 } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcryptjs'
+import { PrismaService } from 'src/common/prisma/prisma.service'
 import { v4 as uuid } from 'uuid'
-import { PrismaService } from '../../../common/prisma/prisma.service'
 import {
   LoginInput,
   LoginOutput,

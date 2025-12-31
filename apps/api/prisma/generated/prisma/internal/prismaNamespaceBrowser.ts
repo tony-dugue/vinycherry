@@ -55,9 +55,22 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  Admin: 'Admin',
   Credentials: 'Credentials',
   AuthProvider: 'AuthProvider',
+  Admin: 'Admin',
+  Member: 'Member',
+  MusicStyle: 'MusicStyle',
+  Group: 'Group',
+  GroupStyle: 'GroupStyle',
+  GroupMusician: 'GroupMusician',
+  Instrument: 'Instrument',
+  GroupMusicianInstrument: 'GroupMusicianInstrument',
+  Album: 'Album',
+  Track: 'Track',
+  AlbumVersion: 'AlbumVersion',
+  CollectionItem: 'CollectionItem',
+  PurchaseInfo: 'PurchaseInfo',
+  ExternalSource: 'ExternalSource',
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -87,15 +100,6 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum =
   (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
-export const AdminScalarFieldEnum = {
-  uid: 'uid',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-} as const
-
-export type AdminScalarFieldEnum =
-  (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
-
 export const CredentialsScalarFieldEnum = {
   uid: 'uid',
   email: 'email',
@@ -114,6 +118,165 @@ export const AuthProviderScalarFieldEnum = {
 
 export type AuthProviderScalarFieldEnum =
   (typeof AuthProviderScalarFieldEnum)[keyof typeof AuthProviderScalarFieldEnum]
+
+export const AdminScalarFieldEnum = {
+  uid: 'uid',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const
+
+export type AdminScalarFieldEnum =
+  (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
+
+export const MemberScalarFieldEnum = {
+  uid: 'uid',
+  displayName: 'displayName',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const
+
+export type MemberScalarFieldEnum =
+  (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum]
+
+export const MusicStyleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const
+
+export type MusicStyleScalarFieldEnum =
+  (typeof MusicStyleScalarFieldEnum)[keyof typeof MusicStyleScalarFieldEnum]
+
+export const GroupScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  image: 'image',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const
+
+export type GroupScalarFieldEnum =
+  (typeof GroupScalarFieldEnum)[keyof typeof GroupScalarFieldEnum]
+
+export const GroupStyleScalarFieldEnum = {
+  groupId: 'groupId',
+  styleId: 'styleId',
+} as const
+
+export type GroupStyleScalarFieldEnum =
+  (typeof GroupStyleScalarFieldEnum)[keyof typeof GroupStyleScalarFieldEnum]
+
+export const GroupMusicianScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  role: 'role',
+  startYear: 'startYear',
+  endYear: 'endYear',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  groupId: 'groupId',
+} as const
+
+export type GroupMusicianScalarFieldEnum =
+  (typeof GroupMusicianScalarFieldEnum)[keyof typeof GroupMusicianScalarFieldEnum]
+
+export const InstrumentScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const
+
+export type InstrumentScalarFieldEnum =
+  (typeof InstrumentScalarFieldEnum)[keyof typeof InstrumentScalarFieldEnum]
+
+export const GroupMusicianInstrumentScalarFieldEnum = {
+  groupMusicianId: 'groupMusicianId',
+  instrumentId: 'instrumentId',
+} as const
+
+export type GroupMusicianInstrumentScalarFieldEnum =
+  (typeof GroupMusicianInstrumentScalarFieldEnum)[keyof typeof GroupMusicianInstrumentScalarFieldEnum]
+
+export const AlbumScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  releaseDate: 'releaseDate',
+  studio: 'studio',
+  coverUrl: 'coverUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  groupId: 'groupId',
+} as const
+
+export type AlbumScalarFieldEnum =
+  (typeof AlbumScalarFieldEnum)[keyof typeof AlbumScalarFieldEnum]
+
+export const TrackScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  position: 'position',
+  duration: 'duration',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  albumId: 'albumId',
+} as const
+
+export type TrackScalarFieldEnum =
+  (typeof TrackScalarFieldEnum)[keyof typeof TrackScalarFieldEnum]
+
+export const AlbumVersionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  format: 'format',
+  year: 'year',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  albumId: 'albumId',
+} as const
+
+export type AlbumVersionScalarFieldEnum =
+  (typeof AlbumVersionScalarFieldEnum)[keyof typeof AlbumVersionScalarFieldEnum]
+
+export const CollectionItemScalarFieldEnum = {
+  id: 'id',
+  memberId: 'memberId',
+  albumVersionId: 'albumVersionId',
+  condition: 'condition',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const
+
+export type CollectionItemScalarFieldEnum =
+  (typeof CollectionItemScalarFieldEnum)[keyof typeof CollectionItemScalarFieldEnum]
+
+export const PurchaseInfoScalarFieldEnum = {
+  id: 'id',
+  price: 'price',
+  place: 'place',
+  date: 'date',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  collectionItemId: 'collectionItemId',
+} as const
+
+export type PurchaseInfoScalarFieldEnum =
+  (typeof PurchaseInfoScalarFieldEnum)[keyof typeof PurchaseInfoScalarFieldEnum]
+
+export const ExternalSourceScalarFieldEnum = {
+  id: 'id',
+  source: 'source',
+  externalId: 'externalId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  albumId: 'albumId',
+} as const
+
+export type ExternalSourceScalarFieldEnum =
+  (typeof ExternalSourceScalarFieldEnum)[keyof typeof ExternalSourceScalarFieldEnum]
 
 export const SortOrder = {
   asc: 'asc',

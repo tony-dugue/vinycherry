@@ -1,10 +1,13 @@
-import { User } from '../../../../../prisma/generated/prisma/client'
-import { RestrictProperties } from '../../../../common/dtos/common.input'
+import { IsOptional } from 'class-validator'
+import { User } from 'prisma/generated/prisma/client'
+import { RestrictProperties } from 'src/common/dtos/common.input'
 
 export class UserEntity implements RestrictProperties<UserEntity, User> {
-  name: string | null
+  @IsOptional()
+  name: string
   uid: string
-  image: string | null
+  @IsOptional()
+  image: string
   createdAt: Date
   updatedAt: Date
 }

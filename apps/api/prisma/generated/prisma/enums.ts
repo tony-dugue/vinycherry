@@ -14,3 +14,33 @@ export const AuthProviderType = {
 
 export type AuthProviderType =
   (typeof AuthProviderType)[keyof typeof AuthProviderType]
+
+export const SupportType = {
+  VINYL: 'VINYL',
+  CD: 'CD',
+  CASSETTE: 'CASSETTE',
+  DIGITAL: 'DIGITAL',
+  BOX: 'BOX',
+} as const
+
+export type SupportType = (typeof SupportType)[keyof typeof SupportType]
+
+export const Condition = {
+  MINT: 'MINT',
+  VERY_GOOD: 'VERY_GOOD',
+  GOOD: 'GOOD',
+  FAIR: 'FAIR',
+  POOR: 'POOR',
+} as const
+
+export type Condition = (typeof Condition)[keyof typeof Condition]
+
+export const ExternalSourceType = {
+  MUSICBRAINZ: 'MUSICBRAINZ',
+  DISCOGS: 'DISCOGS',
+  AUDIO_DB: 'AUDIO_DB',
+  SPOTIFY: 'SPOTIFY',
+} as const
+
+export type ExternalSourceType =
+  (typeof ExternalSourceType)[keyof typeof ExternalSourceType]

@@ -4,7 +4,7 @@ import { GetUserType, Role } from '../types'
 export const checkRowLevelPermission = (
   user: GetUserType,
   requestedUid?: string | string[],
-  roles: Role[] = ['admin'],
+  roles: Role[] = ['admin', 'member'],
 ) => {
   if (!requestedUid) return false
 

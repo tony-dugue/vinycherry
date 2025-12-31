@@ -1,6 +1,7 @@
 import { Field, InputType, PartialType } from '@nestjs/graphql'
-import { Prisma } from '../../../../../prisma/generated/prisma/client'
-import { RestrictProperties } from '../../../../common/dtos/common.input'
+import { Prisma } from 'prisma/generated/prisma/client'
+import { RestrictProperties } from 'src/common/dtos/common.input'
+import { MemberOrderByWithRelationInput } from 'src/models/members/graphql/dtos/order-by.args'
 
 @InputType()
 export class UserOrderByWithRelationInputStrict implements RestrictProperties<
@@ -19,8 +20,7 @@ export class UserOrderByWithRelationInputStrict implements RestrictProperties<
   @Field(() => Prisma.SortOrder)
   name: Prisma.SortOrder
 
-  // Todo: Add below field decorator to the SortOrder properties.
-  // @Field(() => Prisma.SortOrder)
+  Member: MemberOrderByWithRelationInput
 }
 
 @InputType()

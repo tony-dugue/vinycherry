@@ -1,6 +1,6 @@
-import { Prisma } from '../../../../../prisma/generated/prisma/client'
 import { IsIn, IsOptional } from 'class-validator'
-import { BaseQueryDto } from '../../../../common/dtos/common.dto'
+import { Prisma } from 'prisma/generated/prisma/client'
+import { BaseQueryDto } from 'src/common/dtos/common.dto'
 
 export class UserQueryDto extends BaseQueryDto {
   @IsOptional()

@@ -169,14 +169,14 @@ export type AdminWhereInput = {
   uid?: Prisma.StringFilter<'Admin'> | string
   createdAt?: Prisma.DateTimeFilter<'Admin'> | Date | string
   updatedAt?: Prisma.DateTimeFilter<'Admin'> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type AdminOrderByWithRelationInput = {
   uid?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
+  User?: Prisma.UserOrderByWithRelationInput
 }
 
 export type AdminWhereUniqueInput = Prisma.AtLeast<
@@ -187,7 +187,7 @@ export type AdminWhereUniqueInput = Prisma.AtLeast<
     NOT?: Prisma.AdminWhereInput | Prisma.AdminWhereInput[]
     createdAt?: Prisma.DateTimeFilter<'Admin'> | Date | string
     updatedAt?: Prisma.DateTimeFilter<'Admin'> | Date | string
-    user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+    User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   },
   'uid'
 >
@@ -217,7 +217,7 @@ export type AdminScalarWhereWithAggregatesInput = {
 export type AdminCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutAdminInput
+  User: Prisma.UserCreateNestedOneWithoutAdminInput
 }
 
 export type AdminUncheckedCreateInput = {
@@ -229,7 +229,7 @@ export type AdminUncheckedCreateInput = {
 export type AdminUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutAdminNestedInput
+  User?: Prisma.UserUpdateOneRequiredWithoutAdminNestedInput
 }
 
 export type AdminUncheckedUpdateInput = {
@@ -390,7 +390,7 @@ export type AdminSelect<
     uid?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+    User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['admin']
 >
@@ -403,7 +403,7 @@ export type AdminSelectCreateManyAndReturn<
     uid?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+    User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['admin']
 >
@@ -416,7 +416,7 @@ export type AdminSelectUpdateManyAndReturn<
     uid?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+    User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['admin']
 >
@@ -438,19 +438,19 @@ export type AdminInclude<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type AdminIncludeCreateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type AdminIncludeUpdateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $AdminPayload<
@@ -459,7 +459,7 @@ export type $AdminPayload<
 > = {
   name: 'Admin'
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
+    User: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
@@ -1016,7 +1016,7 @@ export interface Prisma__AdminClient<
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise'
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(
+  User<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>,
   ): Prisma.Prisma__UserClient<
     | runtime.Types.Result.GetResult<

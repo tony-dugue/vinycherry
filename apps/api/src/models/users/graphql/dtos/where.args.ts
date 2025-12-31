@@ -1,10 +1,11 @@
 import { InputType, PartialType } from '@nestjs/graphql'
-import { Prisma } from '../../../../../prisma/generated/prisma/client'
+import { Prisma } from 'prisma/generated/prisma/client'
 import {
   DateTimeFilter,
   RestrictProperties,
   StringFilter,
-} from '../../../../common/dtos/common.input'
+} from 'src/common/dtos/common.input'
+import { MemberRelationFilter } from 'src/models/members/graphql/dtos/where.args'
 
 @InputType()
 export class UserWhereUniqueInput {
@@ -19,12 +20,14 @@ export class UserWhereInputStrict implements RestrictProperties<
     'Credentials' | 'AuthProvider' | 'Admin' | 'image'
   >
 > {
-  // Todo: Add the below field decorator only to the $Enums types.
-  // @Field(() => $Enums.x)
   uid: StringFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
   name: StringFilter
+
+  Member: MemberRelationFilter
+  // Todo: Add the below field decorator only to the $Enums types.
+  // @Field(() => $Enums.x)
 
   AND: UserWhereInput[]
   OR: UserWhereInput[]

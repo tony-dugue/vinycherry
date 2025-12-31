@@ -2,14 +2,8 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type LoginOutput {
-  token: String!
-}
-
-type User {
-  name: String
+type Admin {
   uid: String!
-  image: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -18,6 +12,152 @@ type User {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+type AlbumVersion {
+  format: SupportType!
+  year: Int
+  name: String!
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  albumId: Int!
+}
+
+enum SupportType {
+  VINYL
+  CD
+  CASSETTE
+  DIGITAL
+  BOX
+}
+
+type Album {
+  releaseDate: DateTime
+  studio: String
+  coverUrl: String
+  id: Int!
+  title: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  groupId: Int!
+}
+
+type CollectionItem {
+  condition: Condition!
+  notes: String
+  memberId: String!
+  albumVersionId: Int!
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum Condition {
+  MINT
+  VERY_GOOD
+  GOOD
+  FAIR
+  POOR
+}
+
+type ExternalSource {
+  source: ExternalSourceType!
+  albumId: Int
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  externalId: String!
+}
+
+enum ExternalSourceType {
+  MUSICBRAINZ
+  DISCOGS
+  AUDIO_DB
+  SPOTIFY
+}
+
+type GroupMusician {
+  startYear: Int
+  endYear: Int
+  name: String!
+  id: Int!
+  role: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  groupId: Int!
+}
+
+type GroupStyle {
+  groupId: Int!
+  styleId: Int!
+}
+
+type Group {
+  description: String
+  image: String
+  name: String!
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Instrument {
+  name: String!
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Member {
+  displayName: String
+  uid: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type MusicStyle {
+  name: String!
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type PurchaseInfo {
+  price: Int
+  place: String
+  date: DateTime
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  collectionItemId: Int!
+}
+
+type Track {
+  duration: Int
+  id: Int!
+  title: String!
+  position: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  albumId: Int!
+}
+
+type LoginOutput {
+  token: String!
+}
+
+type User {
+  name: String
+  image: String
+  uid: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type GroupMusicianInstrument {
+  groupMusicianId: Int!
+  instrumentId: Int!
+}
 
 type Query {
   whoami: User!
@@ -31,6 +171,148 @@ type Query {
     skip: Int
   ): [User!]!
   user(where: UserWhereUniqueInput!): User!
+  admins(
+    omit: [String!]
+    distinct: [AdminScalarFieldEnum!]
+    where: AdminWhereInput
+    orderBy: [AdminOrderByWithRelationInput!]
+    cursor: AdminWhereUniqueInput
+    take: Int
+    skip: Int
+  ): [Admin!]!
+  admin(where: AdminWhereUniqueInput!): Admin!
+  members(
+    omit: [String!]
+    distinct: [MemberScalarFieldEnum!]
+    where: MemberWhereInput
+    orderBy: [MemberOrderByWithRelationInput!]
+    cursor: MemberWhereUniqueInput
+    take: Int
+    skip: Int
+  ): [Member!]!
+  member(where: MemberWhereUniqueInput!): Member!
+  musicStyles(
+    omit: [String!]
+    distinct: [MusicStyleScalarFieldEnum!]
+    where: MusicStyleWhereInput
+    orderBy: [MusicStyleOrderByWithRelationInput!]
+    cursor: MusicStyleWhereUniqueInput
+    take: Int
+    skip: Int
+  ): [MusicStyle!]!
+  musicStyle(where: MusicStyleWhereUniqueInput!): MusicStyle!
+  groups(
+    omit: [String!]
+    distinct: [GroupScalarFieldEnum!]
+    where: GroupWhereInput
+    orderBy: [GroupOrderByWithRelationInput!]
+    cursor: GroupWhereUniqueInput
+    take: Int
+    skip: Int
+  ): [Group!]!
+  group(where: GroupWhereUniqueInput!): Group!
+  groupStyles(
+    omit: [String!]
+    distinct: [GroupStyleScalarFieldEnum!]
+    where: GroupStyleWhereInput
+    orderBy: [GroupStyleOrderByWithRelationInput!]
+    cursor: GroupStyleWhereUniqueInput
+    take: Int
+    skip: Int
+  ): [GroupStyle!]!
+  groupStyle(where: GroupStyleWhereUniqueInput!): GroupStyle!
+  groupMusicians(
+    omit: [String!]
+    distinct: [GroupMusicianScalarFieldEnum!]
+    where: GroupMusicianWhereInput
+    orderBy: [GroupMusicianOrderByWithRelationInput!]
+    cursor: GroupMusicianWhereUniqueInput
+    take: Int
+    skip: Int
+  ): [GroupMusician!]!
+  groupMusician(where: GroupMusicianWhereUniqueInput!): GroupMusician!
+  instruments(
+    omit: [String!]
+    distinct: [InstrumentScalarFieldEnum!]
+    where: InstrumentWhereInput
+    orderBy: [InstrumentOrderByWithRelationInput!]
+    cursor: InstrumentWhereUniqueInput
+    take: Int
+    skip: Int
+  ): [Instrument!]!
+  instrument(where: InstrumentWhereUniqueInput!): Instrument!
+  groupMusicianInstruments(
+    omit: [String!]
+    distinct: [GroupMusicianInstrumentScalarFieldEnum!]
+    where: GroupMusicianInstrumentWhereInput
+    orderBy: [GroupMusicianInstrumentOrderByWithRelationInput!]
+    cursor: GroupMusicianInstrumentWhereUniqueInput
+    take: Int
+    skip: Int
+  ): [GroupMusicianInstrument!]!
+  groupMusicianInstrument(
+    where: GroupMusicianInstrumentWhereUniqueInput!
+  ): GroupMusicianInstrument!
+  albums(
+    omit: [String!]
+    distinct: [AlbumScalarFieldEnum!]
+    where: AlbumWhereInput
+    orderBy: [AlbumOrderByWithRelationInput!]
+    cursor: AlbumWhereUniqueInput
+    take: Int
+    skip: Int
+  ): [Album!]!
+  album(where: AlbumWhereUniqueInput!): Album!
+  tracks(
+    omit: [String!]
+    distinct: [TrackScalarFieldEnum!]
+    where: TrackWhereInput
+    orderBy: [TrackOrderByWithRelationInput!]
+    cursor: TrackWhereUniqueInput
+    take: Int
+    skip: Int
+  ): [Track!]!
+  track(where: TrackWhereUniqueInput!): Track!
+  albumVersions(
+    omit: [String!]
+    distinct: [AlbumVersionScalarFieldEnum!]
+    where: AlbumVersionWhereInput
+    orderBy: [AlbumVersionOrderByWithRelationInput!]
+    cursor: AlbumVersionWhereUniqueInput
+    take: Int
+    skip: Int
+  ): [AlbumVersion!]!
+  albumVersion(where: AlbumVersionWhereUniqueInput!): AlbumVersion!
+  collectionItems(
+    omit: [String!]
+    distinct: [CollectionItemScalarFieldEnum!]
+    where: CollectionItemWhereInput
+    orderBy: [CollectionItemOrderByWithRelationInput!]
+    cursor: CollectionItemWhereUniqueInput
+    take: Int
+    skip: Int
+  ): [CollectionItem!]!
+  collectionItem(where: CollectionItemWhereUniqueInput!): CollectionItem!
+  purchaseInfos(
+    omit: [String!]
+    distinct: [PurchaseInfoScalarFieldEnum!]
+    where: PurchaseInfoWhereInput
+    orderBy: [PurchaseInfoOrderByWithRelationInput!]
+    cursor: PurchaseInfoWhereUniqueInput
+    take: Int
+    skip: Int
+  ): [PurchaseInfo!]!
+  purchaseInfo(where: PurchaseInfoWhereUniqueInput!): PurchaseInfo!
+  externalSources(
+    omit: [String!]
+    distinct: [ExternalSourceScalarFieldEnum!]
+    where: ExternalSourceWhereInput
+    orderBy: [ExternalSourceOrderByWithRelationInput!]
+    cursor: ExternalSourceWhereUniqueInput
+    take: Int
+    skip: Int
+  ): [ExternalSource!]!
+  externalSource(where: ExternalSourceWhereUniqueInput!): ExternalSource!
 }
 
 enum UserScalarFieldEnum {
@@ -38,6 +320,7 @@ enum UserScalarFieldEnum {
   createdAt
   updatedAt
   name
+  image
 }
 
 input UserWhereInput {
@@ -45,6 +328,7 @@ input UserWhereInput {
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
   name: StringFilter
+  Member: MemberRelationFilter
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
@@ -80,11 +364,302 @@ input DateTimeFilter {
   gte: String
 }
 
+input MemberRelationFilter {
+  is: MemberWhereInput
+  isNot: MemberWhereInput
+}
+
+input MemberWhereInput {
+  uid: StringFilter
+  displayName: StringFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+  User: UserRelationFilter
+  CollectionItems: CollectionItemListRelationFilter
+  AND: [MemberWhereInput!]
+  OR: [MemberWhereInput!]
+  NOT: [MemberWhereInput!]
+}
+
+input UserRelationFilter {
+  is: UserWhereInput
+  isNot: UserWhereInput
+}
+
+input CollectionItemListRelationFilter {
+  every: CollectionItemWhereInput
+  some: CollectionItemWhereInput
+  none: CollectionItemWhereInput
+}
+
+input CollectionItemWhereInput {
+  condition: Condition
+  id: IntFilter
+  memberId: StringFilter
+  albumVersionId: IntFilter
+  notes: StringFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+  Member: MemberRelationFilter
+  AlbumVersion: AlbumVersionRelationFilter
+  Purchase: PurchaseInfoRelationFilter
+  AND: [CollectionItemWhereInput!]
+  OR: [CollectionItemWhereInput!]
+  NOT: [CollectionItemWhereInput!]
+}
+
+input IntFilter {
+  equals: Int
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+}
+
+input AlbumVersionRelationFilter {
+  is: AlbumVersionWhereInput
+  isNot: AlbumVersionWhereInput
+}
+
+input AlbumVersionWhereInput {
+  format: SupportType
+  id: IntFilter
+  name: StringFilter
+  year: IntFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+  albumId: IntFilter
+  Album: AlbumRelationFilter
+  CollectionItems: CollectionItemListRelationFilter
+  AND: [AlbumVersionWhereInput!]
+  OR: [AlbumVersionWhereInput!]
+  NOT: [AlbumVersionWhereInput!]
+}
+
+input AlbumRelationFilter {
+  is: AlbumWhereInput
+  isNot: AlbumWhereInput
+}
+
+input AlbumWhereInput {
+  id: IntFilter
+  title: StringFilter
+  releaseDate: DateTimeFilter
+  studio: DateTimeFilter
+  coverUrl: DateTimeFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+  groupId: IntFilter
+  Group: GroupRelationFilter
+  Tracks: TrackListRelationFilter
+  Versions: AlbumVersionListRelationFilter
+  Sources: ExternalSourceListRelationFilter
+  AND: [AlbumWhereInput!]
+  OR: [AlbumWhereInput!]
+  NOT: [AlbumWhereInput!]
+}
+
+input GroupRelationFilter {
+  is: GroupWhereInput
+  isNot: GroupWhereInput
+}
+
+input GroupWhereInput {
+  id: IntFilter
+  name: StringFilter
+  description: StringFilter
+  image: StringFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+  Styles: GroupStyleListRelationFilter
+  Albums: AlbumListRelationFilter
+  Musicians: GroupMusicianListRelationFilter
+  AND: [GroupWhereInput!]
+  OR: [GroupWhereInput!]
+  NOT: [GroupWhereInput!]
+}
+
+input GroupStyleListRelationFilter {
+  every: GroupStyleWhereInput
+  some: GroupStyleWhereInput
+  none: GroupStyleWhereInput
+}
+
+input GroupStyleWhereInput {
+  groupId: IntFilter
+  styleId: IntFilter
+  Group: GroupRelationFilter
+  MusicStyle: MusicStyleRelationFilter
+  AND: [GroupStyleWhereInput!]
+  OR: [GroupStyleWhereInput!]
+  NOT: [GroupStyleWhereInput!]
+}
+
+input MusicStyleRelationFilter {
+  is: MusicStyleWhereInput
+  isNot: MusicStyleWhereInput
+}
+
+input MusicStyleWhereInput {
+  id: IntFilter
+  name: StringFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+  Groups: GroupStyleListRelationFilter
+  AND: [MusicStyleWhereInput!]
+  OR: [MusicStyleWhereInput!]
+  NOT: [MusicStyleWhereInput!]
+}
+
+input AlbumListRelationFilter {
+  every: AlbumWhereInput
+  some: AlbumWhereInput
+  none: AlbumWhereInput
+}
+
+input GroupMusicianListRelationFilter {
+  every: GroupMusicianWhereInput
+  some: GroupMusicianWhereInput
+  none: GroupMusicianWhereInput
+}
+
+input GroupMusicianWhereInput {
+  id: IntFilter
+  name: StringFilter
+  role: StringFilter
+  startYear: IntFilter
+  endYear: IntFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+  groupId: IntFilter
+  Group: GroupRelationFilter
+  Instruments: GroupMusicianInstrumentListRelationFilter
+  AND: [GroupMusicianWhereInput!]
+  OR: [GroupMusicianWhereInput!]
+  NOT: [GroupMusicianWhereInput!]
+}
+
+input GroupMusicianInstrumentListRelationFilter {
+  every: GroupMusicianInstrumentWhereInput
+  some: GroupMusicianInstrumentWhereInput
+  none: GroupMusicianInstrumentWhereInput
+}
+
+input GroupMusicianInstrumentWhereInput {
+  groupMusicianId: IntFilter
+  instrumentId: IntFilter
+  GroupMusician: GroupMusicianRelationFilter
+  Instrument: InstrumentRelationFilter
+  AND: [GroupMusicianInstrumentWhereInput!]
+  OR: [GroupMusicianInstrumentWhereInput!]
+  NOT: [GroupMusicianInstrumentWhereInput!]
+}
+
+input GroupMusicianRelationFilter {
+  is: GroupMusicianWhereInput
+  isNot: GroupMusicianWhereInput
+}
+
+input InstrumentRelationFilter {
+  is: InstrumentWhereInput
+  isNot: InstrumentWhereInput
+}
+
+input InstrumentWhereInput {
+  id: IntFilter
+  name: StringFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+  Musicians: GroupMusicianInstrumentListRelationFilter
+  AND: [InstrumentWhereInput!]
+  OR: [InstrumentWhereInput!]
+  NOT: [InstrumentWhereInput!]
+}
+
+input TrackListRelationFilter {
+  every: TrackWhereInput
+  some: TrackWhereInput
+  none: TrackWhereInput
+}
+
+input TrackWhereInput {
+  id: IntFilter
+  title: StringFilter
+  position: IntFilter
+  duration: IntFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+  albumId: IntFilter
+  Album: AlbumRelationFilter
+  AND: [TrackWhereInput!]
+  OR: [TrackWhereInput!]
+  NOT: [TrackWhereInput!]
+}
+
+input AlbumVersionListRelationFilter {
+  every: AlbumVersionWhereInput
+  some: AlbumVersionWhereInput
+  none: AlbumVersionWhereInput
+}
+
+input ExternalSourceListRelationFilter {
+  every: ExternalSourceWhereInput
+  some: ExternalSourceWhereInput
+  none: ExternalSourceWhereInput
+}
+
+input ExternalSourceWhereInput {
+  source: ExternalSourceType
+  id: IntFilter
+  externalId: StringFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+  albumId: IntFilter
+  Album: AlbumRelationFilter
+  AND: [ExternalSourceWhereInput!]
+  OR: [ExternalSourceWhereInput!]
+  NOT: [ExternalSourceWhereInput!]
+}
+
+input PurchaseInfoRelationFilter {
+  is: PurchaseInfoWhereInput
+  isNot: PurchaseInfoWhereInput
+}
+
+input PurchaseInfoWhereInput {
+  id: IntFilter
+  price: FloatFilter
+  place: StringFilter
+  date: DateTimeFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+  collectionItemId: IntFilter
+  CollectionItem: CollectionItemRelationFilter
+  AND: [PurchaseInfoWhereInput!]
+  OR: [PurchaseInfoWhereInput!]
+  NOT: [PurchaseInfoWhereInput!]
+}
+
+input FloatFilter {
+  equals: Int
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: Int
+}
+
+input CollectionItemRelationFilter {
+  is: CollectionItemWhereInput
+  isNot: CollectionItemWhereInput
+}
+
 input UserOrderByWithRelationInput {
   uid: SortOrder
   createdAt: SortOrder
   updatedAt: SortOrder
   name: SortOrder
+  Member: MemberOrderByWithRelationInput
 }
 
 enum SortOrder {
@@ -92,8 +667,376 @@ enum SortOrder {
   desc
 }
 
+input MemberOrderByWithRelationInput {
+  uid: SortOrder
+  displayName: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+  User: UserOrderByWithRelationInput
+  CollectionItems: CollectionItemOrderByRelationAggregateInput
+}
+
+input CollectionItemOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
 input UserWhereUniqueInput {
   uid: String!
+}
+
+enum AdminScalarFieldEnum {
+  uid
+  createdAt
+  updatedAt
+}
+
+input AdminWhereInput {
+  uid: StringFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+  User: UserRelationFilter
+  AND: [AdminWhereInput!]
+  OR: [AdminWhereInput!]
+  NOT: [AdminWhereInput!]
+}
+
+input AdminOrderByWithRelationInput {
+  uid: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+  User: UserOrderByWithRelationInput
+}
+
+input AdminWhereUniqueInput {
+  uid: String!
+}
+
+enum MemberScalarFieldEnum {
+  uid
+  displayName
+  createdAt
+  updatedAt
+}
+
+input MemberWhereUniqueInput {
+  uid: String!
+}
+
+enum MusicStyleScalarFieldEnum {
+  id
+  name
+  createdAt
+  updatedAt
+}
+
+input MusicStyleOrderByWithRelationInput {
+  createdAt: SortOrder
+  updatedAt: SortOrder
+  id: SortOrder
+  name: SortOrder
+  Groups: GroupStyleOrderByRelationAggregateInput
+}
+
+input GroupStyleOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input MusicStyleWhereUniqueInput {
+  id: Int!
+}
+
+enum GroupScalarFieldEnum {
+  id
+  name
+  description
+  image
+  createdAt
+  updatedAt
+}
+
+input GroupOrderByWithRelationInput {
+  id: SortOrder
+  name: SortOrder
+  description: SortOrder
+  image: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+  Styles: GroupStyleOrderByRelationAggregateInput
+  Albums: AlbumOrderByRelationAggregateInput
+  Musicians: GroupMusicianOrderByRelationAggregateInput
+}
+
+input AlbumOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input GroupMusicianOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input GroupWhereUniqueInput {
+  id: Int!
+}
+
+enum GroupStyleScalarFieldEnum {
+  groupId
+  styleId
+}
+
+input GroupStyleOrderByWithRelationInput {
+  groupId: SortOrder
+  styleId: SortOrder
+  Group: GroupOrderByWithRelationInput
+  MusicStyle: MusicStyleOrderByWithRelationInput
+}
+
+input GroupStyleWhereUniqueInput {
+  groupId_styleId: GroupStyleGroupIdStyleIdCompoundUniqueInput!
+}
+
+input GroupStyleGroupIdStyleIdCompoundUniqueInput {
+  groupId: Int!
+  styleId: Int!
+}
+
+enum GroupMusicianScalarFieldEnum {
+  id
+  name
+  role
+  startYear
+  endYear
+  createdAt
+  updatedAt
+  groupId
+}
+
+input GroupMusicianOrderByWithRelationInput {
+  createdAt: SortOrder
+  updatedAt: SortOrder
+  id: SortOrder
+  name: SortOrder
+  role: SortOrder
+  startYear: SortOrder
+  endYear: SortOrder
+  groupId: SortOrder
+  Group: GroupOrderByWithRelationInput
+  Instruments: GroupMusicianInstrumentOrderByRelationAggregateInput
+}
+
+input GroupMusicianInstrumentOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input GroupMusicianWhereUniqueInput {
+  id: Int!
+}
+
+enum InstrumentScalarFieldEnum {
+  id
+  name
+  createdAt
+  updatedAt
+}
+
+input InstrumentOrderByWithRelationInput {
+  createdAt: SortOrder
+  updatedAt: SortOrder
+  id: SortOrder
+  name: SortOrder
+  Musicians: GroupMusicianInstrumentOrderByRelationAggregateInput
+}
+
+input InstrumentWhereUniqueInput {
+  id: Int!
+}
+
+enum GroupMusicianInstrumentScalarFieldEnum {
+  groupMusicianId
+  instrumentId
+}
+
+input GroupMusicianInstrumentOrderByWithRelationInput {
+  groupMusicianId: SortOrder
+  instrumentId: SortOrder
+  GroupMusician: GroupMusicianOrderByWithRelationInput
+  Instrument: InstrumentOrderByWithRelationInput
+}
+
+input GroupMusicianInstrumentWhereUniqueInput {
+  groupMusicianId_instrumentId: GroupMusicianInstrumentCompoundUniqueInput!
+}
+
+input GroupMusicianInstrumentCompoundUniqueInput {
+  groupMusicianId: Int!
+  instrumentId: Int!
+}
+
+enum AlbumScalarFieldEnum {
+  id
+  title
+  releaseDate
+  studio
+  coverUrl
+  createdAt
+  updatedAt
+  groupId
+}
+
+input AlbumOrderByWithRelationInput {
+  id: SortOrder
+  title: SortOrder
+  releaseDate: SortOrder
+  studio: SortOrder
+  coverUrl: SortOrder
+  groupId: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+  Group: GroupOrderByWithRelationInput
+  Tracks: TrackOrderByRelationAggregateInput
+  Versions: AlbumVersionOrderByRelationAggregateInput
+  Sources: ExternalSourceOrderByRelationAggregateInput
+}
+
+input TrackOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input AlbumVersionOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input ExternalSourceOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input AlbumWhereUniqueInput {
+  id: Int!
+}
+
+enum TrackScalarFieldEnum {
+  id
+  title
+  position
+  duration
+  createdAt
+  updatedAt
+  albumId
+}
+
+input TrackOrderByWithRelationInput {
+  createdAt: SortOrder
+  updatedAt: SortOrder
+  id: SortOrder
+  title: SortOrder
+  position: SortOrder
+  duration: SortOrder
+  albumId: SortOrder
+  Album: AlbumOrderByWithRelationInput
+}
+
+input TrackWhereUniqueInput {
+  id: Int!
+}
+
+enum AlbumVersionScalarFieldEnum {
+  id
+  name
+  format
+  year
+  createdAt
+  updatedAt
+  albumId
+}
+
+input AlbumVersionOrderByWithRelationInput {
+  id: SortOrder
+  name: SortOrder
+  format: SortOrder
+  year: SortOrder
+  albumId: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+  Album: AlbumOrderByWithRelationInput
+  CollectionItems: CollectionItemOrderByRelationAggregateInput
+}
+
+input AlbumVersionWhereUniqueInput {
+  id: Int!
+}
+
+enum CollectionItemScalarFieldEnum {
+  id
+  memberId
+  albumVersionId
+  condition
+  notes
+  createdAt
+  updatedAt
+}
+
+input CollectionItemOrderByWithRelationInput {
+  id: SortOrder
+  memberId: SortOrder
+  albumVersionId: SortOrder
+  condition: SortOrder
+  notes: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+  Member: MemberOrderByWithRelationInput
+  AlbumVersion: AlbumVersionOrderByWithRelationInput
+  Purchase: PurchaseInfoOrderByWithRelationInput
+}
+
+input PurchaseInfoOrderByWithRelationInput {
+  id: SortOrder
+  price: SortOrder
+  place: SortOrder
+  date: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+  collectionItemId: SortOrder
+  CollectionItem: CollectionItemOrderByWithRelationInput
+}
+
+input CollectionItemWhereUniqueInput {
+  id: Int!
+}
+
+enum PurchaseInfoScalarFieldEnum {
+  id
+  price
+  place
+  date
+  createdAt
+  updatedAt
+  collectionItemId
+}
+
+input PurchaseInfoWhereUniqueInput {
+  id: Int!
+}
+
+enum ExternalSourceScalarFieldEnum {
+  id
+  source
+  externalId
+  createdAt
+  updatedAt
+  albumId
+}
+
+input ExternalSourceOrderByWithRelationInput {
+  id: SortOrder
+  source: SortOrder
+  externalId: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+  albumId: SortOrder
+  Album: AlbumOrderByWithRelationInput
+}
+
+input ExternalSourceWhereUniqueInput {
+  id: Int!
 }
 
 type Mutation {
@@ -103,6 +1046,74 @@ type Mutation {
   login(loginInput: LoginInput!): LoginOutput!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(where: UserWhereUniqueInput!): User!
+  createAdmin(createAdminInput: CreateAdminInput!): Admin!
+  updateAdmin(updateAdminInput: UpdateAdminInput!): Admin!
+  removeAdmin(where: AdminWhereUniqueInput!): Admin!
+  createMember(createMemberInput: CreateMemberInput!): Member!
+  updateMember(updateMemberInput: UpdateMemberInput!): Member!
+  removeMember(where: MemberWhereUniqueInput!): Member!
+  createMusicStyle(createMusicStyleInput: CreateMusicStyleInput!): MusicStyle!
+  updateMusicStyle(updateMusicStyleInput: UpdateMusicStyleInput!): MusicStyle!
+  removeMusicStyle(where: MusicStyleWhereUniqueInput!): MusicStyle!
+  createGroup(createGroupInput: CreateGroupInput!): Group!
+  updateGroup(updateGroupInput: UpdateGroupInput!): Group!
+  removeGroup(where: GroupWhereUniqueInput!): Group!
+  createGroupStyle(createGroupStyleInput: CreateGroupStyleInput!): GroupStyle!
+  updateGroupStyle(updateGroupStyleInput: UpdateGroupStyleInput!): GroupStyle!
+  removeGroupStyle(where: GroupStyleWhereUniqueInput!): GroupStyle!
+  createGroupMusician(
+    createGroupMusicianInput: CreateGroupMusicianInput!
+  ): GroupMusician!
+  updateGroupMusician(
+    updateGroupMusicianInput: UpdateGroupMusicianInput!
+  ): GroupMusician!
+  removeGroupMusician(where: GroupMusicianWhereUniqueInput!): GroupMusician!
+  createInstrument(createInstrumentInput: CreateInstrumentInput!): Instrument!
+  updateInstrument(updateInstrumentInput: UpdateInstrumentInput!): Instrument!
+  removeInstrument(where: InstrumentWhereUniqueInput!): Instrument!
+  createGroupMusicianInstrument(
+    createGroupMusicianInstrumentInput: CreateGroupMusicianInstrumentInput!
+  ): GroupMusicianInstrument!
+  updateGroupMusicianInstrument(
+    updateGroupMusicianInstrumentInput: UpdateGroupMusicianInstrumentInput!
+  ): GroupMusicianInstrument!
+  removeGroupMusicianInstrument(
+    where: GroupMusicianInstrumentWhereUniqueInput!
+  ): GroupMusicianInstrument!
+  createAlbum(createAlbumInput: CreateAlbumInput!): Album!
+  updateAlbum(updateAlbumInput: UpdateAlbumInput!): Album!
+  removeAlbum(where: AlbumWhereUniqueInput!): Album!
+  createTrack(createTrackInput: CreateTrackInput!): Track!
+  updateTrack(updateTrackInput: UpdateTrackInput!): Track!
+  removeTrack(where: TrackWhereUniqueInput!): Track!
+  createAlbumVersion(
+    createAlbumVersionInput: CreateAlbumVersionInput!
+  ): AlbumVersion!
+  updateAlbumVersion(
+    updateAlbumVersionInput: UpdateAlbumVersionInput!
+  ): AlbumVersion!
+  removeAlbumVersion(where: AlbumVersionWhereUniqueInput!): AlbumVersion!
+  createCollectionItem(
+    createCollectionItemInput: CreateCollectionItemInput!
+  ): CollectionItem!
+  updateCollectionItem(
+    updateCollectionItemInput: UpdateCollectionItemInput!
+  ): CollectionItem!
+  removeCollectionItem(where: CollectionItemWhereUniqueInput!): CollectionItem!
+  createPurchaseInfo(
+    createPurchaseInfoInput: CreatePurchaseInfoInput!
+  ): PurchaseInfo!
+  updatePurchaseInfo(
+    updatePurchaseInfoInput: UpdatePurchaseInfoInput!
+  ): PurchaseInfo!
+  removePurchaseInfo(where: PurchaseInfoWhereUniqueInput!): PurchaseInfo!
+  createExternalSource(
+    createExternalSourceInput: CreateExternalSourceInput!
+  ): ExternalSource!
+  updateExternalSource(
+    updateExternalSourceInput: UpdateExternalSourceInput!
+  ): ExternalSource!
+  removeExternalSource(where: ExternalSourceWhereUniqueInput!): ExternalSource!
 }
 
 input RegisterWithCredentialsInput {
@@ -119,4 +1130,180 @@ input LoginInput {
 
 input UpdateUserInput {
   uid: String!
+}
+
+input CreateAdminInput {
+  uid: String!
+}
+
+input UpdateAdminInput {
+  uid: String!
+}
+
+input CreateMemberInput {
+  displayName: String
+  uid: String!
+}
+
+input UpdateMemberInput {
+  displayName: String
+  uid: String!
+}
+
+input CreateMusicStyleInput {
+  name: String!
+}
+
+input UpdateMusicStyleInput {
+  name: String
+  id: Int!
+}
+
+input CreateGroupInput {
+  description: String
+  image: String
+  name: String!
+}
+
+input UpdateGroupInput {
+  description: String
+  image: String
+  name: String
+  id: Int!
+}
+
+input CreateGroupStyleInput {
+  groupId: Int!
+  styleId: Int!
+}
+
+input UpdateGroupStyleInput {
+  groupId: Int!
+  styleId: Int!
+}
+
+input CreateGroupMusicianInput {
+  startYear: Int
+  endYear: Int
+  name: String!
+  role: String!
+  groupId: Int!
+}
+
+input UpdateGroupMusicianInput {
+  startYear: Int
+  endYear: Int
+  name: String
+  role: String
+  groupId: Int
+  id: Int!
+}
+
+input CreateInstrumentInput {
+  name: String!
+}
+
+input UpdateInstrumentInput {
+  name: String
+  id: Int!
+}
+
+input CreateGroupMusicianInstrumentInput {
+  groupMusicianId: Int!
+  instrumentId: Int!
+}
+
+input UpdateGroupMusicianInstrumentInput {
+  groupMusicianId: Int!
+  instrumentId: Int!
+}
+
+input CreateAlbumInput {
+  releaseDate: DateTime
+  studio: String
+  coverUrl: String
+  title: String!
+  groupId: Int!
+}
+
+input UpdateAlbumInput {
+  releaseDate: DateTime
+  studio: String
+  coverUrl: String
+  title: String
+  groupId: Int
+  id: Int!
+}
+
+input CreateTrackInput {
+  duration: Int
+  title: String!
+  position: Int!
+  albumId: Int!
+}
+
+input UpdateTrackInput {
+  duration: Int
+  title: String
+  position: Int
+  albumId: Int
+  id: Int!
+}
+
+input CreateAlbumVersionInput {
+  format: SupportType!
+  year: Int
+  name: String!
+  albumId: Int!
+}
+
+input UpdateAlbumVersionInput {
+  format: SupportType
+  year: Int
+  name: String
+  albumId: Int
+  id: Int!
+}
+
+input CreateCollectionItemInput {
+  condition: Condition!
+  notes: String
+  memberId: String!
+  albumVersionId: Int!
+}
+
+input UpdateCollectionItemInput {
+  condition: Condition
+  notes: String
+  memberId: String
+  albumVersionId: Int
+  id: Int!
+}
+
+input CreatePurchaseInfoInput {
+  price: Int
+  place: String
+  date: DateTime
+  collectionItemId: Int!
+}
+
+input UpdatePurchaseInfoInput {
+  price: Int
+  place: String
+  date: DateTime
+  collectionItemId: Int
+  id: Int!
+}
+
+input CreateExternalSourceInput {
+  source: ExternalSourceType!
+  albumId: Int
+  externalId: String!
+}
+
+input UpdateExternalSourceInput {
+  source: ExternalSourceType
+  albumId: Int
+  externalId: String
+  id: Int!
 }

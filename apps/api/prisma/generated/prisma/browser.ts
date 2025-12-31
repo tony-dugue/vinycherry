@@ -22,11 +22,6 @@ export * from './enums'
  */
 export type User = Prisma.UserModel
 /**
- * Model Admin
- *
- */
-export type Admin = Prisma.AdminModel
-/**
  * Model Credentials
  *
  */
@@ -36,3 +31,73 @@ export type Credentials = Prisma.CredentialsModel
  *
  */
 export type AuthProvider = Prisma.AuthProviderModel
+/**
+ * Model Admin
+ *
+ */
+export type Admin = Prisma.AdminModel
+/**
+ * Model Member
+ *
+ */
+export type Member = Prisma.MemberModel
+/**
+ * Model MusicStyle
+ *
+ */
+export type MusicStyle = Prisma.MusicStyleModel
+/**
+ * Model Group
+ *
+ */
+export type Group = Prisma.GroupModel
+/**
+ * Model GroupStyle
+ *
+ */
+export type GroupStyle = Prisma.GroupStyleModel
+/**
+ * Model GroupMusician
+ *
+ */
+export type GroupMusician = Prisma.GroupMusicianModel
+/**
+ * Model Instrument
+ *
+ */
+export type Instrument = Prisma.InstrumentModel
+/**
+ * Model GroupMusicianInstrument
+ *
+ */
+export type GroupMusicianInstrument = Prisma.GroupMusicianInstrumentModel
+/**
+ * Model Album
+ *
+ */
+export type Album = Prisma.AlbumModel
+/**
+ * Model Track
+ *
+ */
+export type Track = Prisma.TrackModel
+/**
+ * Model AlbumVersion
+ *
+ */
+export type AlbumVersion = Prisma.AlbumVersionModel
+/**
+ * Model CollectionItem
+ *
+ */
+export type CollectionItem = Prisma.CollectionItemModel
+/**
+ * Model PurchaseInfo
+ *
+ */
+export type PurchaseInfo = Prisma.PurchaseInfoModel
+/**
+ * Model ExternalSource
+ *
+ */
+export type ExternalSource = Prisma.ExternalSourceModel

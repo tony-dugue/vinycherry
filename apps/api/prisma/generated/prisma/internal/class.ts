@@ -19,7 +19,7 @@ const config: runtime.GetPrismaClientConfig = {
   engineVersion: '0c8ef2ce45c83248ab3df073180d5eda9e8be7a3',
   activeProvider: 'postgresql',
   inlineSchema:
-    '// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = "prisma-client"\n  output   = "./generated/prisma"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n\nmodel User {\n  uid       String   @id @default(uuid())\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  name  String?\n  image String?\n\n  Credentials  Credentials?  @relation\n  AuthProvider AuthProvider? @relation\n  Admin        Admin?        @relation\n}\n\nmodel Admin {\n  uid  String @id\n  user User   @relation(fields: [uid], references: [uid])\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Credentials {\n  uid  String @id\n  user User   @relation(fields: [uid], references: [uid])\n\n  email        String @unique\n  passwordHash String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel AuthProvider {\n  uid  String           @id\n  type AuthProviderType\n  User User             @relation(fields: [uid], references: [uid])\n}\n\nenum AuthProviderType {\n  CREDENTIALS\n}\n',
+    '// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\n// =======================\n// GENERATOR & DATASOURCE\n// =======================\ngenerator client {\n  provider = "prisma-client"\n  output   = "./generated/prisma"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n\n// =======================\n// AUTHENTICATION & USERS\n// =======================\n\n// User: Entité centrale représentant une personne utilisant l’application. \n// Elle sert de point d’entrée pour l’authentification et les rôles (Admin / Member).\nmodel User {\n  uid       String   @id @default(uuid())\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  name  String?\n  image String?\n\n  Credentials  Credentials?  @relation\n  AuthProvider AuthProvider? @relation\n  Admin        Admin?        @relation\n  Member       Member?       @relation\n}\n\n// Credentials: Stocke les informations de connexion classiques (email / mot de passe).\n// Séparé de User pour l\'ajout d’autres méthodes d’authentification plus tard (avec provider comme Google par ex).\nmodel Credentials {\n  uid  String @id\n  User User   @relation(fields: [uid], references: [uid])\n\n  email        String @unique\n  passwordHash String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\n// AuthProvider: Indique le type de fournisseur d’authentification utilisé par l’utilisateur \n// (ex : credentials, OAuth, etc.).\nmodel AuthProvider {\n  uid  String           @id\n  type AuthProviderType\n  User User             @relation(fields: [uid], references: [uid])\n}\n\nenum AuthProviderType {\n  CREDENTIALS\n}\n\n// Admin: Rôle avec droits d’administration.\n// Permet de gérer et d’enrichir le catalogue musical (groupes, albums, métadonnées).\nmodel Admin {\n  uid  String @id\n  User User   @relation(fields: [uid], references: [uid])\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\n// Member: Rôle utilisateur standard. Permet de gérer une collection personnelle d’albums physiques.\nmodel Member {\n  uid  String @id\n  User User   @relation(fields: [uid], references: [uid])\n\n  displayName String?\n\n  CollectionItems CollectionItem[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\n// =======================\n// MUSIC STYLES\n// =======================\n\n// MusicStyle: Représente un style musical (Rock, Metal, Jazz…).\n//Permet de classer les groupes et de générer des recommandations.\nmodel MusicStyle {\n  id   Int    @id @default(autoincrement())\n  name String @unique\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  Groups GroupStyle[]\n}\n\n// =======================\n// GROUPS & ARTISTS\n// =======================\n\n// Group: Représente un groupe ou un artiste.\n// Contient la description, l’image, les styles associés et la discographie complète.\nmodel Group {\n  id          Int     @id @default(autoincrement())\n  name        String\n  description String?\n  image       String?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  Styles    GroupStyle[]\n  Albums    Album[]\n  Musicians GroupMusician[]\n}\n\n// GroupStyle: Table de jointure entre Group et MusicStyle.\n// Permet d’associer plusieurs styles à un groupe sans duplication.\nmodel GroupStyle {\n  groupId Int\n  styleId Int\n\n  Group      Group      @relation(fields: [groupId], references: [id])\n  MusicStyle MusicStyle @relation(fields: [styleId], references: [id])\n\n  @@id([groupId, styleId])\n}\n\n// =======================\n// MUSICIANS & TIMELINE\n// =======================\n\n// GroupMusician: Représente un musicien d’un groupe.\n// Inclut son rôle et sa période d’activité (timeline du groupe) et ses instruments.\nmodel GroupMusician {\n  id        Int    @id @default(autoincrement())\n  name      String\n  role      String\n  startYear Int?\n  endYear   Int?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  groupId Int\n  Group   Group @relation(fields: [groupId], references: [id])\n\n  Instruments GroupMusicianInstrument[]\n}\n\nmodel Instrument {\n  id   Int    @id @default(autoincrement())\n  name String @unique\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  Musicians GroupMusicianInstrument[]\n}\n\nmodel GroupMusicianInstrument {\n  groupMusicianId Int\n  instrumentId    Int\n\n  GroupMusician GroupMusician @relation(fields: [groupMusicianId], references: [id])\n  Instrument    Instrument    @relation(fields: [instrumentId], references: [id])\n\n  @@id([groupMusicianId, instrumentId])\n}\n\n// =======================\n// ALBUMS & TRACKS\n// =======================\n\n// Album: Représente un album dans le catalogue global.\n// Existe indépendamment de la possession par un utilisateur.\nmodel Album {\n  id          Int       @id @default(autoincrement())\n  title       String\n  releaseDate DateTime?\n  studio      String?\n  coverUrl    String?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  groupId Int\n  Group   Group @relation(fields: [groupId], references: [id])\n\n  Tracks   Track[]\n  Versions AlbumVersion[]\n  Sources  ExternalSource[]\n}\n\n// Track: Représente une piste d’un album.\n//Permet une tracklist complète avec ordre et durée.\nmodel Track {\n  id       Int    @id @default(autoincrement())\n  title    String\n  position Int\n  duration Int?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  albumId Int\n  Album   Album @relation(fields: [albumId], references: [id])\n}\n\n// =======================\n// ALBUM VERSIONS / SUPPORTS\n// =======================\n\n// AlbumVersion: Représente une version physique ou éditoriale d’un album\n// (Standard, Deluxe, Remaster, Vinyle, CD, etc.).\nmodel AlbumVersion {\n  id     Int         @id @default(autoincrement())\n  name   String\n  format SupportType\n  year   Int?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  albumId Int\n  Album   Album @relation(fields: [albumId], references: [id])\n\n  CollectionItems CollectionItem[]\n}\n\nenum SupportType {\n  VINYL\n  CD\n  CASSETTE\n  DIGITAL\n  BOX\n}\n\n// =======================\n// USER COLLECTION\n// =======================\n\n// CollectionItem: Collection personnelle. Lien entre un Member et un AlbumVersion.\n// Représente un album réellement possédé par l’utilisateur.\nmodel CollectionItem {\n  id Int @id @default(autoincrement())\n\n  memberId String\n  Member   Member @relation(fields: [memberId], references: [uid])\n\n  albumVersionId Int\n  AlbumVersion   AlbumVersion @relation(fields: [albumVersionId], references: [id])\n\n  condition Condition\n  notes     String?\n\n  Purchase PurchaseInfo?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nenum Condition {\n  MINT\n  VERY_GOOD\n  GOOD\n  FAIR\n  POOR\n}\n\n// =======================\n// PURCHASE INFO\n// =======================\n\n// PurchaseInfo: Informations d’achat associées à un album possédé (prix, date, lieu).\nmodel PurchaseInfo {\n  id    Int       @id @default(autoincrement())\n  price Float?\n  place String?\n  date  DateTime?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  collectionItemId Int            @unique\n  CollectionItem   CollectionItem @relation(fields: [collectionItemId], references: [id])\n}\n\n// =======================\n// EXTERNAL SOURCES (APIs)\n// =======================\n\n// ExternalSource: Intégrations externes. Lien entre une entité interne (album) et une source externe\n// (MusicBrainz, Discogs, Spotify, etc.).\nmodel ExternalSource {\n  id         Int                @id @default(autoincrement())\n  source     ExternalSourceType\n  externalId String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  albumId Int?\n  Album   Album? @relation(fields: [albumId], references: [id])\n}\n\nenum ExternalSourceType {\n  MUSICBRAINZ\n  DISCOGS\n  AUDIO_DB\n  SPOTIFY\n}\n',
   runtimeDataModel: {
     models: {},
     enums: {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
 }
 
 config.runtimeDataModel = JSON.parse(
-  '{"models":{"User":{"fields":[{"name":"uid","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"name","kind":"scalar","type":"String"},{"name":"image","kind":"scalar","type":"String"},{"name":"Credentials","kind":"object","type":"Credentials","relationName":"CredentialsToUser"},{"name":"AuthProvider","kind":"object","type":"AuthProvider","relationName":"AuthProviderToUser"},{"name":"Admin","kind":"object","type":"Admin","relationName":"AdminToUser"}],"dbName":null},"Admin":{"fields":[{"name":"uid","kind":"scalar","type":"String"},{"name":"user","kind":"object","type":"User","relationName":"AdminToUser"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"}],"dbName":null},"Credentials":{"fields":[{"name":"uid","kind":"scalar","type":"String"},{"name":"user","kind":"object","type":"User","relationName":"CredentialsToUser"},{"name":"email","kind":"scalar","type":"String"},{"name":"passwordHash","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"}],"dbName":null},"AuthProvider":{"fields":[{"name":"uid","kind":"scalar","type":"String"},{"name":"type","kind":"enum","type":"AuthProviderType"},{"name":"User","kind":"object","type":"User","relationName":"AuthProviderToUser"}],"dbName":null}},"enums":{},"types":{}}',
+  '{"models":{"User":{"fields":[{"name":"uid","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"name","kind":"scalar","type":"String"},{"name":"image","kind":"scalar","type":"String"},{"name":"Credentials","kind":"object","type":"Credentials","relationName":"CredentialsToUser"},{"name":"AuthProvider","kind":"object","type":"AuthProvider","relationName":"AuthProviderToUser"},{"name":"Admin","kind":"object","type":"Admin","relationName":"AdminToUser"},{"name":"Member","kind":"object","type":"Member","relationName":"MemberToUser"}],"dbName":null},"Credentials":{"fields":[{"name":"uid","kind":"scalar","type":"String"},{"name":"User","kind":"object","type":"User","relationName":"CredentialsToUser"},{"name":"email","kind":"scalar","type":"String"},{"name":"passwordHash","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"}],"dbName":null},"AuthProvider":{"fields":[{"name":"uid","kind":"scalar","type":"String"},{"name":"type","kind":"enum","type":"AuthProviderType"},{"name":"User","kind":"object","type":"User","relationName":"AuthProviderToUser"}],"dbName":null},"Admin":{"fields":[{"name":"uid","kind":"scalar","type":"String"},{"name":"User","kind":"object","type":"User","relationName":"AdminToUser"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"}],"dbName":null},"Member":{"fields":[{"name":"uid","kind":"scalar","type":"String"},{"name":"User","kind":"object","type":"User","relationName":"MemberToUser"},{"name":"displayName","kind":"scalar","type":"String"},{"name":"CollectionItems","kind":"object","type":"CollectionItem","relationName":"CollectionItemToMember"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"}],"dbName":null},"MusicStyle":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"name","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"Groups","kind":"object","type":"GroupStyle","relationName":"GroupStyleToMusicStyle"}],"dbName":null},"Group":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"name","kind":"scalar","type":"String"},{"name":"description","kind":"scalar","type":"String"},{"name":"image","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"Styles","kind":"object","type":"GroupStyle","relationName":"GroupToGroupStyle"},{"name":"Albums","kind":"object","type":"Album","relationName":"AlbumToGroup"},{"name":"Musicians","kind":"object","type":"GroupMusician","relationName":"GroupToGroupMusician"}],"dbName":null},"GroupStyle":{"fields":[{"name":"groupId","kind":"scalar","type":"Int"},{"name":"styleId","kind":"scalar","type":"Int"},{"name":"Group","kind":"object","type":"Group","relationName":"GroupToGroupStyle"},{"name":"MusicStyle","kind":"object","type":"MusicStyle","relationName":"GroupStyleToMusicStyle"}],"dbName":null},"GroupMusician":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"name","kind":"scalar","type":"String"},{"name":"role","kind":"scalar","type":"String"},{"name":"startYear","kind":"scalar","type":"Int"},{"name":"endYear","kind":"scalar","type":"Int"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"groupId","kind":"scalar","type":"Int"},{"name":"Group","kind":"object","type":"Group","relationName":"GroupToGroupMusician"},{"name":"Instruments","kind":"object","type":"GroupMusicianInstrument","relationName":"GroupMusicianToGroupMusicianInstrument"}],"dbName":null},"Instrument":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"name","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"Musicians","kind":"object","type":"GroupMusicianInstrument","relationName":"GroupMusicianInstrumentToInstrument"}],"dbName":null},"GroupMusicianInstrument":{"fields":[{"name":"groupMusicianId","kind":"scalar","type":"Int"},{"name":"instrumentId","kind":"scalar","type":"Int"},{"name":"GroupMusician","kind":"object","type":"GroupMusician","relationName":"GroupMusicianToGroupMusicianInstrument"},{"name":"Instrument","kind":"object","type":"Instrument","relationName":"GroupMusicianInstrumentToInstrument"}],"dbName":null},"Album":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"title","kind":"scalar","type":"String"},{"name":"releaseDate","kind":"scalar","type":"DateTime"},{"name":"studio","kind":"scalar","type":"String"},{"name":"coverUrl","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"groupId","kind":"scalar","type":"Int"},{"name":"Group","kind":"object","type":"Group","relationName":"AlbumToGroup"},{"name":"Tracks","kind":"object","type":"Track","relationName":"AlbumToTrack"},{"name":"Versions","kind":"object","type":"AlbumVersion","relationName":"AlbumToAlbumVersion"},{"name":"Sources","kind":"object","type":"ExternalSource","relationName":"AlbumToExternalSource"}],"dbName":null},"Track":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"title","kind":"scalar","type":"String"},{"name":"position","kind":"scalar","type":"Int"},{"name":"duration","kind":"scalar","type":"Int"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"albumId","kind":"scalar","type":"Int"},{"name":"Album","kind":"object","type":"Album","relationName":"AlbumToTrack"}],"dbName":null},"AlbumVersion":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"name","kind":"scalar","type":"String"},{"name":"format","kind":"enum","type":"SupportType"},{"name":"year","kind":"scalar","type":"Int"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"albumId","kind":"scalar","type":"Int"},{"name":"Album","kind":"object","type":"Album","relationName":"AlbumToAlbumVersion"},{"name":"CollectionItems","kind":"object","type":"CollectionItem","relationName":"AlbumVersionToCollectionItem"}],"dbName":null},"CollectionItem":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"memberId","kind":"scalar","type":"String"},{"name":"Member","kind":"object","type":"Member","relationName":"CollectionItemToMember"},{"name":"albumVersionId","kind":"scalar","type":"Int"},{"name":"AlbumVersion","kind":"object","type":"AlbumVersion","relationName":"AlbumVersionToCollectionItem"},{"name":"condition","kind":"enum","type":"Condition"},{"name":"notes","kind":"scalar","type":"String"},{"name":"Purchase","kind":"object","type":"PurchaseInfo","relationName":"CollectionItemToPurchaseInfo"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"}],"dbName":null},"PurchaseInfo":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"price","kind":"scalar","type":"Float"},{"name":"place","kind":"scalar","type":"String"},{"name":"date","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"collectionItemId","kind":"scalar","type":"Int"},{"name":"CollectionItem","kind":"object","type":"CollectionItem","relationName":"CollectionItemToPurchaseInfo"}],"dbName":null},"ExternalSource":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"source","kind":"enum","type":"ExternalSourceType"},{"name":"externalId","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"albumId","kind":"scalar","type":"Int"},{"name":"Album","kind":"object","type":"Album","relationName":"AlbumToExternalSource"}],"dbName":null}},"enums":{},"types":{}}',
 )
 
 async function decodeBase64AsWasm(
@@ -236,16 +236,6 @@ export interface PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, { omit: OmitOpts }>
 
   /**
-   * `prisma.admin`: Exposes CRUD operations for the **Admin** model.
-   * Example usage:
-   * ```ts
-   * // Fetch zero or more Admins
-   * const admins = await prisma.admin.findMany()
-   * ```
-   */
-  get admin(): Prisma.AdminDelegate<ExtArgs, { omit: OmitOpts }>
-
-  /**
    * `prisma.credentials`: Exposes CRUD operations for the **Credentials** model.
    * Example usage:
    * ```ts
@@ -264,6 +254,155 @@ export interface PrismaClient<
    * ```
    */
   get authProvider(): Prisma.AuthProviderDelegate<ExtArgs, { omit: OmitOpts }>
+
+  /**
+   * `prisma.admin`: Exposes CRUD operations for the **Admin** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Admins
+   * const admins = await prisma.admin.findMany()
+   * ```
+   */
+  get admin(): Prisma.AdminDelegate<ExtArgs, { omit: OmitOpts }>
+
+  /**
+   * `prisma.member`: Exposes CRUD operations for the **Member** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Members
+   * const members = await prisma.member.findMany()
+   * ```
+   */
+  get member(): Prisma.MemberDelegate<ExtArgs, { omit: OmitOpts }>
+
+  /**
+   * `prisma.musicStyle`: Exposes CRUD operations for the **MusicStyle** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more MusicStyles
+   * const musicStyles = await prisma.musicStyle.findMany()
+   * ```
+   */
+  get musicStyle(): Prisma.MusicStyleDelegate<ExtArgs, { omit: OmitOpts }>
+
+  /**
+   * `prisma.group`: Exposes CRUD operations for the **Group** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Groups
+   * const groups = await prisma.group.findMany()
+   * ```
+   */
+  get group(): Prisma.GroupDelegate<ExtArgs, { omit: OmitOpts }>
+
+  /**
+   * `prisma.groupStyle`: Exposes CRUD operations for the **GroupStyle** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more GroupStyles
+   * const groupStyles = await prisma.groupStyle.findMany()
+   * ```
+   */
+  get groupStyle(): Prisma.GroupStyleDelegate<ExtArgs, { omit: OmitOpts }>
+
+  /**
+   * `prisma.groupMusician`: Exposes CRUD operations for the **GroupMusician** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more GroupMusicians
+   * const groupMusicians = await prisma.groupMusician.findMany()
+   * ```
+   */
+  get groupMusician(): Prisma.GroupMusicianDelegate<ExtArgs, { omit: OmitOpts }>
+
+  /**
+   * `prisma.instrument`: Exposes CRUD operations for the **Instrument** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Instruments
+   * const instruments = await prisma.instrument.findMany()
+   * ```
+   */
+  get instrument(): Prisma.InstrumentDelegate<ExtArgs, { omit: OmitOpts }>
+
+  /**
+   * `prisma.groupMusicianInstrument`: Exposes CRUD operations for the **GroupMusicianInstrument** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more GroupMusicianInstruments
+   * const groupMusicianInstruments = await prisma.groupMusicianInstrument.findMany()
+   * ```
+   */
+  get groupMusicianInstrument(): Prisma.GroupMusicianInstrumentDelegate<
+    ExtArgs,
+    { omit: OmitOpts }
+  >
+
+  /**
+   * `prisma.album`: Exposes CRUD operations for the **Album** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Albums
+   * const albums = await prisma.album.findMany()
+   * ```
+   */
+  get album(): Prisma.AlbumDelegate<ExtArgs, { omit: OmitOpts }>
+
+  /**
+   * `prisma.track`: Exposes CRUD operations for the **Track** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Tracks
+   * const tracks = await prisma.track.findMany()
+   * ```
+   */
+  get track(): Prisma.TrackDelegate<ExtArgs, { omit: OmitOpts }>
+
+  /**
+   * `prisma.albumVersion`: Exposes CRUD operations for the **AlbumVersion** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more AlbumVersions
+   * const albumVersions = await prisma.albumVersion.findMany()
+   * ```
+   */
+  get albumVersion(): Prisma.AlbumVersionDelegate<ExtArgs, { omit: OmitOpts }>
+
+  /**
+   * `prisma.collectionItem`: Exposes CRUD operations for the **CollectionItem** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more CollectionItems
+   * const collectionItems = await prisma.collectionItem.findMany()
+   * ```
+   */
+  get collectionItem(): Prisma.CollectionItemDelegate<
+    ExtArgs,
+    { omit: OmitOpts }
+  >
+
+  /**
+   * `prisma.purchaseInfo`: Exposes CRUD operations for the **PurchaseInfo** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more PurchaseInfos
+   * const purchaseInfos = await prisma.purchaseInfo.findMany()
+   * ```
+   */
+  get purchaseInfo(): Prisma.PurchaseInfoDelegate<ExtArgs, { omit: OmitOpts }>
+
+  /**
+   * `prisma.externalSource`: Exposes CRUD operations for the **ExternalSource** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more ExternalSources
+   * const externalSources = await prisma.externalSource.findMany()
+   * ```
+   */
+  get externalSource(): Prisma.ExternalSourceDelegate<
+    ExtArgs,
+    { omit: OmitOpts }
+  >
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

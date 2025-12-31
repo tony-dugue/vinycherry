@@ -1,0 +1,17 @@
+yarn entity:complete Admin
+yarn entity:complete Member
+
+yarn entity:complete MusicStyle
+yarn entity:complete Group
+yarn entity:complete GroupStyle
+yarn entity:complete GroupMusician
+yarn entity:complete Instrument
+yarn entity:complete GroupMusicianInstrument
+
+yarn entity:complete Album
+yarn entity:complete Track
+
+yarn entity:complete AlbumVersion
+
+yarn entity:complete CollectionItem
+yarn entity:complete PurchaseInfo

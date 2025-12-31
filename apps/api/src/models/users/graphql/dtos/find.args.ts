@@ -1,9 +1,9 @@
 import { ArgsType, Field, PartialType, registerEnumType } from '@nestjs/graphql'
-import { Prisma } from '@prisma/client'
-import { RestrictProperties } from '../../../../common/dtos/common.input'
+import { DefaultArgs } from '@prisma/client/runtime/client'
+import { Prisma } from 'prisma/generated/prisma/client'
+import { RestrictProperties } from 'src/common/dtos/common.input'
 import { UserOrderByWithRelationInput } from './order-by.args'
 import { UserWhereInput, UserWhereUniqueInput } from './where.args'
-import { DefaultArgs } from '@prisma/client/runtime/client'
 
 registerEnumType(Prisma.UserScalarFieldEnum, {
   name: 'UserScalarFieldEnum',
@@ -30,5 +30,6 @@ export class FindManyUserArgs extends PartialType(FindManyUserArgsStrict) {}
 
 @ArgsType()
 export class FindUniqueUserArgs {
+  @Field(() => UserWhereUniqueInput)
   where: UserWhereUniqueInput
 }

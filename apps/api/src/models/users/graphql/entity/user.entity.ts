@@ -1,12 +1,21 @@
-import { ObjectType } from '@nestjs/graphql'
-import { User as UserType } from '../../../../../prisma/generated/prisma/client'
-import { RestrictProperties } from '../../../../common/dtos/common.input'
+import { Field, ObjectType } from '@nestjs/graphql'
+import { $Enums, User as UserType } from 'prisma/generated/prisma/client'
+import { RestrictProperties } from 'src/common/dtos/common.input'
 
 @ObjectType()
 export class User implements RestrictProperties<User, UserType> {
-  name: string | null
+  @Field({ nullable: true })
+  name: string
   uid: string
-  image: string | null
+  @Field({ nullable: true })
+  image: string
   createdAt: Date
   updatedAt: Date
+}
+
+@ObjectType()
+export class AuthProvider {
+  uid: string
+  @Field(() => $Enums.AuthProviderType)
+  type: $Enums.AuthProviderType
 }

@@ -65,7 +65,7 @@ enum AuthProviderType {
 // Permet de gérer et d’enrichir le catalogue musical (groupes, albums, métadonnées).
 model Admin {
   uid  String @id
-  user User   @relation(fields: [uid], references: [uid])
+  User User   @relation(fields: [uid], references: [uid])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -91,8 +91,11 @@ model Member {
 // MusicStyle: Représente un style musical (Rock, Metal, Jazz…).
 //Permet de classer les groupes et de générer des recommandations.
 model MusicStyle {
-  id   String @id @default(uuid())
+  id   Int @id @default(autoincrement())
   name String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   Groups GroupStyle[]
 }
@@ -104,24 +107,24 @@ model MusicStyle {
 // Group: Représente un groupe ou un artiste.
 // Contient la description, l’image, les styles associés et la discographie complète.
 model Group {
-  id          String @id @default(uuid())
+  id          Int @id @default(autoincrement())
   name        String
   description String?
   image       String?
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   Styles     GroupStyle[]
   Albums     Album[]
   Musicians  GroupMusician[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 // GroupStyle: Table de jointure entre Group et MusicStyle.
 // Permet d’associer plusieurs styles à un groupe sans duplication.
 model GroupStyle {
-  groupId String
-  styleId String
+  groupId Int
+  styleId Int
 
   Group      Group      @relation(fields: [groupId], references: [id])
   MusicStyle MusicStyle @relation(fields: [styleId], references: [id])
@@ -136,28 +139,34 @@ model GroupStyle {
 // GroupMusician: Représente un musicien d’un groupe.
 // Inclut son rôle et sa période d’activité (timeline du groupe) et ses instruments.
 model GroupMusician {
-  id        String @id @default(uuid())
+  id        Int @id @default(autoincrement())
   name      String
   role      String
   startYear Int?
   endYear   Int?
 
-  groupId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  groupId Int
   Group   Group @relation(fields: [groupId], references: [id])
 
   Instruments GroupMusicianInstrument[]
 }
 
 model Instrument {
-  id   String @id @default(uuid())
+  id   Int @id @default(autoincrement())
   name String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   Musicians GroupMusicianInstrument[]
 }
 
 model GroupMusicianInstrument {
-  groupMusicianId String
-  instrumentId    String
+  groupMusicianId Int
+  instrumentId    Int
 
   GroupMusician GroupMusician @relation(fields: [groupMusicianId], references: [id])
   Instrument    Instrument    @relation(fields: [instrumentId], references: [id])
@@ -172,32 +181,35 @@ model GroupMusicianInstrument {
 // Album: Représente un album dans le catalogue global.
 // Existe indépendamment de la possession par un utilisateur.
 model Album {
-  id          String   @id @default(uuid())
+  id          Int @id @default(autoincrement())
   title       String
   releaseDate DateTime?
   studio      String?
   coverUrl    String?
 
-  groupId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  groupId Int
   Group   Group @relation(fields: [groupId], references: [id])
 
   Tracks    Track[]
   Versions  AlbumVersion[]
   Sources   ExternalSource[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 // Track: Représente une piste d’un album.
 //Permet une tracklist complète avec ordre et durée.
 model Track {
-  id       String @id @default(uuid())
+  id       Int @id @default(autoincrement())
   title    String
   position Int
   duration Int?
 
-  albumId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  albumId Int
   Album   Album @relation(fields: [albumId], references: [id])
 }
 
@@ -208,12 +220,15 @@ model Track {
 // AlbumVersion: Représente une version physique ou éditoriale d’un album
 // (Standard, Deluxe, Remaster, Vinyle, CD, etc.).
 model AlbumVersion {
-  id     String @id @default(uuid())
+  id     Int @id @default(autoincrement())
   name   String
   format SupportType
   year   Int?
 
-  albumId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  albumId Int
   Album   Album @relation(fields: [albumId], references: [id])
 
   CollectionItems CollectionItem[]
@@ -234,12 +249,12 @@ enum SupportType {
 // CollectionItem: Collection personnelle. Lien entre un Member et un AlbumVersion.
 // Représente un album réellement possédé par l’utilisateur.
 model CollectionItem {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   memberId String
   Member   Member @relation(fields: [memberId], references: [uid])
 
-  albumVersionId String
+  albumVersionId Int
   AlbumVersion   AlbumVersion @relation(fields: [albumVersionId], references: [id])
 
   condition Condition
@@ -248,6 +263,7 @@ model CollectionItem {
   Purchase PurchaseInfo?
 
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum Condition {
@@ -264,12 +280,15 @@ enum Condition {
 
 // PurchaseInfo: Informations d’achat associées à un album possédé (prix, date, lieu).
 model PurchaseInfo {
-  id    String @id @default(uuid())
+  id    Int @id @default(autoincrement())
   price Float?
   place String?
   date  DateTime?
 
-  collectionItemId String @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  collectionItemId Int @unique
   CollectionItem   CollectionItem @relation(fields: [collectionItemId], references: [id])
 }
 
@@ -280,11 +299,14 @@ model PurchaseInfo {
 // ExternalSource: Intégrations externes. Lien entre une entité interne (album) et une source externe
 // (MusicBrainz, Discogs, Spotify, etc.).
 model ExternalSource {
-  id          String @id @default(uuid())
+  id          Int @id @default(autoincrement())
   source      ExternalSourceType
   externalId  String
 
-  albumId String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  albumId Int?
   Album   Album? @relation(fields: [albumId], references: [id])
 }
 

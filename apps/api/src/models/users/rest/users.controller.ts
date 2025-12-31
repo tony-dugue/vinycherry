@@ -17,13 +17,10 @@ import {
   ApiTags,
 } from '@nestjs/swagger'
 
-import {
-  AllowAuthenticated,
-  GetUser,
-} from '../../../common/auth/auth.decorator'
-import { checkRowLevelPermission } from '../../../common/auth/util'
-import { PrismaService } from '../../../common/prisma/prisma.service'
-import { GetUserType } from '../../../common/types'
+import { AllowAuthenticated, GetUser } from 'src/common/auth/auth.decorator'
+import { checkRowLevelPermission } from 'src/common/auth/util'
+import { PrismaService } from 'src/common/prisma/prisma.service'
+import { GetUserType } from 'src/common/types'
 import { CreateUser } from './dtos/create.dto'
 import { UserQueryDto } from './dtos/query.dto'
 import { UpdateUser } from './dtos/update.dto'

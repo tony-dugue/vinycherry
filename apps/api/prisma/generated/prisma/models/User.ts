@@ -197,6 +197,10 @@ export type UserWhereInput = {
     Prisma.AdminNullableScalarRelationFilter,
     Prisma.AdminWhereInput
   > | null
+  Member?: Prisma.XOR<
+    Prisma.MemberNullableScalarRelationFilter,
+    Prisma.MemberWhereInput
+  > | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -208,6 +212,7 @@ export type UserOrderByWithRelationInput = {
   Credentials?: Prisma.CredentialsOrderByWithRelationInput
   AuthProvider?: Prisma.AuthProviderOrderByWithRelationInput
   Admin?: Prisma.AdminOrderByWithRelationInput
+  Member?: Prisma.MemberOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<
@@ -231,6 +236,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<
     Admin?: Prisma.XOR<
       Prisma.AdminNullableScalarRelationFilter,
       Prisma.AdminWhereInput
+    > | null
+    Member?: Prisma.XOR<
+      Prisma.MemberNullableScalarRelationFilter,
+      Prisma.MemberWhereInput
     > | null
   },
   'uid'
@@ -271,6 +280,7 @@ export type UserCreateInput = {
   Credentials?: Prisma.CredentialsCreateNestedOneWithoutUserInput
   AuthProvider?: Prisma.AuthProviderCreateNestedOneWithoutUserInput
   Admin?: Prisma.AdminCreateNestedOneWithoutUserInput
+  Member?: Prisma.MemberCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -282,6 +292,7 @@ export type UserUncheckedCreateInput = {
   Credentials?: Prisma.CredentialsUncheckedCreateNestedOneWithoutUserInput
   AuthProvider?: Prisma.AuthProviderUncheckedCreateNestedOneWithoutUserInput
   Admin?: Prisma.AdminUncheckedCreateNestedOneWithoutUserInput
+  Member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -293,6 +304,7 @@ export type UserUpdateInput = {
   Credentials?: Prisma.CredentialsUpdateOneWithoutUserNestedInput
   AuthProvider?: Prisma.AuthProviderUpdateOneWithoutUserNestedInput
   Admin?: Prisma.AdminUpdateOneWithoutUserNestedInput
+  Member?: Prisma.MemberUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -304,6 +316,7 @@ export type UserUncheckedUpdateInput = {
   Credentials?: Prisma.CredentialsUncheckedUpdateOneWithoutUserNestedInput
   AuthProvider?: Prisma.AuthProviderUncheckedUpdateOneWithoutUserNestedInput
   Admin?: Prisma.AdminUncheckedUpdateOneWithoutUserNestedInput
+  Member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -371,32 +384,6 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
-export type UserCreateNestedOneWithoutAdminInput = {
-  create?: Prisma.XOR<
-    Prisma.UserCreateWithoutAdminInput,
-    Prisma.UserUncheckedCreateWithoutAdminInput
-  >
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAdminInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutAdminNestedInput = {
-  create?: Prisma.XOR<
-    Prisma.UserCreateWithoutAdminInput,
-    Prisma.UserUncheckedCreateWithoutAdminInput
-  >
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAdminInput
-  upsert?: Prisma.UserUpsertWithoutAdminInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<
-    Prisma.XOR<
-      Prisma.UserUpdateToOneWithWhereWithoutAdminInput,
-      Prisma.UserUpdateWithoutAdminInput
-    >,
-    Prisma.UserUncheckedUpdateWithoutAdminInput
-  >
-}
-
 export type UserCreateNestedOneWithoutCredentialsInput = {
   create?: Prisma.XOR<
     Prisma.UserCreateWithoutCredentialsInput,
@@ -449,72 +436,56 @@ export type UserUpdateOneRequiredWithoutAuthProviderNestedInput = {
   >
 }
 
-export type UserCreateWithoutAdminInput = {
-  uid?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  name?: string | null
-  image?: string | null
-  Credentials?: Prisma.CredentialsCreateNestedOneWithoutUserInput
-  AuthProvider?: Prisma.AuthProviderCreateNestedOneWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutAdminInput = {
-  uid?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  name?: string | null
-  image?: string | null
-  Credentials?: Prisma.CredentialsUncheckedCreateNestedOneWithoutUserInput
-  AuthProvider?: Prisma.AuthProviderUncheckedCreateNestedOneWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutAdminInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<
+export type UserCreateNestedOneWithoutAdminInput = {
+  create?: Prisma.XOR<
     Prisma.UserCreateWithoutAdminInput,
     Prisma.UserUncheckedCreateWithoutAdminInput
   >
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAdminInput
+  connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpsertWithoutAdminInput = {
-  update: Prisma.XOR<
-    Prisma.UserUpdateWithoutAdminInput,
-    Prisma.UserUncheckedUpdateWithoutAdminInput
-  >
-  create: Prisma.XOR<
+export type UserUpdateOneRequiredWithoutAdminNestedInput = {
+  create?: Prisma.XOR<
     Prisma.UserCreateWithoutAdminInput,
     Prisma.UserUncheckedCreateWithoutAdminInput
   >
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutAdminInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<
-    Prisma.UserUpdateWithoutAdminInput,
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAdminInput
+  upsert?: Prisma.UserUpsertWithoutAdminInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutAdminInput,
+      Prisma.UserUpdateWithoutAdminInput
+    >,
     Prisma.UserUncheckedUpdateWithoutAdminInput
   >
 }
 
-export type UserUpdateWithoutAdminInput = {
-  uid?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Credentials?: Prisma.CredentialsUpdateOneWithoutUserNestedInput
-  AuthProvider?: Prisma.AuthProviderUpdateOneWithoutUserNestedInput
+export type UserCreateNestedOneWithoutMemberInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutMemberInput,
+    Prisma.UserUncheckedCreateWithoutMemberInput
+  >
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMemberInput
+  connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUncheckedUpdateWithoutAdminInput = {
-  uid?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Credentials?: Prisma.CredentialsUncheckedUpdateOneWithoutUserNestedInput
-  AuthProvider?: Prisma.AuthProviderUncheckedUpdateOneWithoutUserNestedInput
+export type UserUpdateOneRequiredWithoutMemberNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutMemberInput,
+    Prisma.UserUncheckedCreateWithoutMemberInput
+  >
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMemberInput
+  upsert?: Prisma.UserUpsertWithoutMemberInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutMemberInput,
+      Prisma.UserUpdateWithoutMemberInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutMemberInput
+  >
 }
 
 export type UserCreateWithoutCredentialsInput = {
@@ -525,6 +496,7 @@ export type UserCreateWithoutCredentialsInput = {
   image?: string | null
   AuthProvider?: Prisma.AuthProviderCreateNestedOneWithoutUserInput
   Admin?: Prisma.AdminCreateNestedOneWithoutUserInput
+  Member?: Prisma.MemberCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCredentialsInput = {
@@ -535,6 +507,7 @@ export type UserUncheckedCreateWithoutCredentialsInput = {
   image?: string | null
   AuthProvider?: Prisma.AuthProviderUncheckedCreateNestedOneWithoutUserInput
   Admin?: Prisma.AdminUncheckedCreateNestedOneWithoutUserInput
+  Member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCredentialsInput = {
@@ -573,6 +546,7 @@ export type UserUpdateWithoutCredentialsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   AuthProvider?: Prisma.AuthProviderUpdateOneWithoutUserNestedInput
   Admin?: Prisma.AdminUpdateOneWithoutUserNestedInput
+  Member?: Prisma.MemberUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCredentialsInput = {
@@ -583,6 +557,7 @@ export type UserUncheckedUpdateWithoutCredentialsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   AuthProvider?: Prisma.AuthProviderUncheckedUpdateOneWithoutUserNestedInput
   Admin?: Prisma.AdminUncheckedUpdateOneWithoutUserNestedInput
+  Member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAuthProviderInput = {
@@ -593,6 +568,7 @@ export type UserCreateWithoutAuthProviderInput = {
   image?: string | null
   Credentials?: Prisma.CredentialsCreateNestedOneWithoutUserInput
   Admin?: Prisma.AdminCreateNestedOneWithoutUserInput
+  Member?: Prisma.MemberCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAuthProviderInput = {
@@ -603,6 +579,7 @@ export type UserUncheckedCreateWithoutAuthProviderInput = {
   image?: string | null
   Credentials?: Prisma.CredentialsUncheckedCreateNestedOneWithoutUserInput
   Admin?: Prisma.AdminUncheckedCreateNestedOneWithoutUserInput
+  Member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAuthProviderInput = {
@@ -641,6 +618,7 @@ export type UserUpdateWithoutAuthProviderInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Credentials?: Prisma.CredentialsUpdateOneWithoutUserNestedInput
   Admin?: Prisma.AdminUpdateOneWithoutUserNestedInput
+  Member?: Prisma.MemberUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthProviderInput = {
@@ -650,6 +628,151 @@ export type UserUncheckedUpdateWithoutAuthProviderInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Credentials?: Prisma.CredentialsUncheckedUpdateOneWithoutUserNestedInput
+  Admin?: Prisma.AdminUncheckedUpdateOneWithoutUserNestedInput
+  Member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAdminInput = {
+  uid?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name?: string | null
+  image?: string | null
+  Credentials?: Prisma.CredentialsCreateNestedOneWithoutUserInput
+  AuthProvider?: Prisma.AuthProviderCreateNestedOneWithoutUserInput
+  Member?: Prisma.MemberCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAdminInput = {
+  uid?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name?: string | null
+  image?: string | null
+  Credentials?: Prisma.CredentialsUncheckedCreateNestedOneWithoutUserInput
+  AuthProvider?: Prisma.AuthProviderUncheckedCreateNestedOneWithoutUserInput
+  Member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAdminInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutAdminInput,
+    Prisma.UserUncheckedCreateWithoutAdminInput
+  >
+}
+
+export type UserUpsertWithoutAdminInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutAdminInput,
+    Prisma.UserUncheckedUpdateWithoutAdminInput
+  >
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutAdminInput,
+    Prisma.UserUncheckedCreateWithoutAdminInput
+  >
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAdminInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutAdminInput,
+    Prisma.UserUncheckedUpdateWithoutAdminInput
+  >
+}
+
+export type UserUpdateWithoutAdminInput = {
+  uid?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  Credentials?: Prisma.CredentialsUpdateOneWithoutUserNestedInput
+  AuthProvider?: Prisma.AuthProviderUpdateOneWithoutUserNestedInput
+  Member?: Prisma.MemberUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAdminInput = {
+  uid?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  Credentials?: Prisma.CredentialsUncheckedUpdateOneWithoutUserNestedInput
+  AuthProvider?: Prisma.AuthProviderUncheckedUpdateOneWithoutUserNestedInput
+  Member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutMemberInput = {
+  uid?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name?: string | null
+  image?: string | null
+  Credentials?: Prisma.CredentialsCreateNestedOneWithoutUserInput
+  AuthProvider?: Prisma.AuthProviderCreateNestedOneWithoutUserInput
+  Admin?: Prisma.AdminCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutMemberInput = {
+  uid?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name?: string | null
+  image?: string | null
+  Credentials?: Prisma.CredentialsUncheckedCreateNestedOneWithoutUserInput
+  AuthProvider?: Prisma.AuthProviderUncheckedCreateNestedOneWithoutUserInput
+  Admin?: Prisma.AdminUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutMemberInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutMemberInput,
+    Prisma.UserUncheckedCreateWithoutMemberInput
+  >
+}
+
+export type UserUpsertWithoutMemberInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutMemberInput,
+    Prisma.UserUncheckedUpdateWithoutMemberInput
+  >
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutMemberInput,
+    Prisma.UserUncheckedCreateWithoutMemberInput
+  >
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMemberInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutMemberInput,
+    Prisma.UserUncheckedUpdateWithoutMemberInput
+  >
+}
+
+export type UserUpdateWithoutMemberInput = {
+  uid?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  Credentials?: Prisma.CredentialsUpdateOneWithoutUserNestedInput
+  AuthProvider?: Prisma.AuthProviderUpdateOneWithoutUserNestedInput
+  Admin?: Prisma.AdminUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMemberInput = {
+  uid?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  Credentials?: Prisma.CredentialsUncheckedUpdateOneWithoutUserNestedInput
+  AuthProvider?: Prisma.AuthProviderUncheckedUpdateOneWithoutUserNestedInput
   Admin?: Prisma.AdminUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -666,6 +789,7 @@ export type UserSelect<
     Credentials?: boolean | Prisma.User$CredentialsArgs<ExtArgs>
     AuthProvider?: boolean | Prisma.User$AuthProviderArgs<ExtArgs>
     Admin?: boolean | Prisma.User$AdminArgs<ExtArgs>
+    Member?: boolean | Prisma.User$MemberArgs<ExtArgs>
   },
   ExtArgs['result']['user']
 >
@@ -720,6 +844,7 @@ export type UserInclude<
   Credentials?: boolean | Prisma.User$CredentialsArgs<ExtArgs>
   AuthProvider?: boolean | Prisma.User$AuthProviderArgs<ExtArgs>
   Admin?: boolean | Prisma.User$AdminArgs<ExtArgs>
+  Member?: boolean | Prisma.User$MemberArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
@@ -739,6 +864,7 @@ export type $UserPayload<
     Credentials: Prisma.$CredentialsPayload<ExtArgs> | null
     AuthProvider: Prisma.$AuthProviderPayload<ExtArgs> | null
     Admin: Prisma.$AdminPayload<ExtArgs> | null
+    Member: Prisma.$MemberPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
@@ -1336,6 +1462,19 @@ export interface Prisma__UserClient<
     ExtArgs,
     GlobalOmitOptions
   >
+  Member<T extends Prisma.User$MemberArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$MemberArgs<ExtArgs>>,
+  ): Prisma.Prisma__MemberClient<
+    runtime.Types.Result.GetResult<
+      Prisma.$MemberPayload<ExtArgs>,
+      T,
+      'findUniqueOrThrow',
+      GlobalOmitOptions
+    > | null,
+    null,
+    ExtArgs,
+    GlobalOmitOptions
+  >
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1887,6 +2026,28 @@ export type User$AdminArgs<
    */
   include?: Prisma.AdminInclude<ExtArgs> | null
   where?: Prisma.AdminWhereInput
+}
+
+/**
+ * User.Member
+ */
+export type User$MemberArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Member
+   */
+  select?: Prisma.MemberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Member
+   */
+  omit?: Prisma.MemberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MemberInclude<ExtArgs> | null
+  where?: Prisma.MemberWhereInput
 }
 
 /**
