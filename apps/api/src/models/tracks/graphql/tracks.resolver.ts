@@ -1,6 +1,14 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql'
 import { AllowAuthenticated } from 'src/common/auth/auth.decorator'
 import { PrismaService } from 'src/common/prisma/prisma.service'
+import { Album } from 'src/models/albums/graphql/entity/album.entity'
 import { CreateTrackInput } from './dtos/create-track.input'
 import { FindManyTrackArgs, FindUniqueTrackArgs } from './dtos/find.args'
 import { UpdateTrackInput } from './dtos/update-track.input'
@@ -40,5 +48,12 @@ export class TracksResolver {
   @Mutation(() => Track)
   async removeTrack(@Args() args: FindUniqueTrackArgs) {
     return this.tracksService.remove(args)
+  }
+
+  @ResolveField(() => Album)
+  album(@Parent() track: Track) {
+    return this.prisma.album.findUnique({
+      where: { id: track.albumId },
+    })
   }
 }

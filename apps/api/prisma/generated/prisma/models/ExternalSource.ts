@@ -40,27 +40,27 @@ export type ExternalSourceMinAggregateOutputType = {
   id: number | null
   source: $Enums.ExternalSourceType | null
   externalId: string | null
+  albumId: number | null
   createdAt: Date | null
   updatedAt: Date | null
-  albumId: number | null
 }
 
 export type ExternalSourceMaxAggregateOutputType = {
   id: number | null
   source: $Enums.ExternalSourceType | null
   externalId: string | null
+  albumId: number | null
   createdAt: Date | null
   updatedAt: Date | null
-  albumId: number | null
 }
 
 export type ExternalSourceCountAggregateOutputType = {
   id: number
   source: number
   externalId: number
+  albumId: number
   createdAt: number
   updatedAt: number
-  albumId: number
   _all: number
 }
 
@@ -78,27 +78,27 @@ export type ExternalSourceMinAggregateInputType = {
   id?: true
   source?: true
   externalId?: true
+  albumId?: true
   createdAt?: true
   updatedAt?: true
-  albumId?: true
 }
 
 export type ExternalSourceMaxAggregateInputType = {
   id?: true
   source?: true
   externalId?: true
+  albumId?: true
   createdAt?: true
   updatedAt?: true
-  albumId?: true
 }
 
 export type ExternalSourceCountAggregateInputType = {
   id?: true
   source?: true
   externalId?: true
+  albumId?: true
   createdAt?: true
   updatedAt?: true
-  albumId?: true
   _all?: true
 }
 
@@ -203,9 +203,9 @@ export type ExternalSourceGroupByOutputType = {
   id: number
   source: $Enums.ExternalSourceType
   externalId: string
+  albumId: number | null
   createdAt: Date
   updatedAt: Date
-  albumId: number | null
   _count: ExternalSourceCountAggregateOutputType | null
   _avg: ExternalSourceAvgAggregateOutputType | null
   _sum: ExternalSourceSumAggregateOutputType | null
@@ -236,9 +236,9 @@ export type ExternalSourceWhereInput = {
     | Prisma.EnumExternalSourceTypeFilter<'ExternalSource'>
     | $Enums.ExternalSourceType
   externalId?: Prisma.StringFilter<'ExternalSource'> | string
+  albumId?: Prisma.IntNullableFilter<'ExternalSource'> | number | null
   createdAt?: Prisma.DateTimeFilter<'ExternalSource'> | Date | string
   updatedAt?: Prisma.DateTimeFilter<'ExternalSource'> | Date | string
-  albumId?: Prisma.IntNullableFilter<'ExternalSource'> | number | null
   Album?: Prisma.XOR<
     Prisma.AlbumNullableScalarRelationFilter,
     Prisma.AlbumWhereInput
@@ -249,9 +249,9 @@ export type ExternalSourceOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   source?: Prisma.SortOrder
   externalId?: Prisma.SortOrder
+  albumId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  albumId?: Prisma.SortOrderInput | Prisma.SortOrder
   Album?: Prisma.AlbumOrderByWithRelationInput
 }
 
@@ -265,9 +265,9 @@ export type ExternalSourceWhereUniqueInput = Prisma.AtLeast<
       | Prisma.EnumExternalSourceTypeFilter<'ExternalSource'>
       | $Enums.ExternalSourceType
     externalId?: Prisma.StringFilter<'ExternalSource'> | string
+    albumId?: Prisma.IntNullableFilter<'ExternalSource'> | number | null
     createdAt?: Prisma.DateTimeFilter<'ExternalSource'> | Date | string
     updatedAt?: Prisma.DateTimeFilter<'ExternalSource'> | Date | string
-    albumId?: Prisma.IntNullableFilter<'ExternalSource'> | number | null
     Album?: Prisma.XOR<
       Prisma.AlbumNullableScalarRelationFilter,
       Prisma.AlbumWhereInput
@@ -280,9 +280,9 @@ export type ExternalSourceOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   source?: Prisma.SortOrder
   externalId?: Prisma.SortOrder
+  albumId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  albumId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ExternalSourceCountOrderByAggregateInput
   _avg?: Prisma.ExternalSourceAvgOrderByAggregateInput
   _max?: Prisma.ExternalSourceMaxOrderByAggregateInput
@@ -303,6 +303,10 @@ export type ExternalSourceScalarWhereWithAggregatesInput = {
     | Prisma.EnumExternalSourceTypeWithAggregatesFilter<'ExternalSource'>
     | $Enums.ExternalSourceType
   externalId?: Prisma.StringWithAggregatesFilter<'ExternalSource'> | string
+  albumId?:
+    | Prisma.IntNullableWithAggregatesFilter<'ExternalSource'>
+    | number
+    | null
   createdAt?:
     | Prisma.DateTimeWithAggregatesFilter<'ExternalSource'>
     | Date
@@ -311,10 +315,6 @@ export type ExternalSourceScalarWhereWithAggregatesInput = {
     | Prisma.DateTimeWithAggregatesFilter<'ExternalSource'>
     | Date
     | string
-  albumId?:
-    | Prisma.IntNullableWithAggregatesFilter<'ExternalSource'>
-    | number
-    | null
 }
 
 export type ExternalSourceCreateInput = {
@@ -329,9 +329,9 @@ export type ExternalSourceUncheckedCreateInput = {
   id?: number
   source: $Enums.ExternalSourceType
   externalId: string
+  albumId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  albumId?: number | null
 }
 
 export type ExternalSourceUpdateInput = {
@@ -350,18 +350,18 @@ export type ExternalSourceUncheckedUpdateInput = {
     | Prisma.EnumExternalSourceTypeFieldUpdateOperationsInput
     | $Enums.ExternalSourceType
   externalId?: Prisma.StringFieldUpdateOperationsInput | string
+  albumId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  albumId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ExternalSourceCreateManyInput = {
   id?: number
   source: $Enums.ExternalSourceType
   externalId: string
+  albumId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  albumId?: number | null
 }
 
 export type ExternalSourceUpdateManyMutationInput = {
@@ -379,9 +379,9 @@ export type ExternalSourceUncheckedUpdateManyInput = {
     | Prisma.EnumExternalSourceTypeFieldUpdateOperationsInput
     | $Enums.ExternalSourceType
   externalId?: Prisma.StringFieldUpdateOperationsInput | string
+  albumId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  albumId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ExternalSourceListRelationFilter = {
@@ -398,9 +398,9 @@ export type ExternalSourceCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   source?: Prisma.SortOrder
   externalId?: Prisma.SortOrder
+  albumId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  albumId?: Prisma.SortOrder
 }
 
 export type ExternalSourceAvgOrderByAggregateInput = {
@@ -412,18 +412,18 @@ export type ExternalSourceMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   source?: Prisma.SortOrder
   externalId?: Prisma.SortOrder
+  albumId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  albumId?: Prisma.SortOrder
 }
 
 export type ExternalSourceMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   source?: Prisma.SortOrder
   externalId?: Prisma.SortOrder
+  albumId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  albumId?: Prisma.SortOrder
 }
 
 export type ExternalSourceSumOrderByAggregateInput = {
@@ -616,9 +616,9 @@ export type ExternalSourceScalarWhereInput = {
     | Prisma.EnumExternalSourceTypeFilter<'ExternalSource'>
     | $Enums.ExternalSourceType
   externalId?: Prisma.StringFilter<'ExternalSource'> | string
+  albumId?: Prisma.IntNullableFilter<'ExternalSource'> | number | null
   createdAt?: Prisma.DateTimeFilter<'ExternalSource'> | Date | string
   updatedAt?: Prisma.DateTimeFilter<'ExternalSource'> | Date | string
-  albumId?: Prisma.IntNullableFilter<'ExternalSource'> | number | null
 }
 
 export type ExternalSourceCreateManyAlbumInput = {
@@ -666,9 +666,9 @@ export type ExternalSourceSelect<
     id?: boolean
     source?: boolean
     externalId?: boolean
+    albumId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    albumId?: boolean
     Album?: boolean | Prisma.ExternalSource$AlbumArgs<ExtArgs>
   },
   ExtArgs['result']['externalSource']
@@ -682,9 +682,9 @@ export type ExternalSourceSelectCreateManyAndReturn<
     id?: boolean
     source?: boolean
     externalId?: boolean
+    albumId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    albumId?: boolean
     Album?: boolean | Prisma.ExternalSource$AlbumArgs<ExtArgs>
   },
   ExtArgs['result']['externalSource']
@@ -698,9 +698,9 @@ export type ExternalSourceSelectUpdateManyAndReturn<
     id?: boolean
     source?: boolean
     externalId?: boolean
+    albumId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    albumId?: boolean
     Album?: boolean | Prisma.ExternalSource$AlbumArgs<ExtArgs>
   },
   ExtArgs['result']['externalSource']
@@ -710,16 +710,16 @@ export type ExternalSourceSelectScalar = {
   id?: boolean
   source?: boolean
   externalId?: boolean
+  albumId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  albumId?: boolean
 }
 
 export type ExternalSourceOmit<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetOmit<
-  'id' | 'source' | 'externalId' | 'createdAt' | 'updatedAt' | 'albumId',
+  'id' | 'source' | 'externalId' | 'albumId' | 'createdAt' | 'updatedAt',
   ExtArgs['result']['externalSource']
 >
 export type ExternalSourceInclude<
@@ -754,9 +754,9 @@ export type $ExternalSourcePayload<
       id: number
       source: $Enums.ExternalSourceType
       externalId: string
+      albumId: number | null
       createdAt: Date
       updatedAt: Date
-      albumId: number | null
     },
     ExtArgs['result']['externalSource']
   >
@@ -1377,9 +1377,9 @@ export interface ExternalSourceFieldRefs {
   readonly id: Prisma.FieldRef<'ExternalSource', 'Int'>
   readonly source: Prisma.FieldRef<'ExternalSource', 'ExternalSourceType'>
   readonly externalId: Prisma.FieldRef<'ExternalSource', 'String'>
+  readonly albumId: Prisma.FieldRef<'ExternalSource', 'Int'>
   readonly createdAt: Prisma.FieldRef<'ExternalSource', 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<'ExternalSource', 'DateTime'>
-  readonly albumId: Prisma.FieldRef<'ExternalSource', 'Int'>
 }
 
 // Custom InputTypes

@@ -46,9 +46,9 @@ export type GroupMusicianMinAggregateOutputType = {
   role: string | null
   startYear: number | null
   endYear: number | null
+  groupId: number | null
   createdAt: Date | null
   updatedAt: Date | null
-  groupId: number | null
 }
 
 export type GroupMusicianMaxAggregateOutputType = {
@@ -57,9 +57,9 @@ export type GroupMusicianMaxAggregateOutputType = {
   role: string | null
   startYear: number | null
   endYear: number | null
+  groupId: number | null
   createdAt: Date | null
   updatedAt: Date | null
-  groupId: number | null
 }
 
 export type GroupMusicianCountAggregateOutputType = {
@@ -68,9 +68,9 @@ export type GroupMusicianCountAggregateOutputType = {
   role: number
   startYear: number
   endYear: number
+  groupId: number
   createdAt: number
   updatedAt: number
-  groupId: number
   _all: number
 }
 
@@ -94,9 +94,9 @@ export type GroupMusicianMinAggregateInputType = {
   role?: true
   startYear?: true
   endYear?: true
+  groupId?: true
   createdAt?: true
   updatedAt?: true
-  groupId?: true
 }
 
 export type GroupMusicianMaxAggregateInputType = {
@@ -105,9 +105,9 @@ export type GroupMusicianMaxAggregateInputType = {
   role?: true
   startYear?: true
   endYear?: true
+  groupId?: true
   createdAt?: true
   updatedAt?: true
-  groupId?: true
 }
 
 export type GroupMusicianCountAggregateInputType = {
@@ -116,9 +116,9 @@ export type GroupMusicianCountAggregateInputType = {
   role?: true
   startYear?: true
   endYear?: true
+  groupId?: true
   createdAt?: true
   updatedAt?: true
-  groupId?: true
   _all?: true
 }
 
@@ -225,9 +225,9 @@ export type GroupMusicianGroupByOutputType = {
   role: string
   startYear: number | null
   endYear: number | null
+  groupId: number
   createdAt: Date
   updatedAt: Date
-  groupId: number
   _count: GroupMusicianCountAggregateOutputType | null
   _avg: GroupMusicianAvgAggregateOutputType | null
   _sum: GroupMusicianSumAggregateOutputType | null
@@ -258,9 +258,9 @@ export type GroupMusicianWhereInput = {
   role?: Prisma.StringFilter<'GroupMusician'> | string
   startYear?: Prisma.IntNullableFilter<'GroupMusician'> | number | null
   endYear?: Prisma.IntNullableFilter<'GroupMusician'> | number | null
+  groupId?: Prisma.IntFilter<'GroupMusician'> | number
   createdAt?: Prisma.DateTimeFilter<'GroupMusician'> | Date | string
   updatedAt?: Prisma.DateTimeFilter<'GroupMusician'> | Date | string
-  groupId?: Prisma.IntFilter<'GroupMusician'> | number
   Group?: Prisma.XOR<Prisma.GroupScalarRelationFilter, Prisma.GroupWhereInput>
   Instruments?: Prisma.GroupMusicianInstrumentListRelationFilter
 }
@@ -271,9 +271,9 @@ export type GroupMusicianOrderByWithRelationInput = {
   role?: Prisma.SortOrder
   startYear?: Prisma.SortOrderInput | Prisma.SortOrder
   endYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  groupId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  groupId?: Prisma.SortOrder
   Group?: Prisma.GroupOrderByWithRelationInput
   Instruments?: Prisma.GroupMusicianInstrumentOrderByRelationAggregateInput
 }
@@ -288,9 +288,9 @@ export type GroupMusicianWhereUniqueInput = Prisma.AtLeast<
     role?: Prisma.StringFilter<'GroupMusician'> | string
     startYear?: Prisma.IntNullableFilter<'GroupMusician'> | number | null
     endYear?: Prisma.IntNullableFilter<'GroupMusician'> | number | null
+    groupId?: Prisma.IntFilter<'GroupMusician'> | number
     createdAt?: Prisma.DateTimeFilter<'GroupMusician'> | Date | string
     updatedAt?: Prisma.DateTimeFilter<'GroupMusician'> | Date | string
-    groupId?: Prisma.IntFilter<'GroupMusician'> | number
     Group?: Prisma.XOR<Prisma.GroupScalarRelationFilter, Prisma.GroupWhereInput>
     Instruments?: Prisma.GroupMusicianInstrumentListRelationFilter
   },
@@ -303,9 +303,9 @@ export type GroupMusicianOrderByWithAggregationInput = {
   role?: Prisma.SortOrder
   startYear?: Prisma.SortOrderInput | Prisma.SortOrder
   endYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  groupId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  groupId?: Prisma.SortOrder
   _count?: Prisma.GroupMusicianCountOrderByAggregateInput
   _avg?: Prisma.GroupMusicianAvgOrderByAggregateInput
   _max?: Prisma.GroupMusicianMaxOrderByAggregateInput
@@ -332,6 +332,7 @@ export type GroupMusicianScalarWhereWithAggregatesInput = {
     | Prisma.IntNullableWithAggregatesFilter<'GroupMusician'>
     | number
     | null
+  groupId?: Prisma.IntWithAggregatesFilter<'GroupMusician'> | number
   createdAt?:
     | Prisma.DateTimeWithAggregatesFilter<'GroupMusician'>
     | Date
@@ -340,7 +341,6 @@ export type GroupMusicianScalarWhereWithAggregatesInput = {
     | Prisma.DateTimeWithAggregatesFilter<'GroupMusician'>
     | Date
     | string
-  groupId?: Prisma.IntWithAggregatesFilter<'GroupMusician'> | number
 }
 
 export type GroupMusicianCreateInput = {
@@ -360,9 +360,9 @@ export type GroupMusicianUncheckedCreateInput = {
   role: string
   startYear?: number | null
   endYear?: number | null
+  groupId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  groupId: number
   Instruments?: Prisma.GroupMusicianInstrumentUncheckedCreateNestedManyWithoutGroupMusicianInput
 }
 
@@ -383,9 +383,9 @@ export type GroupMusicianUncheckedUpdateInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  groupId?: Prisma.IntFieldUpdateOperationsInput | number
   Instruments?: Prisma.GroupMusicianInstrumentUncheckedUpdateManyWithoutGroupMusicianNestedInput
 }
 
@@ -395,9 +395,9 @@ export type GroupMusicianCreateManyInput = {
   role: string
   startYear?: number | null
   endYear?: number | null
+  groupId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  groupId: number
 }
 
 export type GroupMusicianUpdateManyMutationInput = {
@@ -415,9 +415,9 @@ export type GroupMusicianUncheckedUpdateManyInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  groupId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type GroupMusicianListRelationFilter = {
@@ -436,9 +436,9 @@ export type GroupMusicianCountOrderByAggregateInput = {
   role?: Prisma.SortOrder
   startYear?: Prisma.SortOrder
   endYear?: Prisma.SortOrder
+  groupId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  groupId?: Prisma.SortOrder
 }
 
 export type GroupMusicianAvgOrderByAggregateInput = {
@@ -454,9 +454,9 @@ export type GroupMusicianMaxOrderByAggregateInput = {
   role?: Prisma.SortOrder
   startYear?: Prisma.SortOrder
   endYear?: Prisma.SortOrder
+  groupId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  groupId?: Prisma.SortOrder
 }
 
 export type GroupMusicianMinOrderByAggregateInput = {
@@ -465,9 +465,9 @@ export type GroupMusicianMinOrderByAggregateInput = {
   role?: Prisma.SortOrder
   startYear?: Prisma.SortOrder
   endYear?: Prisma.SortOrder
+  groupId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  groupId?: Prisma.SortOrder
 }
 
 export type GroupMusicianSumOrderByAggregateInput = {
@@ -703,9 +703,9 @@ export type GroupMusicianScalarWhereInput = {
   role?: Prisma.StringFilter<'GroupMusician'> | string
   startYear?: Prisma.IntNullableFilter<'GroupMusician'> | number | null
   endYear?: Prisma.IntNullableFilter<'GroupMusician'> | number | null
+  groupId?: Prisma.IntFilter<'GroupMusician'> | number
   createdAt?: Prisma.DateTimeFilter<'GroupMusician'> | Date | string
   updatedAt?: Prisma.DateTimeFilter<'GroupMusician'> | Date | string
-  groupId?: Prisma.IntFilter<'GroupMusician'> | number
 }
 
 export type GroupMusicianCreateWithoutInstrumentsInput = {
@@ -724,9 +724,9 @@ export type GroupMusicianUncheckedCreateWithoutInstrumentsInput = {
   role: string
   startYear?: number | null
   endYear?: number | null
+  groupId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  groupId: number
 }
 
 export type GroupMusicianCreateOrConnectWithoutInstrumentsInput = {
@@ -773,9 +773,9 @@ export type GroupMusicianUncheckedUpdateWithoutInstrumentsInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  groupId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type GroupMusicianCreateManyGroupInput = {
@@ -867,9 +867,9 @@ export type GroupMusicianSelect<
     role?: boolean
     startYear?: boolean
     endYear?: boolean
+    groupId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    groupId?: boolean
     Group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
     Instruments?: boolean | Prisma.GroupMusician$InstrumentsArgs<ExtArgs>
     _count?: boolean | Prisma.GroupMusicianCountOutputTypeDefaultArgs<ExtArgs>
@@ -887,9 +887,9 @@ export type GroupMusicianSelectCreateManyAndReturn<
     role?: boolean
     startYear?: boolean
     endYear?: boolean
+    groupId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    groupId?: boolean
     Group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['groupMusician']
@@ -905,9 +905,9 @@ export type GroupMusicianSelectUpdateManyAndReturn<
     role?: boolean
     startYear?: boolean
     endYear?: boolean
+    groupId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    groupId?: boolean
     Group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['groupMusician']
@@ -919,9 +919,9 @@ export type GroupMusicianSelectScalar = {
   role?: boolean
   startYear?: boolean
   endYear?: boolean
+  groupId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  groupId?: boolean
 }
 
 export type GroupMusicianOmit<
@@ -933,9 +933,9 @@ export type GroupMusicianOmit<
   | 'role'
   | 'startYear'
   | 'endYear'
+  | 'groupId'
   | 'createdAt'
-  | 'updatedAt'
-  | 'groupId',
+  | 'updatedAt',
   ExtArgs['result']['groupMusician']
 >
 export type GroupMusicianInclude<
@@ -975,9 +975,9 @@ export type $GroupMusicianPayload<
       role: string
       startYear: number | null
       endYear: number | null
+      groupId: number
       createdAt: Date
       updatedAt: Date
-      groupId: number
     },
     ExtArgs['result']['groupMusician']
   >
@@ -1609,9 +1609,9 @@ export interface GroupMusicianFieldRefs {
   readonly role: Prisma.FieldRef<'GroupMusician', 'String'>
   readonly startYear: Prisma.FieldRef<'GroupMusician', 'Int'>
   readonly endYear: Prisma.FieldRef<'GroupMusician', 'Int'>
+  readonly groupId: Prisma.FieldRef<'GroupMusician', 'Int'>
   readonly createdAt: Prisma.FieldRef<'GroupMusician', 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<'GroupMusician', 'DateTime'>
-  readonly groupId: Prisma.FieldRef<'GroupMusician', 'Int'>
 }
 
 // Custom InputTypes

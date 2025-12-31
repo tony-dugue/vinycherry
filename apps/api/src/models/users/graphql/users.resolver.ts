@@ -1,9 +1,18 @@
 import { NotFoundException } from '@nestjs/common'
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql'
 import { AllowAuthenticated, GetUser } from 'src/common/auth/auth.decorator'
 import { checkRowLevelPermission } from 'src/common/auth/util'
 import { PrismaService } from 'src/common/prisma/prisma.service'
 import { GetUserType } from 'src/common/types'
+import { Admin } from 'src/models/admins/graphql/entity/admin.entity'
+import { Member } from 'src/models/members/graphql/entity/member.entity'
 import {
   LoginInput,
   LoginOutput,
@@ -11,7 +20,7 @@ import {
 } from './dtos/create-user.input'
 import { FindManyUserArgs, FindUniqueUserArgs } from './dtos/find.args'
 import { UpdateUserInput } from './dtos/update-user.input'
-import { User } from './entity/user.entity'
+import { AuthProvider, User } from './entity/user.entity'
 import { UsersService } from './users.service'
 
 @Resolver(() => User)
@@ -83,5 +92,20 @@ export class UsersResolver {
 
     checkRowLevelPermission(user, userInfo.uid)
     return this.usersService.remove(args)
+  }
+
+  @Query(() => AuthProvider, { name: 'getAuthProvider', nullable: true })
+  getAuthProvider(@Args('uid') uid: string) {
+    return this.prisma.authProvider.findUnique({ where: { uid } })
+  }
+
+  @ResolveField(() => Admin, { nullable: true })
+  admin(@Parent() user: User) {
+    return this.prisma.admin.findUnique({ where: { uid: user.uid } })
+  }
+
+  @ResolveField(() => Member, { nullable: true })
+  member(@Parent() user: User) {
+    return this.prisma.member.findUnique({ where: { uid: user.uid } })
   }
 }

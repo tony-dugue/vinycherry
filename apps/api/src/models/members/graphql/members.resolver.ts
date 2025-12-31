@@ -1,13 +1,22 @@
 import { NotFoundException } from '@nestjs/common'
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql'
 import { AllowAuthenticated, GetUser } from 'src/common/auth/auth.decorator'
 import { checkRowLevelPermission } from 'src/common/auth/util'
 import { PrismaService } from 'src/common/prisma/prisma.service'
 import { GetUserType } from 'src/common/types'
+import { CollectionItem } from 'src/models/collection-items/graphql/entity/collection-item.entity'
+import { Member } from 'src/models/members/graphql//entity/member.entity'
+import { User } from 'src/models/users/graphql/entity/user.entity'
 import { CreateMemberInput } from './dtos/create-member.input'
 import { FindManyMemberArgs, FindUniqueMemberArgs } from './dtos/find.args'
 import { UpdateMemberInput } from './dtos/update-member.input'
-import { Member } from './entity/member.entity'
 import { MembersService } from './members.service'
 
 @Resolver(() => Member)
@@ -70,5 +79,17 @@ export class MembersResolver {
 
     checkRowLevelPermission(user, member.uid)
     return this.membersService.remove(args)
+  }
+
+  @ResolveField(() => User, { nullable: true })
+  user(@Parent() member: Member) {
+    return this.prisma.user.findUnique({ where: { uid: member.uid } })
+  }
+
+  @ResolveField(() => [CollectionItem])
+  collectionItems(@Parent() member: Member) {
+    return this.prisma.collectionItem.findMany({
+      where: { memberId: member.uid },
+    })
   }
 }

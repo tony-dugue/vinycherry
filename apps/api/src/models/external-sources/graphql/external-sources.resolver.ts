@@ -1,6 +1,14 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql'
 import { AllowAuthenticated } from 'src/common/auth/auth.decorator'
 import { PrismaService } from 'src/common/prisma/prisma.service'
+import { Album } from 'src/models/albums/graphql/entity/album.entity'
 import { CreateExternalSourceInput } from './dtos/create-external-source.input'
 import {
   FindManyExternalSourceArgs,
@@ -47,5 +55,13 @@ export class ExternalSourcesResolver {
   @Mutation(() => ExternalSource)
   async removeExternalSource(@Args() args: FindUniqueExternalSourceArgs) {
     return this.externalSourcesService.remove(args)
+  }
+
+  @ResolveField(() => Album, { nullable: true })
+  album(@Parent() source: ExternalSource) {
+    if (!source.albumId) return null
+    return this.prisma.album.findUnique({
+      where: { id: source.albumId },
+    })
   }
 }

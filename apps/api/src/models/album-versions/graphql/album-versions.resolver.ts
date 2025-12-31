@@ -1,6 +1,15 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql'
 import { AllowAuthenticated } from 'src/common/auth/auth.decorator'
 import { PrismaService } from 'src/common/prisma/prisma.service'
+import { Album } from 'src/models/albums/graphql/entity/album.entity'
+import { CollectionItem } from 'src/models/collection-items/graphql/entity/collection-item.entity'
 import { AlbumVersionsService } from './album-versions.service'
 import { CreateAlbumVersionInput } from './dtos/create-album-version.input'
 import {
@@ -47,5 +56,19 @@ export class AlbumVersionsResolver {
   @Mutation(() => AlbumVersion)
   async removeAlbumVersion(@Args() args: FindUniqueAlbumVersionArgs) {
     return this.albumVersionsService.remove(args)
+  }
+
+  @ResolveField(() => Album)
+  album(@Parent() version: AlbumVersion) {
+    return this.prisma.album.findUnique({
+      where: { id: version.albumId },
+    })
+  }
+
+  @ResolveField(() => [CollectionItem])
+  collectionItems(@Parent() version: AlbumVersion) {
+    return this.prisma.collectionItem.findMany({
+      where: { albumVersionId: version.id },
+    })
   }
 }

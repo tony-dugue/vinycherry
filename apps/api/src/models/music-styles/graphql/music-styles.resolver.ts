@@ -1,6 +1,14 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql'
 import { AllowAuthenticated } from 'src/common/auth/auth.decorator'
 import { PrismaService } from 'src/common/prisma/prisma.service'
+import { GroupStyle } from 'src/models/group-styles/graphql/entity/group-style.entity'
 import { CreateMusicStyleInput } from './dtos/create-music-style.input'
 import {
   FindManyMusicStyleArgs,
@@ -45,5 +53,14 @@ export class MusicStylesResolver {
   @Mutation(() => MusicStyle)
   async removeMusicStyle(@Args() args: FindUniqueMusicStyleArgs) {
     return this.musicStylesService.remove(args)
+  }
+
+  @ResolveField(() => [GroupStyle])
+  groupStyles(@Parent() musicStyle: MusicStyle) {
+    return this.prisma.groupStyle.findMany({
+      where: {
+        styleId: musicStyle.id,
+      },
+    })
   }
 }

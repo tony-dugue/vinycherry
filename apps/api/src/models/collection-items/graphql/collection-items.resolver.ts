@@ -1,9 +1,19 @@
 import { NotFoundException } from '@nestjs/common'
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql'
 import { AllowAuthenticated, GetUser } from 'src/common/auth/auth.decorator'
 import { checkRowLevelPermission } from 'src/common/auth/util'
 import { PrismaService } from 'src/common/prisma/prisma.service'
 import { GetUserType } from 'src/common/types'
+import { AlbumVersion } from 'src/models/album-versions/graphql/entity/album-version.entity'
+import { Member } from 'src/models/members/graphql/entity/member.entity'
+import { PurchaseInfo } from 'src/models/purchase-infos/graphql/entity/purchase-info.entity'
 import { CollectionItemsService } from './collection-items.service'
 import { CreateCollectionItemInput } from './dtos/create-collection-item.input'
 import {
@@ -74,5 +84,26 @@ export class CollectionItemsResolver {
     checkRowLevelPermission(user, collectionItem.memberId)
 
     return this.collectionItemsService.remove(args)
+  }
+
+  @ResolveField(() => Member)
+  member(@Parent() item: CollectionItem) {
+    return this.prisma.member.findUnique({
+      where: { uid: item.memberId },
+    })
+  }
+
+  @ResolveField(() => AlbumVersion)
+  albumVersion(@Parent() item: CollectionItem) {
+    return this.prisma.albumVersion.findUnique({
+      where: { id: item.albumVersionId },
+    })
+  }
+
+  @ResolveField(() => PurchaseInfo, { nullable: true })
+  purchase(@Parent() item: CollectionItem) {
+    return this.prisma.purchaseInfo.findUnique({
+      where: { collectionItemId: item.id },
+    })
   }
 }

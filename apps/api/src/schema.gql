@@ -2,10 +2,14 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Admin {
+type User {
+  name: String
+  image: String
   uid: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  admin: Admin
+  member: Member
 }
 
 """
@@ -13,22 +17,20 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type AlbumVersion {
-  format: SupportType!
-  year: Int
-  name: String!
-  id: Int!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  albumId: Int!
+type AuthProvider {
+  type: AuthProviderType!
+  uid: String!
 }
 
-enum SupportType {
-  VINYL
-  CD
-  CASSETTE
-  DIGITAL
-  BOX
+enum AuthProviderType {
+  CREDENTIALS
+}
+
+type Admin {
+  uid: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: User
 }
 
 type Album {
@@ -40,6 +42,10 @@ type Album {
   createdAt: DateTime!
   updatedAt: DateTime!
   groupId: Int!
+  group: Group!
+  tracks: [Track!]!
+  versions: [AlbumVersion!]!
+  sources: [ExternalSource!]!
 }
 
 type CollectionItem {
@@ -50,6 +56,9 @@ type CollectionItem {
   id: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
+  member: Member!
+  albumVersion: AlbumVersion!
+  purchase: PurchaseInfo
 }
 
 enum Condition {
@@ -60,6 +69,26 @@ enum Condition {
   POOR
 }
 
+type AlbumVersion {
+  format: SupportType!
+  year: Int
+  name: String!
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  albumId: Int!
+  album: Album!
+  collectionItems: [CollectionItem!]!
+}
+
+enum SupportType {
+  VINYL
+  CD
+  CASSETTE
+  DIGITAL
+  BOX
+}
+
 type ExternalSource {
   source: ExternalSourceType!
   albumId: Int
@@ -67,6 +96,7 @@ type ExternalSource {
   createdAt: DateTime!
   updatedAt: DateTime!
   externalId: String!
+  album: Album
 }
 
 enum ExternalSourceType {
@@ -74,6 +104,56 @@ enum ExternalSourceType {
   DISCOGS
   AUDIO_DB
   SPOTIFY
+}
+
+type Track {
+  duration: Int
+  id: Int!
+  title: String!
+  position: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  albumId: Int!
+  album: Album!
+}
+
+type Group {
+  description: String
+  image: String
+  name: String!
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  styles: [GroupStyle!]!
+  albums: [Album!]!
+  musicians: [GroupMusician!]!
+}
+
+type Member {
+  displayName: String
+  uid: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: User
+  collectionItems: [CollectionItem!]!
+}
+
+type PurchaseInfo {
+  price: Int
+  place: String
+  date: DateTime
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  collectionItemId: Int!
+  collectionItem: CollectionItem!
+}
+
+type GroupMusicianInstrument {
+  groupMusicianId: Int!
+  instrumentId: Int!
+  groupMusician: GroupMusician!
+  instrument: Instrument!
 }
 
 type GroupMusician {
@@ -85,34 +165,8 @@ type GroupMusician {
   createdAt: DateTime!
   updatedAt: DateTime!
   groupId: Int!
-}
-
-type GroupStyle {
-  groupId: Int!
-  styleId: Int!
-}
-
-type Group {
-  description: String
-  image: String
-  name: String!
-  id: Int!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type Instrument {
-  name: String!
-  id: Int!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type Member {
-  displayName: String
-  uid: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  group: Group!
+  instruments: [GroupMusicianInstrument!]!
 }
 
 type MusicStyle {
@@ -120,43 +174,27 @@ type MusicStyle {
   id: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
+  groupStyles: [GroupStyle!]!
 }
 
-type PurchaseInfo {
-  price: Int
-  place: String
-  date: DateTime
+type GroupStyle {
+  groupId: Int!
+  styleId: Int!
+  group: Group!
+  musicStyle: MusicStyle!
+}
+
+type Instrument {
+  name: String!
   id: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
-  collectionItemId: Int!
-}
-
-type Track {
-  duration: Int
-  id: Int!
-  title: String!
-  position: Int!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  albumId: Int!
+  musicians: [GroupMusicianInstrument!]!
 }
 
 type LoginOutput {
   token: String!
-}
-
-type User {
-  name: String
-  image: String
-  uid: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type GroupMusicianInstrument {
-  groupMusicianId: Int!
-  instrumentId: Int!
+  user: User!
 }
 
 type Query {
@@ -171,6 +209,7 @@ type Query {
     skip: Int
   ): [User!]!
   user(where: UserWhereUniqueInput!): User!
+  getAuthProvider(uid: String!): AuthProvider
   admins(
     omit: [String!]
     distinct: [AdminScalarFieldEnum!]
@@ -1117,7 +1156,7 @@ type Mutation {
 }
 
 input RegisterWithCredentialsInput {
-  name: String!
+  name: String
   email: String!
   password: String!
   image: String

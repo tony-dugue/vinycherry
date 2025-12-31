@@ -43,9 +43,9 @@ export type AlbumVersionMinAggregateOutputType = {
   name: string | null
   format: $Enums.SupportType | null
   year: number | null
+  albumId: number | null
   createdAt: Date | null
   updatedAt: Date | null
-  albumId: number | null
 }
 
 export type AlbumVersionMaxAggregateOutputType = {
@@ -53,9 +53,9 @@ export type AlbumVersionMaxAggregateOutputType = {
   name: string | null
   format: $Enums.SupportType | null
   year: number | null
+  albumId: number | null
   createdAt: Date | null
   updatedAt: Date | null
-  albumId: number | null
 }
 
 export type AlbumVersionCountAggregateOutputType = {
@@ -63,9 +63,9 @@ export type AlbumVersionCountAggregateOutputType = {
   name: number
   format: number
   year: number
+  albumId: number
   createdAt: number
   updatedAt: number
-  albumId: number
   _all: number
 }
 
@@ -86,9 +86,9 @@ export type AlbumVersionMinAggregateInputType = {
   name?: true
   format?: true
   year?: true
+  albumId?: true
   createdAt?: true
   updatedAt?: true
-  albumId?: true
 }
 
 export type AlbumVersionMaxAggregateInputType = {
@@ -96,9 +96,9 @@ export type AlbumVersionMaxAggregateInputType = {
   name?: true
   format?: true
   year?: true
+  albumId?: true
   createdAt?: true
   updatedAt?: true
-  albumId?: true
 }
 
 export type AlbumVersionCountAggregateInputType = {
@@ -106,9 +106,9 @@ export type AlbumVersionCountAggregateInputType = {
   name?: true
   format?: true
   year?: true
+  albumId?: true
   createdAt?: true
   updatedAt?: true
-  albumId?: true
   _all?: true
 }
 
@@ -211,9 +211,9 @@ export type AlbumVersionGroupByOutputType = {
   name: string
   format: $Enums.SupportType
   year: number | null
+  albumId: number
   createdAt: Date
   updatedAt: Date
-  albumId: number
   _count: AlbumVersionCountAggregateOutputType | null
   _avg: AlbumVersionAvgAggregateOutputType | null
   _sum: AlbumVersionSumAggregateOutputType | null
@@ -242,9 +242,9 @@ export type AlbumVersionWhereInput = {
   name?: Prisma.StringFilter<'AlbumVersion'> | string
   format?: Prisma.EnumSupportTypeFilter<'AlbumVersion'> | $Enums.SupportType
   year?: Prisma.IntNullableFilter<'AlbumVersion'> | number | null
+  albumId?: Prisma.IntFilter<'AlbumVersion'> | number
   createdAt?: Prisma.DateTimeFilter<'AlbumVersion'> | Date | string
   updatedAt?: Prisma.DateTimeFilter<'AlbumVersion'> | Date | string
-  albumId?: Prisma.IntFilter<'AlbumVersion'> | number
   Album?: Prisma.XOR<Prisma.AlbumScalarRelationFilter, Prisma.AlbumWhereInput>
   CollectionItems?: Prisma.CollectionItemListRelationFilter
 }
@@ -254,9 +254,9 @@ export type AlbumVersionOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   format?: Prisma.SortOrder
   year?: Prisma.SortOrderInput | Prisma.SortOrder
+  albumId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  albumId?: Prisma.SortOrder
   Album?: Prisma.AlbumOrderByWithRelationInput
   CollectionItems?: Prisma.CollectionItemOrderByRelationAggregateInput
 }
@@ -270,9 +270,9 @@ export type AlbumVersionWhereUniqueInput = Prisma.AtLeast<
     name?: Prisma.StringFilter<'AlbumVersion'> | string
     format?: Prisma.EnumSupportTypeFilter<'AlbumVersion'> | $Enums.SupportType
     year?: Prisma.IntNullableFilter<'AlbumVersion'> | number | null
+    albumId?: Prisma.IntFilter<'AlbumVersion'> | number
     createdAt?: Prisma.DateTimeFilter<'AlbumVersion'> | Date | string
     updatedAt?: Prisma.DateTimeFilter<'AlbumVersion'> | Date | string
-    albumId?: Prisma.IntFilter<'AlbumVersion'> | number
     Album?: Prisma.XOR<Prisma.AlbumScalarRelationFilter, Prisma.AlbumWhereInput>
     CollectionItems?: Prisma.CollectionItemListRelationFilter
   },
@@ -284,9 +284,9 @@ export type AlbumVersionOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   format?: Prisma.SortOrder
   year?: Prisma.SortOrderInput | Prisma.SortOrder
+  albumId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  albumId?: Prisma.SortOrder
   _count?: Prisma.AlbumVersionCountOrderByAggregateInput
   _avg?: Prisma.AlbumVersionAvgOrderByAggregateInput
   _max?: Prisma.AlbumVersionMaxOrderByAggregateInput
@@ -308,6 +308,7 @@ export type AlbumVersionScalarWhereWithAggregatesInput = {
     | Prisma.EnumSupportTypeWithAggregatesFilter<'AlbumVersion'>
     | $Enums.SupportType
   year?: Prisma.IntNullableWithAggregatesFilter<'AlbumVersion'> | number | null
+  albumId?: Prisma.IntWithAggregatesFilter<'AlbumVersion'> | number
   createdAt?:
     | Prisma.DateTimeWithAggregatesFilter<'AlbumVersion'>
     | Date
@@ -316,7 +317,6 @@ export type AlbumVersionScalarWhereWithAggregatesInput = {
     | Prisma.DateTimeWithAggregatesFilter<'AlbumVersion'>
     | Date
     | string
-  albumId?: Prisma.IntWithAggregatesFilter<'AlbumVersion'> | number
 }
 
 export type AlbumVersionCreateInput = {
@@ -334,9 +334,9 @@ export type AlbumVersionUncheckedCreateInput = {
   name: string
   format: $Enums.SupportType
   year?: number | null
+  albumId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  albumId: number
   CollectionItems?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutAlbumVersionInput
 }
 
@@ -355,9 +355,9 @@ export type AlbumVersionUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   format?: Prisma.EnumSupportTypeFieldUpdateOperationsInput | $Enums.SupportType
   year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  albumId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  albumId?: Prisma.IntFieldUpdateOperationsInput | number
   CollectionItems?: Prisma.CollectionItemUncheckedUpdateManyWithoutAlbumVersionNestedInput
 }
 
@@ -366,9 +366,9 @@ export type AlbumVersionCreateManyInput = {
   name: string
   format: $Enums.SupportType
   year?: number | null
+  albumId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  albumId: number
 }
 
 export type AlbumVersionUpdateManyMutationInput = {
@@ -384,9 +384,9 @@ export type AlbumVersionUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   format?: Prisma.EnumSupportTypeFieldUpdateOperationsInput | $Enums.SupportType
   year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  albumId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  albumId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type AlbumVersionListRelationFilter = {
@@ -404,9 +404,9 @@ export type AlbumVersionCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   format?: Prisma.SortOrder
   year?: Prisma.SortOrder
+  albumId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  albumId?: Prisma.SortOrder
 }
 
 export type AlbumVersionAvgOrderByAggregateInput = {
@@ -420,9 +420,9 @@ export type AlbumVersionMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   format?: Prisma.SortOrder
   year?: Prisma.SortOrder
+  albumId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  albumId?: Prisma.SortOrder
 }
 
 export type AlbumVersionMinOrderByAggregateInput = {
@@ -430,9 +430,9 @@ export type AlbumVersionMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   format?: Prisma.SortOrder
   year?: Prisma.SortOrder
+  albumId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  albumId?: Prisma.SortOrder
 }
 
 export type AlbumVersionSumOrderByAggregateInput = {
@@ -660,9 +660,9 @@ export type AlbumVersionScalarWhereInput = {
   name?: Prisma.StringFilter<'AlbumVersion'> | string
   format?: Prisma.EnumSupportTypeFilter<'AlbumVersion'> | $Enums.SupportType
   year?: Prisma.IntNullableFilter<'AlbumVersion'> | number | null
+  albumId?: Prisma.IntFilter<'AlbumVersion'> | number
   createdAt?: Prisma.DateTimeFilter<'AlbumVersion'> | Date | string
   updatedAt?: Prisma.DateTimeFilter<'AlbumVersion'> | Date | string
-  albumId?: Prisma.IntFilter<'AlbumVersion'> | number
 }
 
 export type AlbumVersionCreateWithoutCollectionItemsInput = {
@@ -679,9 +679,9 @@ export type AlbumVersionUncheckedCreateWithoutCollectionItemsInput = {
   name: string
   format: $Enums.SupportType
   year?: number | null
+  albumId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  albumId: number
 }
 
 export type AlbumVersionCreateOrConnectWithoutCollectionItemsInput = {
@@ -726,9 +726,9 @@ export type AlbumVersionUncheckedUpdateWithoutCollectionItemsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   format?: Prisma.EnumSupportTypeFieldUpdateOperationsInput | $Enums.SupportType
   year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  albumId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  albumId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type AlbumVersionCreateManyAlbumInput = {
@@ -817,9 +817,9 @@ export type AlbumVersionSelect<
     name?: boolean
     format?: boolean
     year?: boolean
+    albumId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    albumId?: boolean
     Album?: boolean | Prisma.AlbumDefaultArgs<ExtArgs>
     CollectionItems?: boolean | Prisma.AlbumVersion$CollectionItemsArgs<ExtArgs>
     _count?: boolean | Prisma.AlbumVersionCountOutputTypeDefaultArgs<ExtArgs>
@@ -836,9 +836,9 @@ export type AlbumVersionSelectCreateManyAndReturn<
     name?: boolean
     format?: boolean
     year?: boolean
+    albumId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    albumId?: boolean
     Album?: boolean | Prisma.AlbumDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['albumVersion']
@@ -853,9 +853,9 @@ export type AlbumVersionSelectUpdateManyAndReturn<
     name?: boolean
     format?: boolean
     year?: boolean
+    albumId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    albumId?: boolean
     Album?: boolean | Prisma.AlbumDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['albumVersion']
@@ -866,16 +866,16 @@ export type AlbumVersionSelectScalar = {
   name?: boolean
   format?: boolean
   year?: boolean
+  albumId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  albumId?: boolean
 }
 
 export type AlbumVersionOmit<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetOmit<
-  'id' | 'name' | 'format' | 'year' | 'createdAt' | 'updatedAt' | 'albumId',
+  'id' | 'name' | 'format' | 'year' | 'albumId' | 'createdAt' | 'updatedAt',
   ExtArgs['result']['albumVersion']
 >
 export type AlbumVersionInclude<
@@ -914,9 +914,9 @@ export type $AlbumVersionPayload<
       name: string
       format: $Enums.SupportType
       year: number | null
+      albumId: number
       createdAt: Date
       updatedAt: Date
-      albumId: number
     },
     ExtArgs['result']['albumVersion']
   >
@@ -1546,9 +1546,9 @@ export interface AlbumVersionFieldRefs {
   readonly name: Prisma.FieldRef<'AlbumVersion', 'String'>
   readonly format: Prisma.FieldRef<'AlbumVersion', 'SupportType'>
   readonly year: Prisma.FieldRef<'AlbumVersion', 'Int'>
+  readonly albumId: Prisma.FieldRef<'AlbumVersion', 'Int'>
   readonly createdAt: Prisma.FieldRef<'AlbumVersion', 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<'AlbumVersion', 'DateTime'>
-  readonly albumId: Prisma.FieldRef<'AlbumVersion', 'Int'>
 }
 
 // Custom InputTypes

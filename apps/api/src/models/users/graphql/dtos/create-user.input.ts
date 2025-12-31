@@ -1,8 +1,9 @@
 import { InputType, ObjectType, PickType } from '@nestjs/graphql'
+import { User } from '../entity/user.entity'
 
 @InputType()
 export class RegisterWithCredentialsInput {
-  name: string
+  name?: string
   email: string
   password: string
   image?: string
@@ -17,4 +18,5 @@ export class LoginInput extends PickType(RegisterWithCredentialsInput, [
 @ObjectType()
 export class LoginOutput {
   token: string
+  user: User
 }

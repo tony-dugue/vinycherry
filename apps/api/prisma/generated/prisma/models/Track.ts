@@ -45,9 +45,9 @@ export type TrackMinAggregateOutputType = {
   title: string | null
   position: number | null
   duration: number | null
+  albumId: number | null
   createdAt: Date | null
   updatedAt: Date | null
-  albumId: number | null
 }
 
 export type TrackMaxAggregateOutputType = {
@@ -55,9 +55,9 @@ export type TrackMaxAggregateOutputType = {
   title: string | null
   position: number | null
   duration: number | null
+  albumId: number | null
   createdAt: Date | null
   updatedAt: Date | null
-  albumId: number | null
 }
 
 export type TrackCountAggregateOutputType = {
@@ -65,9 +65,9 @@ export type TrackCountAggregateOutputType = {
   title: number
   position: number
   duration: number
+  albumId: number
   createdAt: number
   updatedAt: number
-  albumId: number
   _all: number
 }
 
@@ -90,9 +90,9 @@ export type TrackMinAggregateInputType = {
   title?: true
   position?: true
   duration?: true
+  albumId?: true
   createdAt?: true
   updatedAt?: true
-  albumId?: true
 }
 
 export type TrackMaxAggregateInputType = {
@@ -100,9 +100,9 @@ export type TrackMaxAggregateInputType = {
   title?: true
   position?: true
   duration?: true
+  albumId?: true
   createdAt?: true
   updatedAt?: true
-  albumId?: true
 }
 
 export type TrackCountAggregateInputType = {
@@ -110,9 +110,9 @@ export type TrackCountAggregateInputType = {
   title?: true
   position?: true
   duration?: true
+  albumId?: true
   createdAt?: true
   updatedAt?: true
-  albumId?: true
   _all?: true
 }
 
@@ -214,9 +214,9 @@ export type TrackGroupByOutputType = {
   title: string
   position: number
   duration: number | null
+  albumId: number
   createdAt: Date
   updatedAt: Date
-  albumId: number
   _count: TrackCountAggregateOutputType | null
   _avg: TrackAvgAggregateOutputType | null
   _sum: TrackSumAggregateOutputType | null
@@ -244,9 +244,9 @@ export type TrackWhereInput = {
   title?: Prisma.StringFilter<'Track'> | string
   position?: Prisma.IntFilter<'Track'> | number
   duration?: Prisma.IntNullableFilter<'Track'> | number | null
+  albumId?: Prisma.IntFilter<'Track'> | number
   createdAt?: Prisma.DateTimeFilter<'Track'> | Date | string
   updatedAt?: Prisma.DateTimeFilter<'Track'> | Date | string
-  albumId?: Prisma.IntFilter<'Track'> | number
   Album?: Prisma.XOR<Prisma.AlbumScalarRelationFilter, Prisma.AlbumWhereInput>
 }
 
@@ -255,9 +255,9 @@ export type TrackOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   position?: Prisma.SortOrder
   duration?: Prisma.SortOrderInput | Prisma.SortOrder
+  albumId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  albumId?: Prisma.SortOrder
   Album?: Prisma.AlbumOrderByWithRelationInput
 }
 
@@ -270,9 +270,9 @@ export type TrackWhereUniqueInput = Prisma.AtLeast<
     title?: Prisma.StringFilter<'Track'> | string
     position?: Prisma.IntFilter<'Track'> | number
     duration?: Prisma.IntNullableFilter<'Track'> | number | null
+    albumId?: Prisma.IntFilter<'Track'> | number
     createdAt?: Prisma.DateTimeFilter<'Track'> | Date | string
     updatedAt?: Prisma.DateTimeFilter<'Track'> | Date | string
-    albumId?: Prisma.IntFilter<'Track'> | number
     Album?: Prisma.XOR<Prisma.AlbumScalarRelationFilter, Prisma.AlbumWhereInput>
   },
   'id'
@@ -283,9 +283,9 @@ export type TrackOrderByWithAggregationInput = {
   title?: Prisma.SortOrder
   position?: Prisma.SortOrder
   duration?: Prisma.SortOrderInput | Prisma.SortOrder
+  albumId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  albumId?: Prisma.SortOrder
   _count?: Prisma.TrackCountOrderByAggregateInput
   _avg?: Prisma.TrackAvgOrderByAggregateInput
   _max?: Prisma.TrackMaxOrderByAggregateInput
@@ -305,9 +305,9 @@ export type TrackScalarWhereWithAggregatesInput = {
   title?: Prisma.StringWithAggregatesFilter<'Track'> | string
   position?: Prisma.IntWithAggregatesFilter<'Track'> | number
   duration?: Prisma.IntNullableWithAggregatesFilter<'Track'> | number | null
+  albumId?: Prisma.IntWithAggregatesFilter<'Track'> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<'Track'> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<'Track'> | Date | string
-  albumId?: Prisma.IntWithAggregatesFilter<'Track'> | number
 }
 
 export type TrackCreateInput = {
@@ -324,9 +324,9 @@ export type TrackUncheckedCreateInput = {
   title: string
   position: number
   duration?: number | null
+  albumId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  albumId: number
 }
 
 export type TrackUpdateInput = {
@@ -343,9 +343,9 @@ export type TrackUncheckedUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  albumId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  albumId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type TrackCreateManyInput = {
@@ -353,9 +353,9 @@ export type TrackCreateManyInput = {
   title: string
   position: number
   duration?: number | null
+  albumId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  albumId: number
 }
 
 export type TrackUpdateManyMutationInput = {
@@ -371,9 +371,9 @@ export type TrackUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  albumId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  albumId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type TrackListRelationFilter = {
@@ -391,9 +391,9 @@ export type TrackCountOrderByAggregateInput = {
   title?: Prisma.SortOrder
   position?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  albumId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  albumId?: Prisma.SortOrder
 }
 
 export type TrackAvgOrderByAggregateInput = {
@@ -408,9 +408,9 @@ export type TrackMaxOrderByAggregateInput = {
   title?: Prisma.SortOrder
   position?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  albumId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  albumId?: Prisma.SortOrder
 }
 
 export type TrackMinOrderByAggregateInput = {
@@ -418,9 +418,9 @@ export type TrackMinOrderByAggregateInput = {
   title?: Prisma.SortOrder
   position?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  albumId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  albumId?: Prisma.SortOrder
 }
 
 export type TrackSumOrderByAggregateInput = {
@@ -582,9 +582,9 @@ export type TrackScalarWhereInput = {
   title?: Prisma.StringFilter<'Track'> | string
   position?: Prisma.IntFilter<'Track'> | number
   duration?: Prisma.IntNullableFilter<'Track'> | number | null
+  albumId?: Prisma.IntFilter<'Track'> | number
   createdAt?: Prisma.DateTimeFilter<'Track'> | Date | string
   updatedAt?: Prisma.DateTimeFilter<'Track'> | Date | string
-  albumId?: Prisma.IntFilter<'Track'> | number
 }
 
 export type TrackCreateManyAlbumInput = {
@@ -631,9 +631,9 @@ export type TrackSelect<
     title?: boolean
     position?: boolean
     duration?: boolean
+    albumId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    albumId?: boolean
     Album?: boolean | Prisma.AlbumDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['track']
@@ -648,9 +648,9 @@ export type TrackSelectCreateManyAndReturn<
     title?: boolean
     position?: boolean
     duration?: boolean
+    albumId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    albumId?: boolean
     Album?: boolean | Prisma.AlbumDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['track']
@@ -665,9 +665,9 @@ export type TrackSelectUpdateManyAndReturn<
     title?: boolean
     position?: boolean
     duration?: boolean
+    albumId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    albumId?: boolean
     Album?: boolean | Prisma.AlbumDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['track']
@@ -678,9 +678,9 @@ export type TrackSelectScalar = {
   title?: boolean
   position?: boolean
   duration?: boolean
+  albumId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  albumId?: boolean
 }
 
 export type TrackOmit<
@@ -691,9 +691,9 @@ export type TrackOmit<
   | 'title'
   | 'position'
   | 'duration'
+  | 'albumId'
   | 'createdAt'
-  | 'updatedAt'
-  | 'albumId',
+  | 'updatedAt',
   ExtArgs['result']['track']
 >
 export type TrackInclude<
@@ -729,9 +729,9 @@ export type $TrackPayload<
       title: string
       position: number
       duration: number | null
+      albumId: number
       createdAt: Date
       updatedAt: Date
-      albumId: number
     },
     ExtArgs['result']['track']
   >
@@ -1342,9 +1342,9 @@ export interface TrackFieldRefs {
   readonly title: Prisma.FieldRef<'Track', 'String'>
   readonly position: Prisma.FieldRef<'Track', 'Int'>
   readonly duration: Prisma.FieldRef<'Track', 'Int'>
+  readonly albumId: Prisma.FieldRef<'Track', 'Int'>
   readonly createdAt: Prisma.FieldRef<'Track', 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<'Track', 'DateTime'>
-  readonly albumId: Prisma.FieldRef<'Track', 'Int'>
 }
 
 // Custom InputTypes

@@ -1,9 +1,17 @@
 import { NotFoundException } from '@nestjs/common'
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql'
 import { AllowAuthenticated, GetUser } from 'src/common/auth/auth.decorator'
 import { checkRowLevelPermission } from 'src/common/auth/util'
 import { PrismaService } from 'src/common/prisma/prisma.service'
 import { GetUserType } from 'src/common/types'
+import { CollectionItem } from 'src/models/collection-items/graphql/entity/collection-item.entity'
 import { CreatePurchaseInfoInput } from './dtos/create-purchase-info.input'
 import {
   FindManyPurchaseInfoArgs,
@@ -74,5 +82,12 @@ export class PurchaseInfosResolver {
 
     checkRowLevelPermission(user, purchaseInfo.collectionItemId.toString())
     return this.purchaseInfosService.remove(args)
+  }
+
+  @ResolveField(() => CollectionItem)
+  collectionItem(@Parent() purchase: PurchaseInfo) {
+    return this.prisma.collectionItem.findUnique({
+      where: { id: purchase.collectionItemId },
+    })
   }
 }

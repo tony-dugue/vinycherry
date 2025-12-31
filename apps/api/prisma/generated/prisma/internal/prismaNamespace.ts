@@ -1887,9 +1887,9 @@ export const GroupMusicianScalarFieldEnum = {
   role: 'role',
   startYear: 'startYear',
   endYear: 'endYear',
+  groupId: 'groupId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  groupId: 'groupId',
 } as const
 
 export type GroupMusicianScalarFieldEnum =
@@ -1919,9 +1919,9 @@ export const AlbumScalarFieldEnum = {
   releaseDate: 'releaseDate',
   studio: 'studio',
   coverUrl: 'coverUrl',
+  groupId: 'groupId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  groupId: 'groupId',
 } as const
 
 export type AlbumScalarFieldEnum =
@@ -1932,9 +1932,9 @@ export const TrackScalarFieldEnum = {
   title: 'title',
   position: 'position',
   duration: 'duration',
+  albumId: 'albumId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  albumId: 'albumId',
 } as const
 
 export type TrackScalarFieldEnum =
@@ -1945,9 +1945,9 @@ export const AlbumVersionScalarFieldEnum = {
   name: 'name',
   format: 'format',
   year: 'year',
+  albumId: 'albumId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  albumId: 'albumId',
 } as const
 
 export type AlbumVersionScalarFieldEnum =
@@ -1971,9 +1971,9 @@ export const PurchaseInfoScalarFieldEnum = {
   price: 'price',
   place: 'place',
   date: 'date',
+  collectionItemId: 'collectionItemId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  collectionItemId: 'collectionItemId',
 } as const
 
 export type PurchaseInfoScalarFieldEnum =
@@ -1983,9 +1983,9 @@ export const ExternalSourceScalarFieldEnum = {
   id: 'id',
   source: 'source',
   externalId: 'externalId',
+  albumId: 'albumId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  albumId: 'albumId',
 } as const
 
 export type ExternalSourceScalarFieldEnum =

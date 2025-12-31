@@ -65,23 +65,23 @@ enum AuthProviderType {
 // Permet de gérer et d’enrichir le catalogue musical (groupes, albums, métadonnées).
 model Admin {
   uid  String @id
-  User User   @relation(fields: [uid], references: [uid])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  User User   @relation(fields: [uid], references: [uid])
 }
 
 // Member: Rôle utilisateur standard. Permet de gérer une collection personnelle d’albums physiques.
 model Member {
   uid  String @id
-  User User   @relation(fields: [uid], references: [uid])
-
   displayName String?
-
-  CollectionItems CollectionItem[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  User User   @relation(fields: [uid], references: [uid])
+  CollectionItems CollectionItem[]
 }
 
 // =======================
@@ -144,13 +144,12 @@ model GroupMusician {
   role      String
   startYear Int?
   endYear   Int?
+  groupId Int
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  groupId Int
-  Group   Group @relation(fields: [groupId], references: [id])
-
+  Group       Group @relation(fields: [groupId], references: [id])
   Instruments GroupMusicianInstrument[]
 }
 
@@ -186,13 +185,12 @@ model Album {
   releaseDate DateTime?
   studio      String?
   coverUrl    String?
+  groupId Int
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  groupId Int
   Group   Group @relation(fields: [groupId], references: [id])
-
   Tracks    Track[]
   Versions  AlbumVersion[]
   Sources   ExternalSource[]
@@ -205,11 +203,11 @@ model Track {
   title    String
   position Int
   duration Int?
+  albumId Int
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  albumId Int
   Album   Album @relation(fields: [albumId], references: [id])
 }
 
@@ -224,13 +222,12 @@ model AlbumVersion {
   name   String
   format SupportType
   year   Int?
+  albumId Int
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  albumId Int
   Album   Album @relation(fields: [albumId], references: [id])
-
   CollectionItems CollectionItem[]
 }
 
@@ -250,20 +247,17 @@ enum SupportType {
 // Représente un album réellement possédé par l’utilisateur.
 model CollectionItem {
   id Int @id @default(autoincrement())
-
   memberId String
-  Member   Member @relation(fields: [memberId], references: [uid])
-
   albumVersionId Int
-  AlbumVersion   AlbumVersion @relation(fields: [albumVersionId], references: [id])
-
   condition Condition
   notes     String?
 
-  Purchase PurchaseInfo?
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  Member   Member @relation(fields: [memberId], references: [uid])
+  AlbumVersion   AlbumVersion @relation(fields: [albumVersionId], references: [id])
+  Purchase PurchaseInfo?
 }
 
 enum Condition {
@@ -284,11 +278,11 @@ model PurchaseInfo {
   price Float?
   place String?
   date  DateTime?
+  collectionItemId Int @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  collectionItemId Int @unique
   CollectionItem   CollectionItem @relation(fields: [collectionItemId], references: [id])
 }
 
@@ -302,11 +296,11 @@ model ExternalSource {
   id          Int @id @default(autoincrement())
   source      ExternalSourceType
   externalId  String
+  albumId Int?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  albumId Int?
   Album   Album? @relation(fields: [albumId], references: [id])
 }
 

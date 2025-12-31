@@ -42,9 +42,9 @@ export type AlbumMinAggregateOutputType = {
   releaseDate: Date | null
   studio: string | null
   coverUrl: string | null
+  groupId: number | null
   createdAt: Date | null
   updatedAt: Date | null
-  groupId: number | null
 }
 
 export type AlbumMaxAggregateOutputType = {
@@ -53,9 +53,9 @@ export type AlbumMaxAggregateOutputType = {
   releaseDate: Date | null
   studio: string | null
   coverUrl: string | null
+  groupId: number | null
   createdAt: Date | null
   updatedAt: Date | null
-  groupId: number | null
 }
 
 export type AlbumCountAggregateOutputType = {
@@ -64,9 +64,9 @@ export type AlbumCountAggregateOutputType = {
   releaseDate: number
   studio: number
   coverUrl: number
+  groupId: number
   createdAt: number
   updatedAt: number
-  groupId: number
   _all: number
 }
 
@@ -86,9 +86,9 @@ export type AlbumMinAggregateInputType = {
   releaseDate?: true
   studio?: true
   coverUrl?: true
+  groupId?: true
   createdAt?: true
   updatedAt?: true
-  groupId?: true
 }
 
 export type AlbumMaxAggregateInputType = {
@@ -97,9 +97,9 @@ export type AlbumMaxAggregateInputType = {
   releaseDate?: true
   studio?: true
   coverUrl?: true
+  groupId?: true
   createdAt?: true
   updatedAt?: true
-  groupId?: true
 }
 
 export type AlbumCountAggregateInputType = {
@@ -108,9 +108,9 @@ export type AlbumCountAggregateInputType = {
   releaseDate?: true
   studio?: true
   coverUrl?: true
+  groupId?: true
   createdAt?: true
   updatedAt?: true
-  groupId?: true
   _all?: true
 }
 
@@ -213,9 +213,9 @@ export type AlbumGroupByOutputType = {
   releaseDate: Date | null
   studio: string | null
   coverUrl: string | null
+  groupId: number
   createdAt: Date
   updatedAt: Date
-  groupId: number
   _count: AlbumCountAggregateOutputType | null
   _avg: AlbumAvgAggregateOutputType | null
   _sum: AlbumSumAggregateOutputType | null
@@ -244,9 +244,9 @@ export type AlbumWhereInput = {
   releaseDate?: Prisma.DateTimeNullableFilter<'Album'> | Date | string | null
   studio?: Prisma.StringNullableFilter<'Album'> | string | null
   coverUrl?: Prisma.StringNullableFilter<'Album'> | string | null
+  groupId?: Prisma.IntFilter<'Album'> | number
   createdAt?: Prisma.DateTimeFilter<'Album'> | Date | string
   updatedAt?: Prisma.DateTimeFilter<'Album'> | Date | string
-  groupId?: Prisma.IntFilter<'Album'> | number
   Group?: Prisma.XOR<Prisma.GroupScalarRelationFilter, Prisma.GroupWhereInput>
   Tracks?: Prisma.TrackListRelationFilter
   Versions?: Prisma.AlbumVersionListRelationFilter
@@ -259,9 +259,9 @@ export type AlbumOrderByWithRelationInput = {
   releaseDate?: Prisma.SortOrderInput | Prisma.SortOrder
   studio?: Prisma.SortOrderInput | Prisma.SortOrder
   coverUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  groupId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  groupId?: Prisma.SortOrder
   Group?: Prisma.GroupOrderByWithRelationInput
   Tracks?: Prisma.TrackOrderByRelationAggregateInput
   Versions?: Prisma.AlbumVersionOrderByRelationAggregateInput
@@ -278,9 +278,9 @@ export type AlbumWhereUniqueInput = Prisma.AtLeast<
     releaseDate?: Prisma.DateTimeNullableFilter<'Album'> | Date | string | null
     studio?: Prisma.StringNullableFilter<'Album'> | string | null
     coverUrl?: Prisma.StringNullableFilter<'Album'> | string | null
+    groupId?: Prisma.IntFilter<'Album'> | number
     createdAt?: Prisma.DateTimeFilter<'Album'> | Date | string
     updatedAt?: Prisma.DateTimeFilter<'Album'> | Date | string
-    groupId?: Prisma.IntFilter<'Album'> | number
     Group?: Prisma.XOR<Prisma.GroupScalarRelationFilter, Prisma.GroupWhereInput>
     Tracks?: Prisma.TrackListRelationFilter
     Versions?: Prisma.AlbumVersionListRelationFilter
@@ -295,9 +295,9 @@ export type AlbumOrderByWithAggregationInput = {
   releaseDate?: Prisma.SortOrderInput | Prisma.SortOrder
   studio?: Prisma.SortOrderInput | Prisma.SortOrder
   coverUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  groupId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  groupId?: Prisma.SortOrder
   _count?: Prisma.AlbumCountOrderByAggregateInput
   _avg?: Prisma.AlbumAvgOrderByAggregateInput
   _max?: Prisma.AlbumMaxOrderByAggregateInput
@@ -322,9 +322,9 @@ export type AlbumScalarWhereWithAggregatesInput = {
     | null
   studio?: Prisma.StringNullableWithAggregatesFilter<'Album'> | string | null
   coverUrl?: Prisma.StringNullableWithAggregatesFilter<'Album'> | string | null
+  groupId?: Prisma.IntWithAggregatesFilter<'Album'> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<'Album'> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<'Album'> | Date | string
-  groupId?: Prisma.IntWithAggregatesFilter<'Album'> | number
 }
 
 export type AlbumCreateInput = {
@@ -346,9 +346,9 @@ export type AlbumUncheckedCreateInput = {
   releaseDate?: Date | string | null
   studio?: string | null
   coverUrl?: string | null
+  groupId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  groupId: number
   Tracks?: Prisma.TrackUncheckedCreateNestedManyWithoutAlbumInput
   Versions?: Prisma.AlbumVersionUncheckedCreateNestedManyWithoutAlbumInput
   Sources?: Prisma.ExternalSourceUncheckedCreateNestedManyWithoutAlbumInput
@@ -381,9 +381,9 @@ export type AlbumUncheckedUpdateInput = {
     | null
   studio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  groupId?: Prisma.IntFieldUpdateOperationsInput | number
   Tracks?: Prisma.TrackUncheckedUpdateManyWithoutAlbumNestedInput
   Versions?: Prisma.AlbumVersionUncheckedUpdateManyWithoutAlbumNestedInput
   Sources?: Prisma.ExternalSourceUncheckedUpdateManyWithoutAlbumNestedInput
@@ -395,9 +395,9 @@ export type AlbumCreateManyInput = {
   releaseDate?: Date | string | null
   studio?: string | null
   coverUrl?: string | null
+  groupId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  groupId: number
 }
 
 export type AlbumUpdateManyMutationInput = {
@@ -423,9 +423,9 @@ export type AlbumUncheckedUpdateManyInput = {
     | null
   studio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  groupId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type AlbumListRelationFilter = {
@@ -444,9 +444,9 @@ export type AlbumCountOrderByAggregateInput = {
   releaseDate?: Prisma.SortOrder
   studio?: Prisma.SortOrder
   coverUrl?: Prisma.SortOrder
+  groupId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  groupId?: Prisma.SortOrder
 }
 
 export type AlbumAvgOrderByAggregateInput = {
@@ -460,9 +460,9 @@ export type AlbumMaxOrderByAggregateInput = {
   releaseDate?: Prisma.SortOrder
   studio?: Prisma.SortOrder
   coverUrl?: Prisma.SortOrder
+  groupId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  groupId?: Prisma.SortOrder
 }
 
 export type AlbumMinOrderByAggregateInput = {
@@ -471,9 +471,9 @@ export type AlbumMinOrderByAggregateInput = {
   releaseDate?: Prisma.SortOrder
   studio?: Prisma.SortOrder
   coverUrl?: Prisma.SortOrder
+  groupId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  groupId?: Prisma.SortOrder
 }
 
 export type AlbumSumOrderByAggregateInput = {
@@ -736,9 +736,9 @@ export type AlbumScalarWhereInput = {
   releaseDate?: Prisma.DateTimeNullableFilter<'Album'> | Date | string | null
   studio?: Prisma.StringNullableFilter<'Album'> | string | null
   coverUrl?: Prisma.StringNullableFilter<'Album'> | string | null
+  groupId?: Prisma.IntFilter<'Album'> | number
   createdAt?: Prisma.DateTimeFilter<'Album'> | Date | string
   updatedAt?: Prisma.DateTimeFilter<'Album'> | Date | string
-  groupId?: Prisma.IntFilter<'Album'> | number
 }
 
 export type AlbumCreateWithoutTracksInput = {
@@ -759,9 +759,9 @@ export type AlbumUncheckedCreateWithoutTracksInput = {
   releaseDate?: Date | string | null
   studio?: string | null
   coverUrl?: string | null
+  groupId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  groupId: number
   Versions?: Prisma.AlbumVersionUncheckedCreateNestedManyWithoutAlbumInput
   Sources?: Prisma.ExternalSourceUncheckedCreateNestedManyWithoutAlbumInput
 }
@@ -820,9 +820,9 @@ export type AlbumUncheckedUpdateWithoutTracksInput = {
     | null
   studio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  groupId?: Prisma.IntFieldUpdateOperationsInput | number
   Versions?: Prisma.AlbumVersionUncheckedUpdateManyWithoutAlbumNestedInput
   Sources?: Prisma.ExternalSourceUncheckedUpdateManyWithoutAlbumNestedInput
 }
@@ -845,9 +845,9 @@ export type AlbumUncheckedCreateWithoutVersionsInput = {
   releaseDate?: Date | string | null
   studio?: string | null
   coverUrl?: string | null
+  groupId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  groupId: number
   Tracks?: Prisma.TrackUncheckedCreateNestedManyWithoutAlbumInput
   Sources?: Prisma.ExternalSourceUncheckedCreateNestedManyWithoutAlbumInput
 }
@@ -906,9 +906,9 @@ export type AlbumUncheckedUpdateWithoutVersionsInput = {
     | null
   studio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  groupId?: Prisma.IntFieldUpdateOperationsInput | number
   Tracks?: Prisma.TrackUncheckedUpdateManyWithoutAlbumNestedInput
   Sources?: Prisma.ExternalSourceUncheckedUpdateManyWithoutAlbumNestedInput
 }
@@ -931,9 +931,9 @@ export type AlbumUncheckedCreateWithoutSourcesInput = {
   releaseDate?: Date | string | null
   studio?: string | null
   coverUrl?: string | null
+  groupId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  groupId: number
   Tracks?: Prisma.TrackUncheckedCreateNestedManyWithoutAlbumInput
   Versions?: Prisma.AlbumVersionUncheckedCreateNestedManyWithoutAlbumInput
 }
@@ -992,9 +992,9 @@ export type AlbumUncheckedUpdateWithoutSourcesInput = {
     | null
   studio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  groupId?: Prisma.IntFieldUpdateOperationsInput | number
   Tracks?: Prisma.TrackUncheckedUpdateManyWithoutAlbumNestedInput
   Versions?: Prisma.AlbumVersionUncheckedUpdateManyWithoutAlbumNestedInput
 }
@@ -1128,9 +1128,9 @@ export type AlbumSelect<
     releaseDate?: boolean
     studio?: boolean
     coverUrl?: boolean
+    groupId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    groupId?: boolean
     Group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
     Tracks?: boolean | Prisma.Album$TracksArgs<ExtArgs>
     Versions?: boolean | Prisma.Album$VersionsArgs<ExtArgs>
@@ -1150,9 +1150,9 @@ export type AlbumSelectCreateManyAndReturn<
     releaseDate?: boolean
     studio?: boolean
     coverUrl?: boolean
+    groupId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    groupId?: boolean
     Group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['album']
@@ -1168,9 +1168,9 @@ export type AlbumSelectUpdateManyAndReturn<
     releaseDate?: boolean
     studio?: boolean
     coverUrl?: boolean
+    groupId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    groupId?: boolean
     Group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['album']
@@ -1182,9 +1182,9 @@ export type AlbumSelectScalar = {
   releaseDate?: boolean
   studio?: boolean
   coverUrl?: boolean
+  groupId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  groupId?: boolean
 }
 
 export type AlbumOmit<
@@ -1196,9 +1196,9 @@ export type AlbumOmit<
   | 'releaseDate'
   | 'studio'
   | 'coverUrl'
+  | 'groupId'
   | 'createdAt'
-  | 'updatedAt'
-  | 'groupId',
+  | 'updatedAt',
   ExtArgs['result']['album']
 >
 export type AlbumInclude<
@@ -1242,9 +1242,9 @@ export type $AlbumPayload<
       releaseDate: Date | null
       studio: string | null
       coverUrl: string | null
+      groupId: number
       createdAt: Date
       updatedAt: Date
-      groupId: number
     },
     ExtArgs['result']['album']
   >
@@ -1889,9 +1889,9 @@ export interface AlbumFieldRefs {
   readonly releaseDate: Prisma.FieldRef<'Album', 'DateTime'>
   readonly studio: Prisma.FieldRef<'Album', 'String'>
   readonly coverUrl: Prisma.FieldRef<'Album', 'String'>
+  readonly groupId: Prisma.FieldRef<'Album', 'Int'>
   readonly createdAt: Prisma.FieldRef<'Album', 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<'Album', 'DateTime'>
-  readonly groupId: Prisma.FieldRef<'Album', 'Int'>
 }
 
 // Custom InputTypes

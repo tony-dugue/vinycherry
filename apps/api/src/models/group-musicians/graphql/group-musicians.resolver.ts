@@ -1,6 +1,15 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql'
 import { AllowAuthenticated } from 'src/common/auth/auth.decorator'
 import { PrismaService } from 'src/common/prisma/prisma.service'
+import { GroupMusicianInstrument } from 'src/models/group-musician-instruments/graphql/entity/group-musician-instrument.entity'
+import { Group } from 'src/models/groups/graphql/entity/group.entity'
 import { CreateGroupMusicianInput } from './dtos/create-group-musician.input'
 import {
   FindManyGroupMusicianArgs,
@@ -47,5 +56,19 @@ export class GroupMusiciansResolver {
   @Mutation(() => GroupMusician)
   async removeGroupMusician(@Args() args: FindUniqueGroupMusicianArgs) {
     return this.groupMusiciansService.remove(args)
+  }
+
+  @ResolveField(() => Group)
+  group(@Parent() gm: GroupMusician) {
+    return this.prisma.group.findUnique({
+      where: { id: gm.groupId },
+    })
+  }
+
+  @ResolveField(() => [GroupMusicianInstrument])
+  instruments(@Parent() gm: GroupMusician) {
+    return this.prisma.groupMusicianInstrument.findMany({
+      where: { groupMusicianId: gm.id },
+    })
   }
 }

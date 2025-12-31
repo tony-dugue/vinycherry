@@ -43,9 +43,9 @@ export type PurchaseInfoMinAggregateOutputType = {
   price: number | null
   place: string | null
   date: Date | null
+  collectionItemId: number | null
   createdAt: Date | null
   updatedAt: Date | null
-  collectionItemId: number | null
 }
 
 export type PurchaseInfoMaxAggregateOutputType = {
@@ -53,9 +53,9 @@ export type PurchaseInfoMaxAggregateOutputType = {
   price: number | null
   place: string | null
   date: Date | null
+  collectionItemId: number | null
   createdAt: Date | null
   updatedAt: Date | null
-  collectionItemId: number | null
 }
 
 export type PurchaseInfoCountAggregateOutputType = {
@@ -63,9 +63,9 @@ export type PurchaseInfoCountAggregateOutputType = {
   price: number
   place: number
   date: number
+  collectionItemId: number
   createdAt: number
   updatedAt: number
-  collectionItemId: number
   _all: number
 }
 
@@ -86,9 +86,9 @@ export type PurchaseInfoMinAggregateInputType = {
   price?: true
   place?: true
   date?: true
+  collectionItemId?: true
   createdAt?: true
   updatedAt?: true
-  collectionItemId?: true
 }
 
 export type PurchaseInfoMaxAggregateInputType = {
@@ -96,9 +96,9 @@ export type PurchaseInfoMaxAggregateInputType = {
   price?: true
   place?: true
   date?: true
+  collectionItemId?: true
   createdAt?: true
   updatedAt?: true
-  collectionItemId?: true
 }
 
 export type PurchaseInfoCountAggregateInputType = {
@@ -106,9 +106,9 @@ export type PurchaseInfoCountAggregateInputType = {
   price?: true
   place?: true
   date?: true
+  collectionItemId?: true
   createdAt?: true
   updatedAt?: true
-  collectionItemId?: true
   _all?: true
 }
 
@@ -211,9 +211,9 @@ export type PurchaseInfoGroupByOutputType = {
   price: number | null
   place: string | null
   date: Date | null
+  collectionItemId: number
   createdAt: Date
   updatedAt: Date
-  collectionItemId: number
   _count: PurchaseInfoCountAggregateOutputType | null
   _avg: PurchaseInfoAvgAggregateOutputType | null
   _sum: PurchaseInfoSumAggregateOutputType | null
@@ -242,9 +242,9 @@ export type PurchaseInfoWhereInput = {
   price?: Prisma.FloatNullableFilter<'PurchaseInfo'> | number | null
   place?: Prisma.StringNullableFilter<'PurchaseInfo'> | string | null
   date?: Prisma.DateTimeNullableFilter<'PurchaseInfo'> | Date | string | null
+  collectionItemId?: Prisma.IntFilter<'PurchaseInfo'> | number
   createdAt?: Prisma.DateTimeFilter<'PurchaseInfo'> | Date | string
   updatedAt?: Prisma.DateTimeFilter<'PurchaseInfo'> | Date | string
-  collectionItemId?: Prisma.IntFilter<'PurchaseInfo'> | number
   CollectionItem?: Prisma.XOR<
     Prisma.CollectionItemScalarRelationFilter,
     Prisma.CollectionItemWhereInput
@@ -256,9 +256,9 @@ export type PurchaseInfoOrderByWithRelationInput = {
   price?: Prisma.SortOrderInput | Prisma.SortOrder
   place?: Prisma.SortOrderInput | Prisma.SortOrder
   date?: Prisma.SortOrderInput | Prisma.SortOrder
+  collectionItemId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  collectionItemId?: Prisma.SortOrder
   CollectionItem?: Prisma.CollectionItemOrderByWithRelationInput
 }
 
@@ -287,9 +287,9 @@ export type PurchaseInfoOrderByWithAggregationInput = {
   price?: Prisma.SortOrderInput | Prisma.SortOrder
   place?: Prisma.SortOrderInput | Prisma.SortOrder
   date?: Prisma.SortOrderInput | Prisma.SortOrder
+  collectionItemId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  collectionItemId?: Prisma.SortOrder
   _count?: Prisma.PurchaseInfoCountOrderByAggregateInput
   _avg?: Prisma.PurchaseInfoAvgOrderByAggregateInput
   _max?: Prisma.PurchaseInfoMaxOrderByAggregateInput
@@ -319,6 +319,7 @@ export type PurchaseInfoScalarWhereWithAggregatesInput = {
     | Date
     | string
     | null
+  collectionItemId?: Prisma.IntWithAggregatesFilter<'PurchaseInfo'> | number
   createdAt?:
     | Prisma.DateTimeWithAggregatesFilter<'PurchaseInfo'>
     | Date
@@ -327,7 +328,6 @@ export type PurchaseInfoScalarWhereWithAggregatesInput = {
     | Prisma.DateTimeWithAggregatesFilter<'PurchaseInfo'>
     | Date
     | string
-  collectionItemId?: Prisma.IntWithAggregatesFilter<'PurchaseInfo'> | number
 }
 
 export type PurchaseInfoCreateInput = {
@@ -344,9 +344,9 @@ export type PurchaseInfoUncheckedCreateInput = {
   price?: number | null
   place?: string | null
   date?: Date | string | null
+  collectionItemId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  collectionItemId: number
 }
 
 export type PurchaseInfoUpdateInput = {
@@ -371,9 +371,9 @@ export type PurchaseInfoUncheckedUpdateInput = {
     | Date
     | string
     | null
+  collectionItemId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  collectionItemId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type PurchaseInfoCreateManyInput = {
@@ -381,9 +381,9 @@ export type PurchaseInfoCreateManyInput = {
   price?: number | null
   place?: string | null
   date?: Date | string | null
+  collectionItemId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  collectionItemId: number
 }
 
 export type PurchaseInfoUpdateManyMutationInput = {
@@ -407,9 +407,9 @@ export type PurchaseInfoUncheckedUpdateManyInput = {
     | Date
     | string
     | null
+  collectionItemId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  collectionItemId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type PurchaseInfoNullableScalarRelationFilter = {
@@ -422,9 +422,9 @@ export type PurchaseInfoCountOrderByAggregateInput = {
   price?: Prisma.SortOrder
   place?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  collectionItemId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  collectionItemId?: Prisma.SortOrder
 }
 
 export type PurchaseInfoAvgOrderByAggregateInput = {
@@ -438,9 +438,9 @@ export type PurchaseInfoMaxOrderByAggregateInput = {
   price?: Prisma.SortOrder
   place?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  collectionItemId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  collectionItemId?: Prisma.SortOrder
 }
 
 export type PurchaseInfoMinOrderByAggregateInput = {
@@ -448,9 +448,9 @@ export type PurchaseInfoMinOrderByAggregateInput = {
   price?: Prisma.SortOrder
   place?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  collectionItemId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  collectionItemId?: Prisma.SortOrder
 }
 
 export type PurchaseInfoSumOrderByAggregateInput = {
@@ -602,9 +602,9 @@ export type PurchaseInfoSelect<
     price?: boolean
     place?: boolean
     date?: boolean
+    collectionItemId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    collectionItemId?: boolean
     CollectionItem?: boolean | Prisma.CollectionItemDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['purchaseInfo']
@@ -619,9 +619,9 @@ export type PurchaseInfoSelectCreateManyAndReturn<
     price?: boolean
     place?: boolean
     date?: boolean
+    collectionItemId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    collectionItemId?: boolean
     CollectionItem?: boolean | Prisma.CollectionItemDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['purchaseInfo']
@@ -636,9 +636,9 @@ export type PurchaseInfoSelectUpdateManyAndReturn<
     price?: boolean
     place?: boolean
     date?: boolean
+    collectionItemId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    collectionItemId?: boolean
     CollectionItem?: boolean | Prisma.CollectionItemDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['purchaseInfo']
@@ -649,9 +649,9 @@ export type PurchaseInfoSelectScalar = {
   price?: boolean
   place?: boolean
   date?: boolean
+  collectionItemId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  collectionItemId?: boolean
 }
 
 export type PurchaseInfoOmit<
@@ -662,9 +662,9 @@ export type PurchaseInfoOmit<
   | 'price'
   | 'place'
   | 'date'
+  | 'collectionItemId'
   | 'createdAt'
-  | 'updatedAt'
-  | 'collectionItemId',
+  | 'updatedAt',
   ExtArgs['result']['purchaseInfo']
 >
 export type PurchaseInfoInclude<
@@ -700,9 +700,9 @@ export type $PurchaseInfoPayload<
       price: number | null
       place: string | null
       date: Date | null
+      collectionItemId: number
       createdAt: Date
       updatedAt: Date
-      collectionItemId: number
     },
     ExtArgs['result']['purchaseInfo']
   >
@@ -1319,9 +1319,9 @@ export interface PurchaseInfoFieldRefs {
   readonly price: Prisma.FieldRef<'PurchaseInfo', 'Float'>
   readonly place: Prisma.FieldRef<'PurchaseInfo', 'String'>
   readonly date: Prisma.FieldRef<'PurchaseInfo', 'DateTime'>
+  readonly collectionItemId: Prisma.FieldRef<'PurchaseInfo', 'Int'>
   readonly createdAt: Prisma.FieldRef<'PurchaseInfo', 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<'PurchaseInfo', 'DateTime'>
-  readonly collectionItemId: Prisma.FieldRef<'PurchaseInfo', 'Int'>
 }
 
 // Custom InputTypes
