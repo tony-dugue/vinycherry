@@ -12,24 +12,13 @@ mutation RegisterWithCredentials(
   }
 }
 
-query Users($orderBy: [UserOrderByWithRelationInput!]) {
-  users(orderBy: $orderBy) {
-    name
-    image
-    uid
-    createdAt
-    updatedAt
-    admin {
+mutation Login($loginInput: LoginInput!) {
+  login(loginInput: $loginInput) {
+    token
+    user {
       uid
-      createdAt
-      updatedAt
-      user {
-        name
-        image
-        uid
-        createdAt
-        updatedAt
-      }
+      name
+      image
     }
   }
 }

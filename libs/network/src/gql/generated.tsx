@@ -1653,44 +1653,28 @@ export type RegisterWithCredentialsMutation = {
   }
 }
 
-export type UsersQueryVariables = Exact<{
-  orderBy?: InputMaybe<
-    Array<UserOrderByWithRelationInput> | UserOrderByWithRelationInput
-  >
+export type LoginMutationVariables = Exact<{
+  loginInput: LoginInput
 }>
 
-export type UsersQuery = {
-  __typename?: 'Query'
-  users: Array<{
-    __typename?: 'User'
-    name?: string | null
-    image?: string | null
-    uid: string
-    createdAt: any
-    updatedAt: any
-    admin?: {
-      __typename?: 'Admin'
+export type LoginMutation = {
+  __typename?: 'Mutation'
+  login: {
+    __typename?: 'LoginOutput'
+    token: string
+    user: {
+      __typename?: 'User'
       uid: string
-      createdAt: any
-      updatedAt: any
-      user?: {
-        __typename?: 'User'
-        name?: string | null
-        image?: string | null
-        uid: string
-        createdAt: any
-        updatedAt: any
-      } | null
-    } | null
-  }>
+      name?: string | null
+      image?: string | null
+    }
+  }
 }
 
 export const namedOperations = {
-  Query: {
-    Users: 'Users',
-  },
   Mutation: {
     RegisterWithCredentials: 'RegisterWithCredentials',
+    Login: 'Login',
   },
 }
 
@@ -1752,28 +1736,25 @@ export const RegisterWithCredentialsDocument = {
   RegisterWithCredentialsMutation,
   RegisterWithCredentialsMutationVariables
 >
-export const UsersDocument = {
+export const LoginDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'Users' },
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'Login' },
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'orderBy' },
+            name: { kind: 'Name', value: 'loginInput' },
           },
           type: {
-            kind: 'ListType',
+            kind: 'NonNullType',
             type: {
-              kind: 'NonNullType',
-              type: {
-                kind: 'NamedType',
-                name: { kind: 'Name', value: 'UserOrderByWithRelationInput' },
-              },
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'LoginInput' },
             },
           },
         },
@@ -1783,69 +1764,30 @@ export const UsersDocument = {
         selections: [
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'users' },
+            name: { kind: 'Name', value: 'login' },
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'orderBy' },
+                name: { kind: 'Name', value: 'loginInput' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'orderBy' },
+                  name: { kind: 'Name', value: 'loginInput' },
                 },
               },
             ],
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'image' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'uid' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'token' } },
                 {
                   kind: 'Field',
-                  name: { kind: 'Name', value: 'admin' },
+                  name: { kind: 'Name', value: 'user' },
                   selectionSet: {
                     kind: 'SelectionSet',
                     selections: [
                       { kind: 'Field', name: { kind: 'Name', value: 'uid' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'createdAt' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'updatedAt' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'user' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'name' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'image' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'uid' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'createdAt' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'updatedAt' },
-                            },
-                          ],
-                        },
-                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
                     ],
                   },
                 },
@@ -1856,4 +1798,4 @@ export const UsersDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<UsersQuery, UsersQueryVariables>
+} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>
