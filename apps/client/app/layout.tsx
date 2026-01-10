@@ -1,7 +1,7 @@
 import { ApolloProvider } from '@vinycherry/network/src/config/apollo'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono, Inter } from 'next/font/google'
-import './globals.css'
+import '@vinycherry/ui/app/globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 
