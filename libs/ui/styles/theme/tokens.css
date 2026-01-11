@@ -1,0 +1,9 @@
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #171717;
+}
+
+[data-theme='dark'] {
+  --color-background: #0a0a0a;
+  --color-foreground: #ededed;
+}

@@ -1,0 +1,27 @@
+@import 'tailwindcss';
+
+/* Scan sources */
+@source '../app/**/*.{ts,tsx}';
+@source '../components/**/*.{ts,tsx}';
+@source '../../libs/ui/**/*.{ts,tsx}';
+
+/* Theme layers */
+@import './theme/breakpoints.css';
+@import './theme/colors.css';
+@import './theme/spacing.css';
+@import './theme/typography.css';
+@import './theme/animations.css';
+@import './theme/tokens.css';
+
+/* Base styles */
+html,
+body,
+:root {
+  height: 100%;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans, system-ui, sans-serif);
+}

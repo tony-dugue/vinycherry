@@ -1,9 +1,10 @@
 'use client'
-import { ButtonUI } from '@vinycherry/ui/components/Button'
+import { BrandIcon } from '@vinycherry/ui/components/atoms/BrandIcon'
+
 export default function Page() {
   return (
-    <main className="text-5xl text-green-500">
-      Hello <ButtonUI>Text</ButtonUI>
+    <main>
+      <BrandIcon />
     </main>
   )
 }

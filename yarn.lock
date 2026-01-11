@@ -5555,6 +5555,7 @@ __metadata:
     eslint: "npm:^9"
     eslint-config-next: "npm:16.1.1"
     next: "npm:16.1.1"
+    postcss: "npm:^8.5.6"
     react: "npm:19.2.3"
     react-dom: "npm:19.2.3"
     tailwindcss: "npm:^4"
@@ -13074,7 +13075,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.41":
+"postcss@npm:^8.4.41, postcss@npm:^8.5.6":
   version: 8.5.6
   resolution: "postcss@npm:8.5.6"
   dependencies:
